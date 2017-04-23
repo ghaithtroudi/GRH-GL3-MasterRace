@@ -11,22 +11,18 @@
 
 namespace Symfony\Component\VarDumper\Cloner;
 
-use Symfony\Component\VarDumper\Caster\Caster;
-
 /**
  * @author Nicolas Grekas <p@tchwork.com>
  */
 class Data
 {
     private $data;
-    private $position = 0;
-    private $key = 0;
     private $maxDepth = 20;
     private $maxItemsPerDepth = -1;
     private $useRefHandles = -1;
 
     /**
-     * @param array $data A array as returned by ClonerInterface::cloneVar()
+     * @param array $data A array as returned by ClonerInterface::cloneVar().
      */
     public function __construct(array $data)
     {
@@ -34,7 +30,7 @@ class Data
     }
 
     /**
-     * @return array The raw data structure
+     * @return array The raw data structure.
      */
     public function getRawData()
     {
@@ -44,9 +40,9 @@ class Data
     /**
      * Returns a depth limited clone of $this.
      *
-     * @param int $maxDepth The max dumped depth level
+     * @param int $maxDepth The max dumped depth level.
      *
-     * @return self A clone of $this
+     * @return self A clone of $this.
      */
     public function withMaxDepth($maxDepth)
     {
@@ -59,9 +55,9 @@ class Data
     /**
      * Limits the number of elements per depth level.
      *
-     * @param int $maxItemsPerDepth The max number of items dumped per depth level
+     * @param int $maxItemsPerDepth The max number of items dumped per depth level.
      *
-     * @return self A clone of $this
+     * @return self A clone of $this.
      */
     public function withMaxItemsPerDepth($maxItemsPerDepth)
     {
@@ -74,9 +70,9 @@ class Data
     /**
      * Enables/disables objects' identifiers tracking.
      *
-     * @param bool $useRefHandles False to hide global ref. handles
+     * @param bool $useRefHandles False to hide global ref. handles.
      *
-     * @return self A clone of $this
+     * @return self A clone of $this.
      */
     public function withRefHandles($useRefHandles)
     {
@@ -87,45 +83,24 @@ class Data
     }
 
     /**
-     * Seeks to a specific key in nested data structures.
+     * Returns a depth limited clone of $this.
      *
-     * @param string|int $key The key to seek to
+     * @param int  $maxDepth         The max dumped depth level.
+     * @param int  $maxItemsPerDepth The max number of items dumped per depth level.
+     * @param bool $useRefHandles    False to hide ref. handles.
      *
-     * @return self|null A clone of $this of null if the key is not set
+     * @return self A depth limited clone of $this.
+     *
+     * @deprecated since Symfony 2.7, to be removed in 3.0. Use withMaxDepth, withMaxItemsPerDepth or withRefHandles instead.
      */
-    public function seek($key)
+    public function getLimitedClone($maxDepth, $maxItemsPerDepth, $useRefHandles = true)
     {
-        $item = $this->data[$this->position][$this->key];
+        @trigger_error('The '.__METHOD__.' method is deprecated since Symfony 2.7 and will be removed in 3.0. Use withMaxDepth, withMaxItemsPerDepth or withRefHandles methods instead.', E_USER_DEPRECATED);
 
-        if (!$item instanceof Stub || !$item->position) {
-            return;
-        }
-        $keys = array($key);
-
-        switch ($item->type) {
-            case Stub::TYPE_OBJECT:
-                $keys[] = Caster::PREFIX_DYNAMIC.$key;
-                $keys[] = Caster::PREFIX_PROTECTED.$key;
-                $keys[] = Caster::PREFIX_VIRTUAL.$key;
-                $keys[] = "\0$item->class\0$key";
-            case Stub::TYPE_ARRAY:
-            case Stub::TYPE_RESOURCE:
-                break;
-            default:
-                return;
-        }
-
-        $data = null;
-        $children = $this->data[$item->position];
-
-        foreach ($keys as $key) {
-            if (isset($children[$key]) || array_key_exists($key, $children)) {
-                $data = clone $this;
-                $data->key = $key;
-                $data->position = $item->position;
-                break;
-            }
-        }
+        $data = clone $this;
+        $data->maxDepth = (int) $maxDepth;
+        $data->maxItemsPerDepth = (int) $maxItemsPerDepth;
+        $data->useRefHandles = $useRefHandles ? -1 : 0;
 
         return $data;
     }
@@ -136,16 +111,16 @@ class Data
     public function dump(DumperInterface $dumper)
     {
         $refs = array(0);
-        $this->dumpItem($dumper, new Cursor(), $refs, $this->data[$this->position][$this->key]);
+        $this->dumpItem($dumper, new Cursor(), $refs, $this->data[0][0]);
     }
 
     /**
      * Depth-first dumping of items.
      *
-     * @param DumperInterface $dumper The dumper being used for dumping
-     * @param Cursor          $cursor A cursor used for tracking dumper state position
-     * @param array           &$refs  A map of all references discovered while dumping
-     * @param mixed           $item   A Stub object or the original value being dumped
+     * @param DumperInterface $dumper The dumper being used for dumping.
+     * @param Cursor          $cursor A cursor used for tracking dumper state position.
+     * @param array           &$refs  A map of all references discovered while dumping.
+     * @param mixed           $item   A Stub object or the original value being dumped.
      */
     private function dumpItem($dumper, $cursor, &$refs, $item)
     {
@@ -155,7 +130,6 @@ class Data
         $firstSeen = true;
 
         if (!$item instanceof Stub) {
-            $cursor->attr = array();
             $type = gettype($item);
         } elseif (Stub::TYPE_REF === $item->type) {
             if ($item->handle) {
@@ -168,7 +142,6 @@ class Data
                 $cursor->hardRefHandle = $this->useRefHandles & $item->handle;
                 $cursor->hardRefCount = $item->refCount;
             }
-            $cursor->attr = $item->attr;
             $type = $item->class ?: gettype($item->value);
             $item = $item->value;
         }
@@ -183,7 +156,6 @@ class Data
             }
             $cursor->softRefHandle = $this->useRefHandles & $item->handle;
             $cursor->softRefCount = $item->refCount;
-            $cursor->attr = $item->attr;
             $cut = $item->cut;
 
             if ($item->position && $firstSeen) {
@@ -213,7 +185,7 @@ class Data
                     $withChildren = $children && $cursor->depth !== $this->maxDepth && $this->maxItemsPerDepth;
                     $dumper->enterHash($cursor, $item->type, $item->class, $withChildren);
                     if ($withChildren) {
-                        $cut = $this->dumpChildren($dumper, $cursor, $refs, $children, $cut, $item->type, null !== $item->class);
+                        $cut = $this->dumpChildren($dumper, $cursor, $refs, $children, $cut, $item->type);
                     } elseif ($children && 0 <= $cut) {
                         $cut += count($children);
                     }
@@ -237,16 +209,15 @@ class Data
      * Dumps children of hash structures.
      *
      * @param DumperInterface $dumper
-     * @param Cursor          $parentCursor The cursor of the parent hash
-     * @param array           &$refs        A map of all references discovered while dumping
-     * @param array           $children     The children to dump
-     * @param int             $hashCut      The number of items removed from the original hash
-     * @param string          $hashType     A Cursor::HASH_* const
-     * @param bool            $dumpKeys     Whether keys should be dumped or not
+     * @param Cursor          $parentCursor The cursor of the parent hash.
+     * @param array           &$refs        A map of all references discovered while dumping.
+     * @param array           $children     The children to dump.
+     * @param int             $hashCut      The number of items removed from the original hash.
+     * @param string          $hashType     A Cursor::HASH_* const.
      *
-     * @return int The final number of removed items
+     * @return int The final number of removed items.
      */
-    private function dumpChildren($dumper, $parentCursor, &$refs, $children, $hashCut, $hashType, $dumpKeys)
+    private function dumpChildren($dumper, $parentCursor, &$refs, $children, $hashCut, $hashType)
     {
         $cursor = clone $parentCursor;
         ++$cursor->depth;
@@ -256,7 +227,7 @@ class Data
         $cursor->hashCut = $hashCut;
         foreach ($children as $key => $child) {
             $cursor->hashKeyIsBinary = isset($key[0]) && !preg_match('//u', $key);
-            $cursor->hashKey = $dumpKeys ? $key : null;
+            $cursor->hashKey = $key;
             $this->dumpItem($dumper, $cursor, $refs, $child);
             if (++$cursor->hashIndex === $this->maxItemsPerDepth || $cursor->stop) {
                 $parentCursor->stop = true;

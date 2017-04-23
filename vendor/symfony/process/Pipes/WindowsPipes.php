@@ -36,51 +36,26 @@ class WindowsPipes extends AbstractPipes
         Process::STDERR => 0,
     );
     /** @var bool */
-    private $haveReadSupport;
+    private $disableOutput;
 
-    public function __construct($input, $haveReadSupport)
+    public function __construct($disableOutput, $input)
     {
-        $this->haveReadSupport = (bool) $haveReadSupport;
+        $this->disableOutput = (bool) $disableOutput;
 
-        if ($this->haveReadSupport) {
+        if (!$this->disableOutput) {
             // Fix for PHP bug #51800: reading from STDOUT pipe hangs forever on Windows if the output is too big.
             // Workaround for this problem is to use temporary files instead of pipes on Windows platform.
             //
             // @see https://bugs.php.net/bug.php?id=51800
-            $pipes = array(
-                Process::STDOUT => Process::OUT,
-                Process::STDERR => Process::ERR,
+            $this->files = array(
+                Process::STDOUT => tempnam(sys_get_temp_dir(), 'out_sf_proc'),
+                Process::STDERR => tempnam(sys_get_temp_dir(), 'err_sf_proc'),
             );
-            $tmpCheck = false;
-            $tmpDir = sys_get_temp_dir();
-            $lastError = 'unknown reason';
-            set_error_handler(function ($type, $msg) use (&$lastError) { $lastError = $msg; });
-            for ($i = 0;; ++$i) {
-                foreach ($pipes as $pipe => $name) {
-                    $file = sprintf('%s\\sf_proc_%02X.%s', $tmpDir, $i, $name);
-                    if (file_exists($file) && !unlink($file)) {
-                        continue 2;
-                    }
-                    $h = fopen($file, 'xb');
-                    if (!$h) {
-                        $error = $lastError;
-                        if ($tmpCheck || $tmpCheck = unlink(tempnam(false, 'sf_check_'))) {
-                            continue;
-                        }
-                        restore_error_handler();
-                        throw new RuntimeException(sprintf('A temporary file could not be opened to write the process output: %s', $error));
-                    }
-                    if (!$h || !$this->fileHandles[$pipe] = fopen($file, 'rb')) {
-                        continue 2;
-                    }
-                    if (isset($this->files[$pipe])) {
-                        unlink($this->files[$pipe]);
-                    }
-                    $this->files[$pipe] = $file;
+            foreach ($this->files as $offset => $file) {
+                if (false === $file || false === $this->fileHandles[$offset] = @fopen($file, 'rb')) {
+                    throw new RuntimeException('A temporary file could not be opened to write the process output to, verify that your TEMP environment variable is writable');
                 }
-                break;
             }
-            restore_error_handler();
         }
 
         parent::__construct($input);
@@ -97,7 +72,7 @@ class WindowsPipes extends AbstractPipes
      */
     public function getDescriptors()
     {
-        if (!$this->haveReadSupport) {
+        if ($this->disableOutput) {
             $nullstream = fopen('NUL', 'c');
 
             return array(
@@ -160,14 +135,6 @@ class WindowsPipes extends AbstractPipes
     /**
      * {@inheritdoc}
      */
-    public function haveReadSupport()
-    {
-        return $this->haveReadSupport;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function areOpen()
     {
         return $this->pipes && $this->fileHandles;
@@ -183,6 +150,19 @@ class WindowsPipes extends AbstractPipes
             fclose($handle);
         }
         $this->fileHandles = array();
+    }
+
+    /**
+     * Creates a new WindowsPipes instance.
+     *
+     * @param Process $process The process
+     * @param $input
+     *
+     * @return WindowsPipes
+     */
+    public static function create(Process $process, $input)
+    {
+        return new static($process->isOutputDisabled(), $input);
     }
 
     /**

@@ -15,13 +15,6 @@ class Message
     protected $swift;
 
     /**
-     * CIDs of files embedded in the message.
-     *
-     * @var array
-     */
-    protected $embeddedFiles = [];
-
-    /**
      * Create a new message instance.
      *
      * @param  \Swift_Message  $swift
@@ -35,7 +28,7 @@ class Message
     /**
      * Add a "from" address to the message.
      *
-     * @param  string|array  $address
+     * @param  string  $address
      * @param  string|null  $name
      * @return $this
      */
@@ -49,7 +42,7 @@ class Message
     /**
      * Set the "sender" of the message.
      *
-     * @param  string|array  $address
+     * @param  string  $address
      * @param  string|null  $name
      * @return $this
      */
@@ -84,9 +77,7 @@ class Message
     public function to($address, $name = null, $override = false)
     {
         if ($override) {
-            $this->swift->setTo($address, $name);
-
-            return $this;
+            return $this->swift->setTo($address, $name);
         }
 
         return $this->addAddresses($address, $name, 'To');
@@ -95,45 +86,31 @@ class Message
     /**
      * Add a carbon copy to the message.
      *
-     * @param  string|array  $address
+     * @param  string  $address
      * @param  string|null  $name
-     * @param  bool  $override
      * @return $this
      */
-    public function cc($address, $name = null, $override = false)
+    public function cc($address, $name = null)
     {
-        if ($override) {
-            $this->swift->setCc($address, $name);
-
-            return $this;
-        }
-
         return $this->addAddresses($address, $name, 'Cc');
     }
 
     /**
      * Add a blind carbon copy to the message.
      *
-     * @param  string|array  $address
+     * @param  string  $address
      * @param  string|null  $name
-     * @param  bool  $override
      * @return $this
      */
-    public function bcc($address, $name = null, $override = false)
+    public function bcc($address, $name = null)
     {
-        if ($override) {
-            $this->swift->setBcc($address, $name);
-
-            return $this;
-        }
-
         return $this->addAddresses($address, $name, 'Bcc');
     }
 
     /**
      * Add a reply to address to the message.
      *
-     * @param  string|array  $address
+     * @param  string  $address
      * @param  string|null  $name
      * @return $this
      */
@@ -247,13 +224,7 @@ class Message
      */
     public function embed($file)
     {
-        if (isset($this->embeddedFiles[$file])) {
-            return $this->embeddedFiles[$file];
-        }
-
-        return $this->embeddedFiles[$file] = $this->swift->embed(
-            Swift_Image::fromPath($file)
-        );
+        return $this->swift->embed(Swift_Image::fromPath($file));
     }
 
     /**

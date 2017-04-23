@@ -25,24 +25,20 @@ class CallbackEvent extends Event
     /**
      * Create a new event instance.
      *
-     * @param  \Illuminate\Console\Scheduling\Mutex  $mutex
      * @param  string  $callback
      * @param  array  $parameters
      * @return void
-     *
-     * @throws \InvalidArgumentException
      */
-    public function __construct(Mutex $mutex, $callback, array $parameters = [])
+    public function __construct($callback, array $parameters = [])
     {
-        if (! is_string($callback) && ! is_callable($callback)) {
-            throw new InvalidArgumentException(
-                'Invalid scheduled callback event. Must be a string or callable.'
-            );
-        }
-
-        $this->mutex = $mutex;
         $this->callback = $callback;
         $this->parameters = $parameters;
+
+        if (! is_string($this->callback) && ! is_callable($this->callback)) {
+            throw new InvalidArgumentException(
+                'Invalid scheduled callback event. Must be string or callable.'
+            );
+        }
     }
 
     /**
@@ -56,7 +52,7 @@ class CallbackEvent extends Event
     public function run(Container $container)
     {
         if ($this->description) {
-            $this->mutex->create($this);
+            touch($this->mutexPath());
         }
 
         try {
@@ -78,7 +74,7 @@ class CallbackEvent extends Event
     protected function removeMutex()
     {
         if ($this->description) {
-            $this->mutex->forget($this);
+            @unlink($this->mutexPath());
         }
     }
 
@@ -86,8 +82,6 @@ class CallbackEvent extends Event
      * Do not allow the event to overlap each other.
      *
      * @return $this
-     *
-     * @throws \LogicException
      */
     public function withoutOverlapping()
     {
@@ -98,18 +92,18 @@ class CallbackEvent extends Event
         }
 
         return $this->skip(function () {
-            return $this->mutex->exists($this);
+            return file_exists($this->mutexPath());
         });
     }
 
     /**
-     * Get the mutex name for the scheduled command.
+     * Get the mutex path for the scheduled command.
      *
      * @return string
      */
-    public function mutexName()
+    protected function mutexPath()
     {
-        return 'framework/schedule-'.sha1($this->description);
+        return storage_path('framework/schedule-'.md5($this->description));
     }
 
     /**

@@ -11,8 +11,6 @@
 
 namespace Symfony\Component\Translation;
 
-use Symfony\Component\Translation\Exception\InvalidArgumentException;
-
 /**
  * @author Abdellatif Ait boudad <a.aitboudad@gmail.com>
  */
@@ -38,7 +36,7 @@ class DataCollectorTranslator implements TranslatorInterface, TranslatorBagInter
     public function __construct(TranslatorInterface $translator)
     {
         if (!$translator instanceof TranslatorBagInterface) {
-            throw new InvalidArgumentException(sprintf('The Translator "%s" must implement TranslatorInterface and TranslatorBagInterface.', get_class($translator)));
+            throw new \InvalidArgumentException(sprintf('The Translator "%s" must implement TranslatorInterface and TranslatorBagInterface.', get_class($translator)));
         }
 
         $this->translator = $translator;
@@ -50,7 +48,7 @@ class DataCollectorTranslator implements TranslatorInterface, TranslatorBagInter
     public function trans($id, array $parameters = array(), $domain = null, $locale = null)
     {
         $trans = $this->translator->trans($id, $parameters, $domain, $locale);
-        $this->collectMessage($locale, $domain, $id, $trans, $parameters);
+        $this->collectMessage($locale, $domain, $id, $trans);
 
         return $trans;
     }
@@ -61,7 +59,7 @@ class DataCollectorTranslator implements TranslatorInterface, TranslatorBagInter
     public function transChoice($id, $number, array $parameters = array(), $domain = null, $locale = null)
     {
         $trans = $this->translator->transChoice($id, $number, $parameters, $domain, $locale);
-        $this->collectMessage($locale, $domain, $id, $trans, $parameters, $number);
+        $this->collectMessage($locale, $domain, $id, $trans);
 
         return $trans;
     }
@@ -91,20 +89,6 @@ class DataCollectorTranslator implements TranslatorInterface, TranslatorBagInter
     }
 
     /**
-     * Gets the fallback locales.
-     *
-     * @return array $locales The fallback locales
-     */
-    public function getFallbackLocales()
-    {
-        if ($this->translator instanceof Translator) {
-            return $this->translator->getFallbackLocales();
-        }
-
-        return array();
-    }
-
-    /**
      * Passes through all unknown calls onto the translator object.
      */
     public function __call($method, $args)
@@ -124,11 +108,9 @@ class DataCollectorTranslator implements TranslatorInterface, TranslatorBagInter
      * @param string|null $locale
      * @param string|null $domain
      * @param string      $id
-     * @param string      $translation
-     * @param array|null  $parameters
-     * @param int|null    $number
+     * @param string      $trans
      */
-    private function collectMessage($locale, $domain, $id, $translation, $parameters = array(), $number = null)
+    private function collectMessage($locale, $domain, $id, $translation)
     {
         if (null === $domain) {
             $domain = 'messages';
@@ -142,14 +124,14 @@ class DataCollectorTranslator implements TranslatorInterface, TranslatorBagInter
         } elseif ($catalogue->has($id, $domain)) {
             $state = self::MESSAGE_EQUALS_FALLBACK;
 
-            $fallbackCatalogue = $catalogue->getFallbackCatalogue();
+            $fallbackCatalogue = $catalogue->getFallBackCatalogue();
             while ($fallbackCatalogue) {
                 if ($fallbackCatalogue->defines($id, $domain)) {
                     $locale = $fallbackCatalogue->getLocale();
                     break;
                 }
 
-                $fallbackCatalogue = $fallbackCatalogue->getFallbackCatalogue();
+                $fallbackCatalogue = $fallbackCatalogue->getFallBackCatalogue();
             }
         } else {
             $state = self::MESSAGE_MISSING;
@@ -160,8 +142,6 @@ class DataCollectorTranslator implements TranslatorInterface, TranslatorBagInter
             'domain' => $domain,
             'id' => $id,
             'translation' => $translation,
-            'parameters' => $parameters,
-            'transChoiceNumber' => $number,
             'state' => $state,
         );
     }

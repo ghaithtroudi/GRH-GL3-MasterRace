@@ -11,12 +11,11 @@
 
 namespace Symfony\Component\EventDispatcher\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-abstract class AbstractEventDispatcherTest extends TestCase
+abstract class AbstractEventDispatcherTest extends \PHPUnit_Framework_TestCase
 {
     /* Some pseudo events */
     const preFoo = 'pre.foo';
@@ -137,6 +136,16 @@ abstract class AbstractEventDispatcherTest extends TestCase
         $this->assertSame($event, $return);
     }
 
+    /**
+     * @group legacy
+     */
+    public function testLegacyDispatch()
+    {
+        $event = new Event();
+        $return = $this->dispatcher->dispatch(self::preFoo, $event);
+        $this->assertEquals('pre.foo', $event->getName());
+    }
+
     public function testDispatchForClosure()
     {
         $invoked = 0;
@@ -252,6 +261,19 @@ abstract class AbstractEventDispatcherTest extends TestCase
         $this->assertCount(2, $this->dispatcher->getListeners(self::preFoo));
         $this->dispatcher->removeSubscriber($eventSubscriber);
         $this->assertFalse($this->dispatcher->hasListeners(self::preFoo));
+    }
+
+    /**
+     * @group legacy
+     */
+    public function testLegacyEventReceivesTheDispatcherInstance()
+    {
+        $dispatcher = null;
+        $this->dispatcher->addListener('test', function ($event) use (&$dispatcher) {
+            $dispatcher = $event->getDispatcher();
+        });
+        $this->dispatcher->dispatch('test');
+        $this->assertSame($this->dispatcher, $dispatcher);
     }
 
     public function testEventReceivesTheDispatcherInstanceAsArgument()

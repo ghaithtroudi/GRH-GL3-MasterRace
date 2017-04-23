@@ -11,6 +11,9 @@
 
 namespace Symfony\Component\Finder\Tests;
 
+use Symfony\Component\Finder\Adapter\AdapterInterface;
+use Symfony\Component\Finder\Adapter\GnuFindAdapter;
+use Symfony\Component\Finder\Adapter\PhpAdapter;
 use Symfony\Component\Finder\Finder;
 
 class FinderTest extends Iterator\RealIteratorTestCase
@@ -242,7 +245,9 @@ class FinderTest extends Iterator\RealIteratorTestCase
 
         $expected = array(
             self::$tmpDir.DIRECTORY_SEPARATOR.'test.php',
+            __DIR__.DIRECTORY_SEPARATOR.'BsdFinderTest.php',
             __DIR__.DIRECTORY_SEPARATOR.'FinderTest.php',
+            __DIR__.DIRECTORY_SEPARATOR.'GnuFinderTest.php',
             __DIR__.DIRECTORY_SEPARATOR.'GlobTest.php',
         );
 
@@ -312,7 +317,7 @@ class FinderTest extends Iterator\RealIteratorTestCase
 
         $finder = $this->buildFinder();
         $a = iterator_to_array($finder->directories()->in(self::$tmpDir));
-        $a = array_values(array_map('strval', $a));
+        $a = array_values(array_map(function ($a) { return (string) $a; }, $a));
         sort($a);
         $this->assertEquals($expected, $a, 'implements the \IteratorAggregate interface');
     }
@@ -529,6 +534,41 @@ class FinderTest extends Iterator\RealIteratorTestCase
         $this->assertIterator($this->toAbsoluteFixtures($expected), $finder);
     }
 
+    public function testAdaptersOrdering()
+    {
+        $finder = Finder::create()
+            ->removeAdapters()
+            ->addAdapter(new FakeAdapter\NamedAdapter('a'), 0)
+            ->addAdapter(new FakeAdapter\NamedAdapter('b'), -50)
+            ->addAdapter(new FakeAdapter\NamedAdapter('c'), 50)
+            ->addAdapter(new FakeAdapter\NamedAdapter('d'), -25)
+            ->addAdapter(new FakeAdapter\NamedAdapter('e'), 25);
+
+        $this->assertEquals(
+            array('c', 'e', 'a', 'd', 'b'),
+            array_map(function (AdapterInterface $adapter) {
+                return $adapter->getName();
+            }, $finder->getAdapters())
+        );
+    }
+
+    public function testAdaptersChaining()
+    {
+        $iterator = new \ArrayIterator(array());
+        $filenames = $this->toAbsolute(array('foo', 'foo/bar.tmp', 'test.php', 'test.py', 'toto'));
+        foreach ($filenames as $file) {
+            $iterator->append(new \Symfony\Component\Finder\SplFileInfo($file, null, null));
+        }
+
+        $finder = Finder::create()
+            ->removeAdapters()
+            ->addAdapter(new FakeAdapter\UnsupportedAdapter(), 3)
+            ->addAdapter(new FakeAdapter\FailingAdapter(), 2)
+            ->addAdapter(new FakeAdapter\DummyAdapter($iterator), 1);
+
+        $this->assertIterator($filenames, $finder->in(sys_get_temp_dir())->getIterator());
+    }
+
     public function getContainsTestData()
     {
         return array(
@@ -564,6 +604,21 @@ class FinderTest extends Iterator\RealIteratorTestCase
             ->notPath($noMatchPatterns);
 
         $this->assertIterator($this->toAbsoluteFixtures($expected), $finder);
+    }
+
+    public function testAdapterSelection()
+    {
+        // test that by default, PhpAdapter is selected
+        $adapters = Finder::create()->getAdapters();
+        $this->assertTrue($adapters[0] instanceof PhpAdapter);
+
+        // test another adapter selection
+        $adapters = Finder::create()->setAdapter('gnu_find')->getAdapters();
+        $this->assertTrue($adapters[0] instanceof GnuFindAdapter);
+
+        // test that useBestAdapter method removes selection
+        $adapters = Finder::create()->useBestAdapter()->getAdapters();
+        $this->assertFalse($adapters[0] instanceof PhpAdapter);
     }
 
     public function getTestPathData()
@@ -634,10 +689,6 @@ class FinderTest extends Iterator\RealIteratorTestCase
                     $this->fail(sprintf("Expected exception:\n%s\nGot:\n%s\nWith comparison failure:\n%s", $expectedExceptionClass, 'PHPUnit_Framework_ExpectationFailedException', $e->getComparisonFailure()->getExpectedAsString()));
                 }
 
-                if ($e instanceof \PHPUnit\Framework\ExpectationFailedException) {
-                    $this->fail(sprintf("Expected exception:\n%s\nGot:\n%s\nWith comparison failure:\n%s", $expectedExceptionClass, '\PHPUnit\Framework\ExpectationFailedException', $e->getComparisonFailure()->getExpectedAsString()));
-                }
-
                 $this->assertInstanceOf($expectedExceptionClass, $e);
             }
         }
@@ -677,8 +728,18 @@ class FinderTest extends Iterator\RealIteratorTestCase
         }
     }
 
-    protected function buildFinder()
+    /**
+     * @return AdapterInterface
+     */
+    protected function getAdapter()
     {
-        return Finder::create();
+        return new PhpAdapter();
+    }
+
+    private function buildFinder()
+    {
+        return Finder::create()
+            ->removeAdapters()
+            ->addAdapter($this->getAdapter());
     }
 }

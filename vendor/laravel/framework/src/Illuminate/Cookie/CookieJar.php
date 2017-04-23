@@ -2,7 +2,6 @@
 
 namespace Illuminate\Cookie;
 
-use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Symfony\Component\HttpFoundation\Cookie;
 use Illuminate\Contracts\Cookie\QueueingFactory as JarContract;
@@ -21,14 +20,7 @@ class CookieJar implements JarContract
      *
      * @var string
      */
-    protected $domain;
-
-    /**
-     * The default secure setting (defaults to false).
-     *
-     * @var bool
-     */
-    protected $secure = false;
+    protected $domain = null;
 
     /**
      * All of the cookies queued for sending.
@@ -51,9 +43,9 @@ class CookieJar implements JarContract
      */
     public function make($name, $value, $minutes = 0, $path = null, $domain = null, $secure = false, $httpOnly = true)
     {
-        list($path, $domain, $secure) = $this->getPathAndDomain($path, $domain, $secure);
+        list($path, $domain) = $this->getPathAndDomain($path, $domain);
 
-        $time = ($minutes == 0) ? 0 : Carbon::now()->getTimestamp() + ($minutes * 60);
+        $time = ($minutes == 0) ? 0 : time() + ($minutes * 60);
 
         return new Cookie($name, $value, $time, $path, $domain, $secure, $httpOnly);
     }
@@ -113,15 +105,15 @@ class CookieJar implements JarContract
     /**
      * Queue a cookie to send with the next response.
      *
-     * @param  array  $parameters
+     * @param  mixed
      * @return void
      */
-    public function queue(...$parameters)
+    public function queue()
     {
-        if (head($parameters) instanceof Cookie) {
-            $cookie = head($parameters);
+        if (head(func_get_args()) instanceof Cookie) {
+            $cookie = head(func_get_args());
         } else {
-            $cookie = call_user_func_array([$this, 'make'], $parameters);
+            $cookie = call_user_func_array([$this, 'make'], func_get_args());
         }
 
         $this->queued[$cookie->getName()] = $cookie;
@@ -143,12 +135,11 @@ class CookieJar implements JarContract
      *
      * @param  string  $path
      * @param  string  $domain
-     * @param  bool    $secure
      * @return array
      */
-    protected function getPathAndDomain($path, $domain, $secure = false)
+    protected function getPathAndDomain($path, $domain)
     {
-        return [$path ?: $this->path, $domain ?: $this->domain, $secure ?: $this->secure];
+        return [$path ?: $this->path, $domain ?: $this->domain];
     }
 
     /**
@@ -156,12 +147,11 @@ class CookieJar implements JarContract
      *
      * @param  string  $path
      * @param  string  $domain
-     * @param  bool    $secure
      * @return $this
      */
-    public function setDefaultPathAndDomain($path, $domain, $secure = false)
+    public function setDefaultPathAndDomain($path, $domain)
     {
-        list($this->path, $this->domain, $this->secure) = [$path, $domain, $secure];
+        list($this->path, $this->domain) = [$path, $domain];
 
         return $this;
     }

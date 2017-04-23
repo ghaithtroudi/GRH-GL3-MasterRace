@@ -29,71 +29,75 @@ class PostgresConnector extends Connector implements ConnectorInterface
         // First we'll create the basic DSN and connection instance connecting to the
         // using the configuration option specified by the developer. We will also
         // set the default character set on the connections to UTF-8 by default.
-        $connection = $this->createConnection(
-            $this->getDsn($config), $config, $this->getOptions($config)
-        );
+        $dsn = $this->getDsn($config);
 
-        $this->configureEncoding($connection, $config);
+        $options = $this->getOptions($config);
+
+        $connection = $this->createConnection($dsn, $config, $options);
+
+        $charset = $config['charset'];
+
+        $connection->prepare("set names '$charset'")->execute();
 
         // Next, we will check to see if a timezone has been specified in this config
         // and if it has we will issue a statement to modify the timezone with the
         // database. Setting this DB timezone is an optional configuration item.
-        $this->configureTimezone($connection, $config);
-
-        $this->configureSchema($connection, $config);
-
-        // Postgres allows an application_name to be set by the user and this name is
-        // used to when monitoring the application with pg_stat_activity. So we'll
-        // determine if the option has been specified and run a statement if so.
-        $this->configureApplicationName($connection, $config);
-
-        return $connection;
-    }
-
-    /**
-     * Set the connection character set and collation.
-     *
-     * @param  \PDO  $connection
-     * @param  array  $config
-     * @return void
-     */
-    protected function configureEncoding($connection, $config)
-    {
-        $charset = $config['charset'];
-
-        $connection->prepare("set names '$charset'")->execute();
-    }
-
-    /**
-     * Set the timezone on the connection.
-     *
-     * @param  \PDO  $connection
-     * @param  array  $config
-     * @return void
-     */
-    protected function configureTimezone($connection, array $config)
-    {
         if (isset($config['timezone'])) {
             $timezone = $config['timezone'];
 
-            $connection->prepare("set time zone '{$timezone}'")->execute();
+            $connection->prepare("set time zone '$timezone'")->execute();
         }
-    }
 
-    /**
-     * Set the schema on the connection.
-     *
-     * @param  \PDO  $connection
-     * @param  array  $config
-     * @return void
-     */
-    protected function configureSchema($connection, $config)
-    {
+        // Unlike MySQL, Postgres allows the concept of "schema" and a default schema
+        // may have been specified on the connections. If that is the case we will
+        // set the default schema search paths to the specified database schema.
         if (isset($config['schema'])) {
             $schema = $this->formatSchema($config['schema']);
 
             $connection->prepare("set search_path to {$schema}")->execute();
         }
+
+        // Postgres allows an application_name to be set by the user and this name is
+        // used to when monitoring the application with pg_stat_activity. So we'll
+        // determine if the option has been specified and run a statement if so.
+        if (isset($config['application_name'])) {
+            $applicationName = $config['application_name'];
+
+            $connection->prepare("set application_name to '$applicationName'")->execute();
+        }
+
+        return $connection;
+    }
+
+    /**
+     * Create a DSN string from a configuration.
+     *
+     * @param  array   $config
+     * @return string
+     */
+    protected function getDsn(array $config)
+    {
+        // First we will create the basic DSN setup as well as the port if it is in
+        // in the configuration options. This will give us the basic DSN we will
+        // need to establish the PDO connections and return them back for use.
+        extract($config);
+
+        $host = isset($host) ? "host={$host};" : '';
+
+        $dsn = "pgsql:{$host}dbname={$database}";
+
+        // If a port was specified, we will add it to this Postgres DSN connections
+        // format. Once we have done that we are ready to return this connection
+        // string back out for usage, as this has been fully constructed here.
+        if (isset($config['port'])) {
+            $dsn .= ";port={$port}";
+        }
+
+        if (isset($config['sslmode'])) {
+            $dsn .= ";sslmode={$sslmode}";
+        }
+
+        return $dsn;
     }
 
     /**
@@ -109,66 +113,5 @@ class PostgresConnector extends Connector implements ConnectorInterface
         } else {
             return '"'.$schema.'"';
         }
-    }
-
-    /**
-     * Set the schema on the connection.
-     *
-     * @param  \PDO  $connection
-     * @param  array  $config
-     * @return void
-     */
-    protected function configureApplicationName($connection, $config)
-    {
-        if (isset($config['application_name'])) {
-            $applicationName = $config['application_name'];
-
-            $connection->prepare("set application_name to '$applicationName'")->execute();
-        }
-    }
-
-    /**
-     * Create a DSN string from a configuration.
-     *
-     * @param  array   $config
-     * @return string
-     */
-    protected function getDsn(array $config)
-    {
-        // First we will create the basic DSN setup as well as the port if it is in
-        // in the configuration options. This will give us the basic DSN we will
-        // need to establish the PDO connections and return them back for use.
-        extract($config, EXTR_SKIP);
-
-        $host = isset($host) ? "host={$host};" : '';
-
-        $dsn = "pgsql:{$host}dbname={$database}";
-
-        // If a port was specified, we will add it to this Postgres DSN connections
-        // format. Once we have done that we are ready to return this connection
-        // string back out for usage, as this has been fully constructed here.
-        if (isset($config['port'])) {
-            $dsn .= ";port={$port}";
-        }
-
-        return $this->addSslOptions($dsn, $config);
-    }
-
-    /**
-     * Add the SSL options to the DSN.
-     *
-     * @param  string  $dsn
-     * @param  array  $config
-     * @return string
-     */
-    protected function addSslOptions($dsn, array $config)
-    {
-        foreach (['sslmode', 'sslcert', 'sslkey', 'sslrootcert'] as $option) {
-            if (isset($config[$option])) {
-                $dsn .= ";{$option}={$config[$option]}";
-            }
-        }
-
-        return $dsn;
     }
 }
