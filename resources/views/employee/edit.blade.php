@@ -96,4 +96,5 @@
 //     });
 // });
   </script>
+    <script type="text/javascript" src={{url('/assets/js/plus/emp_edit.js')}}></script>
 @endsection

@@ -153,5 +153,17 @@ function createDateRangeArray($strDateFrom,$strDateTo)
 	return $aryRange;
 }
 
+function imageUploadCleanUp($employee)
+{
+    $base_path = public_path('uploads/images/employees/');
+    $extension = explode('.',$employee->image)[count(explode('.',$employee->image))-1];
+
+    $imageToClean = $base_path.$employee->image;
+
+    $employee->image = $employee->id.'.'.$extension;
+
+    unlink($imageToClean);
+}
+
 
 

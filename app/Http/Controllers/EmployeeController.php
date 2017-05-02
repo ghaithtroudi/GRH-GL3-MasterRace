@@ -220,9 +220,31 @@ class EmployeeController extends Controller
 
         $edit->add('type','Type <span class="text-danger">*</span>','select')->options(['1'=>'Worker','2'=>'Staff'])->rule('required');
 
-        $edit->add('image','Photo', 'image')->move('uploads/images/employees')->preview(80,80);
-       
+        $edit->add('image','Photo', 'image')->move(public_path('/uploads/images/employees'))
+            ->image(function($image) {
+            $employee = Employee::orderBy('id','desc')->first();
+            $last_id = $employee->id + 1;
+
+            $image->resize(120, 90);
+            $image->save(public_path('/uploads/images/employees/'.$last_id.'.'.$image->extension));
+        });
+
         $edit->build();
+
         return $edit->view('employee.edit', compact('edit')); 
+    }
+
+    public function editExtended(Request $request)
+    {
+        $this->validate($request,[
+            'employee_id' => 'required|filled',
+            'name' => 'required|filled',
+            'dob' => 'required|filled|date',
+            'present_address' => 'required|filled',
+            'permanent_address' => 'required|filled',
+            'primary_phone' => 'required|filled|digits',
+            'secondary_phone' => 'digits',
+            'image' => 'mimes:jpeg,bmp,png,jpg,gif,svg|nullable'
+        ]);
     }
 }
