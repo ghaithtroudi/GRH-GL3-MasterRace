@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         \DB::table('lines')->truncate();;
         \DB::table('designations')->truncate();;
         \DB::table('employees')->truncate();;
+        \DB::table('employee_designation')->truncate();;
         // \DB::truncate('users');
         // \DB::truncate('users');
 
@@ -33,6 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call(OrganizationTableSeeder::class);
         $this->call(SectionTableSeeder::class);
         $this->call(BranchTableSeeder::class);
+        $this->call(Employee_DesignationTableSeeder::class);
         
         Model::reguard();
     }

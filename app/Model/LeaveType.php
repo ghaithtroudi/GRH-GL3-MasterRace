@@ -9,12 +9,12 @@ class LeaveType extends Model
     //
     public function leave()
     {
-    	return $this->hasMany("App\Model\leave");
+    	return $this->hasMany("App\\Model\\leave");
     }
 
     //
     public function leaveEmployee()
     {
-    	return $this->hasMany("App\Model\leaveEmployee");
+    	return $this->hasMany("App\\Model\\leaveEmployee");
     }
 }

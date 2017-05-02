@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" type="image/ico" href="{{ url('favicon.ico') }}"/>
-    <title>DKGF @yield('title')</title>
+    <title>INSAT @yield('title')</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -48,7 +48,7 @@
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">HRM</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg">DKGF HRM</span>
+          <span class="logo-lg">INSAT HRM</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -136,7 +136,7 @@
         <div class="pull-right hidden-xs">
          
         </div>
-        <strong>Copyright &copy; 2016 <a href="http://universalit.com.bd">Universal IT </a>.</strong> All Rights Reserved
+        <strong>Copyright &copy; 2016 <p>Universal IT </p>.</strong> All Rights Reserved
       </footer>
 
       

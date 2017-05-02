@@ -11,12 +11,12 @@ class LeaveEmployee extends Model
     //
 	public function employee()
     {
-    	return $this->belongsTo("App\Model\Employee",'employee_id','id');
+    	return $this->belongsTo("App\\Model\\Employee",'employee_id','id');
     }
 
     public function leaveType()
     {
-    	return $this->belongsTo("App\Model\LeaveType",'leavetype_id','id');
+    	return $this->belongsTo("App\\Model\\LeaveType",'leavetype_id','id');
     }
 
 

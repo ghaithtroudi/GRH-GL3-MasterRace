@@ -86,14 +86,14 @@ class EmployeeController extends Controller
             //         return $query;
             //     }
             // })
-            ->attributes(['data-target'=>'line','data-source'=>url('/line/json'), 'onchange'=>"populateSelect(this)"]);
+            ->attributes(['data-target'=>'line','data-source'=>url('/line/json'), 'onchange'=>"setDesignationWhilePopulatingSelect(this)"]); //populateSelect(this)
         
         	$filter->add('line','Line','select')
 
             ->options([''=>"Select Line"])
             ->options(Line::where('section_id', \Input::get('line_section'))->lists("name", "id"))
             ->scope(function($query){
-                if (!empty(\Input::get('line')) && trim(\Input::get('line')) !="--Select--") {
+                if (!empty(\Input::get('line')) && trim(\Input::get('line')) != "--Select--") {
             		
                     return $query->where('line_id',\Input::get('line'));
 
@@ -103,7 +103,22 @@ class EmployeeController extends Controller
         });
 
 
-        $filter->add('designations.name','Designations','tags');
+        //$filter->add('designations.name','Designations','tags');
+
+       $filter->add('designations','Designation','select')
+            ->options(['' => "Select Designation"])
+            ->options(Designation::where('section_id',\Input::get('section'))->lists('name','id'))
+        ->scope(function($query,$value){
+            if(!empty($value) && trim($value != "--Select--")){
+                    $grades = Grade::where('designation_id',$value)->get();
+
+                    return $query->whereIn('grade_id',$grades->pluck('id'));
+
+                }
+                else{
+                    return $query;
+                }
+        });
 
         $filter->submit('search');
         $filter->reset('reset');
@@ -116,9 +131,9 @@ class EmployeeController extends Controller
         $grid->add('id','#')->cell(function($value, $row){
             $pageNumber = (\Input::get('page')) ? \Input::get('page') : 1;
 
-            static $serialStart =0;
+            static $serialStart = 0;
             ++$serialStart; 
-            return ($pageNumber-1)*config('hrm.pagination_per_page', 15) +$serialStart;
+            return ($pageNumber-1)*config('hrm.pagination_per_page', 15) + $serialStart;
 
 
         });
@@ -145,7 +160,7 @@ class EmployeeController extends Controller
         	return employeeStatus($value);
         });
         $grid->edit('employee/edit', 'Edit','modify');
-        $grid->link('employee/edit',"New Employee", "TR",['class' =>'btn btn-success']);
+        $grid->link('/employee/edit',"New Employee", "TR",['class' =>'btn btn-success']);
         $grid->orderBy('id','ASC');
         
         $grid->paginate(config('hrm.pagination_per_page', 15));

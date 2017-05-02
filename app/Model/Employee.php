@@ -9,47 +9,47 @@ class Employee extends Model
     
     public function line()
     {
-    	return $this->belongsTo("App\Model\Line");
+    	return $this->belongsTo("App\\Model\\Line");
     }
 
     public function department()
     {
-    	return $this->belongsTo("App\Model\Department");
+    	return $this->belongsTo("App\\Model\\Department");
     }
     public function section()
     {
-        return $this->belongsTo("App\Model\Section");
+        return $this->belongsTo("App\\Model\\Section");
 
     }
     public function branch()
     {
-        return $this->belongsTo("App\Model\Branch");
+        return $this->belongsTo("App\\Model\\Branch");
 
     }
 
     public function designations()
     {
-    	return $this->belongsToMany("App\Model\Designation",'employee_designation','employee_id','designation_id');
+    	return $this->belongsToMany("App\\Model\\Designation",'employee_designation','employee_id','designation_id');
     }
 
     public function educations()
     {
-    	return $this->hasMany("App\Model\Education");
+    	return $this->hasMany("App\\Model\\Education");
     }
 
     public function experiences()
     {
-    	return $this->hasMany("App\Model\Experience");
+    	return $this->hasMany("App\\Model\\Experience");
     }
 
     public function leave()
     {
-        return $this->hasMany("App\Model\Leave");
+        return $this->hasMany("App\\Model\\Leave");
     }
 
      public function leaveEmployees()
     {
-        return $this->hasMany("App\Model\LeaveEmployee");
+        return $this->hasMany("App\\Model\\LeaveEmployee");
     }
 
     public function grade()

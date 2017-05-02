@@ -19,7 +19,7 @@ jQuery(document).ready(function($) {
 		})
 		.done(function(response) {
 			console.log(response);
-			if (response.status ==1) {
+			if (response.status == 1) {
 				$(event.target).parent().parent().parent().remove();
 				console.log(response);
 			} else{};
@@ -60,7 +60,7 @@ function populateSelect (event) {
 		url: url,
 		type: 'GET',
 		dataType: 'JSON',
-		
+
 	})
 	.done(function(response) {
 		console.log(response);
@@ -86,8 +86,8 @@ function populateSelect (event) {
 }
 
 function setDesignation(event) {
-	var url = $('#base_url').text()+'/designation/json/'+$(event).val();
-	var target ='designations';
+	var url = $('#base_url').text()+'/designation/json/'+ $(event).val();
+	var target = 'designations';
 	console.log(url);
 	console.log(target);
 	$("#"+target).html('');
@@ -119,6 +119,13 @@ function setDesignation(event) {
 		console.log(response);
 	});
 }
+
+function setDesignationWhilePopulatingSelect(event){
+	populateSelect(event);
+	setDesignation(event);
+}
+
+
 /*Get Diff between two days in format of d/m/y*/
 function getDateDiff(date1, date2, interval) {
     var second = 1000,

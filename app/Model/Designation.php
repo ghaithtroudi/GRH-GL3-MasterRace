@@ -11,27 +11,27 @@ class Designation extends Model
 
     public function department()
     {
-    	return $this->belongsTo("App\Model\Department");
+    	return $this->belongsTo("App\\Model\\Department");
     }
 
     public function branch()
     {
-        return $this->belongsTo("App\Model\Branch");
+        return $this->belongsTo("App\\Model\\Branch");
     }
 
     public function section()
     {
-        return $this->belongsTo("App\Model\Section");
+        return $this->belongsTo("App\\Model\\Section");
     }
     
     public function employees()
     {
-    	return $this->belongsToMany("App\Model\Employee","employee_designation");
+    	return $this->belongsToMany("App\\Model\\Employee","employee_designation","designation_id","employee_id");
     }
 
     public function grade()
     {
-    	return $this->hasMany("App\Model\Grade");
+    	return $this->hasMany("App\\Model\\Grade");
     }
     
 }

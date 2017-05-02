@@ -11,6 +11,6 @@ class Organization extends Model
 	protected $visible = ['name','address'];
     public function branches()
     {
-    	return $this->hasMany("App\Model\Branch");
+    	return $this->hasMany("App\\Model\\Branch");
     }
 }

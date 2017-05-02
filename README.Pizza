@@ -1,0 +1,25 @@
+Enter this directory in a terminal.
+
+type composer install.
+
+Make sure mysql is open and that you have a user 'user' with the password 'user' and that you have a, empty database called 'hoho', or
+create a new valid user with all previliges and change the corresponding data in ".env".
+
+Type in that terminal: php artisan migrate => this will fill the database with the tables
+
+add at least one row in the 'roles' table.
+
+Type in the same terminal: php artisan db:seed => this will fill the tables with random values
+
+Type: php artisan serve, go to your browser and put the following url: localhost:8000/
+
+if you do not login automatically, open phpmyadmin, go to the 'users' in the 'hoho' database and choose an e-mail to log with, if you don't log
+with just the e-mail ( bug, happened with me only twice though...dunno why), you can do this:
+
+	type php artisan tinker in the teminal
+	type password_hash('0123456789',CRYPT_SHA256) to encrypt the password
+	copy the hash to the password field of any in the 'users' table in the database
+	use the email from that row as login and '0123456789' as password to login
+
+
+enjoy free application.

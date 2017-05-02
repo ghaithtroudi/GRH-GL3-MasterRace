@@ -10,6 +10,6 @@ class Education extends Model
 
     public function employee()
     {
-    	return $this->belongsTo("App\Model\Employee");
+    	return $this->belongsTo("App\\Model\\Employee");
     }
 }

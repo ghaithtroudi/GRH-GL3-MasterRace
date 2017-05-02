@@ -187,9 +187,9 @@ class DesignationController extends Controller
         //
     }
 
-    public function getLists($department_id)
+    public function getLists($section_id)
     {
-        return Designation::where('section_id',$department_id)->get();
+        return Designation::where('section_id',$section_id)->get();
     }
 
 }

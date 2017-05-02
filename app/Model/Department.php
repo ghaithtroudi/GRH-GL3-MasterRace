@@ -10,12 +10,12 @@ class Department extends Model
 
     public function branch()
     {
-    	return $this->belongsTo("App\Model\Branch");
+    	return $this->belongsTo("App\\Model\\Branch");
     }
 
     public function sections()
     {
-    	return $this->hasMany("App\Model\Section");
+    	return $this->hasMany("App\\Model\\Section");
     }
 
     public function designations()

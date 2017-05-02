@@ -78,6 +78,7 @@ return array(
     'DesignationTableSeeder' => $baseDir . '/database/seeds/DesignationTableSeeder.php',
     'DesignationsDescriptionSetNull' => $baseDir . '/database/migrations/2016_01_08_110957_designations_description_set_null.php',
     'EmployeeTableSeeder' => $baseDir . '/database/seeds/EmployeeTableSeeder.php',
+    'Employee_DesignationTableSeeder' => $baseDir . '/database/seeds/Employee_DesignationTableSeeder.php',
     'Encoding_Map' => $vendorDir . '/phenx/php-font-lib/classes/Encoding_Map.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',

@@ -23,10 +23,14 @@
 			<div class="box-footer clearfix">
 		                  
       </div>
-  </div>  
-
-    
+  </div>
             
           
           
+@endsection
+
+@section('script')
+
+    <script type="text/javascript" src={{url('assets/js/plus/employee.js')}}></script>
+
 @endsection
