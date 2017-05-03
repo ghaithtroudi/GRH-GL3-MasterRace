@@ -8,6 +8,7 @@ use App\Model\Branch;
 use App\Model\Department;
 use App\Model\Designation;
 use App\Model\Employee;
+use App\Model\Employee_Designation;
 use App\Model\Grade;
 use App\Model\Line;
 use App\Model\Section;
@@ -15,6 +16,8 @@ use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
+    protected static $img_dir = 'uploads/images/employees/';
+
     public function index()
     {
     	// return Employee::with('line.section.department.branch','designations')->get();
@@ -159,7 +162,7 @@ class EmployeeController extends Controller
         $grid->add('status','Status',true)->cell(function($value,$row){
         	return employeeStatus($value);
         });
-        $grid->edit('employee/edit', 'Edit','modify');
+        $grid->edit('/employee/edit', 'Edit','modify');
         $grid->link('/employee/edit',"New Employee", "TR",['class' =>'btn btn-success']);
         $grid->orderBy('id','ASC');
         
@@ -199,9 +202,9 @@ class EmployeeController extends Controller
         $edit->add('designations','Designations','select')
              ->options([''=>'Select Designations'])
              ->options(Designation::lists('name','id')->all())
-             ->attributes(['data-target'=>'grade','data-source'=>url('/grade/json'), 'onchange'=>"populateSelect(this)"]);
+             ->attributes(['data-target'=>'grade_id','data-source'=>url('/grade/json'), 'onchange'=>"populateSelect(this)"]);
 
-        $edit->add('grade','Grade','select')
+        $edit->add('grade_id','Grade','select')
              ->options([''=>'Select Grade'])
              ->options(Grade::lists('name','id')->all());
 
@@ -239,12 +242,144 @@ class EmployeeController extends Controller
         $this->validate($request,[
             'employee_id' => 'required|filled',
             'name' => 'required|filled',
-            'dob' => 'required|filled|date',
+            'dob' => 'required|filled|date_format:"d/m/Y"',
             'present_address' => 'required|filled',
             'permanent_address' => 'required|filled',
-            'primary_phone' => 'required|filled|digits',
-            'secondary_phone' => 'digits',
-            'image' => 'mimes:jpeg,bmp,png,jpg,gif,svg|nullable'
+            'primary_phone' => 'required|filled|numeric',
+            'secondary_phone' => 'numeric',
         ]);
+
+        $referer = $request->headers->get('referer');
+        $ref_array = explode('=',$referer);
+        $id = $ref_array[count($ref_array)-1];
+
+        if( !is_numeric($id))
+        {
+            $this->saveEmployee($request->all());
+        }
+
+        else
+        {
+            $this->updateEmployee($request->all(),$id);
+        }
+
+        return back()->withErrors($this);
+    }
+
+    public function saveEmployee($fields)
+    {
+        $image = null;
+        $designation_id = null;
+
+        unset($fields['_token']);
+        unset($fields['save']);
+
+        if( array_key_exists('designations',$fields) )
+        {
+            $designation_id = $fields['designations'];
+            unset($fields['designations']);
+        }
+
+        if( array_key_exists('image',$fields) )
+        {
+            $image = $fields['image'];
+            unset($fields['image']);
+        }
+
+        $date = \DateTime::createFromFormat('d/m/Y',$fields['joining_date']);
+        $date = $date->format('Y-m-d');
+
+        $fields['joining_date'] = $date;
+
+        $date = \DateTime::createFromFormat('d/m/Y',$fields['dob']);
+        $date = $date->format('Y-m-d');
+
+        $fields['dob'] = $date;
+
+        $employee = new Employee($fields);
+        $employee_designation = new Employee_Designation();
+
+        if( $image != null )
+        {
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $mime = finfo_file($finfo,$image);
+
+            if( str_contains($mime,'image') )
+            {
+                $base_path = config('img_dir');
+
+                $extension = explode('/',$mime)[1];
+
+                $last_id = Employee::orderBy('id','desc')->first()->id + 1;
+
+                $new_path = $base_path.$last_id.'.'.$extension;
+
+                move_uploaded_file(realpath($image),$new_path);
+
+                $employee->image = $last_id.'.'.$extension;
+            }
+        }
+
+        $employee->save();
+
+        if( $designation_id != null )
+        {
+            $employee_designation->employee_id = $employee->id;
+            $employee_designation->designation_id = $designation_id;
+            $employee_designation->status = true;
+            $employee_designation->save();
+        }
+    }
+
+    public function updateEmployee($fields,$id)
+    {
+        $employee = Employee::find($id);
+        $image = null;
+
+        unset($fields['_token']);
+        unset($fields['save']);
+
+        if( array_key_exists('designations',$fields) )
+        {
+            $designation_id = $fields['designations'];
+            unset($fields['designations']);
+        }
+
+        if ( array_key_exists('image_remove',$fields) )
+        {
+            unset($fields['image_remove']);
+            $file = config('hrm.img_dir').$employee->image;
+            unlink($file);
+            $employee->image = '';
+        }
+
+        if( array_key_exists('image',$fields) )
+        {
+            $image = $fields['image'];
+            unset($fields['image']);
+        }
+
+        $employee_designation = new Employee_Designation();
+
+        if( $image != null )
+        {
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $mime = finfo_file($finfo,$image);
+
+            if( str_contains($mime,'image') )
+            {
+                $base_path = config('hrm.img_dir');
+
+                $extension = explode('/',$mime)[1];;
+
+                $new_path = $base_path.$id.'.'.$extension;
+
+                move_uploaded_file(realpath($image),$new_path);
+
+                $fields['image'] = $id.'.'.$extension;
+            }
+        }
+
+        $employee->update($fields);
     }
 }

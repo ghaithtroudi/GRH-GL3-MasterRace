@@ -98,3 +98,16 @@
   </script>
     <script type="text/javascript" src={{url('/assets/js/plus/emp_edit.js')}}></script>
 @endsection
+
+
+@section('errors')
+    @if($errors)
+        <ul>
+        @foreach($errors->all() as $error)
+            <li>
+                {{$error}}
+            </li>
+        @endforeach
+        </ul>
+    @endif
+@endsection

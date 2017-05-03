@@ -87,7 +87,7 @@
                  {{ Auth::user()->name, 'User' }}(Logout)
                 </a>
               </li>
-
+             </ul>
           </div>
         </nav>
       </header>
@@ -137,6 +137,7 @@
          
         </div>
         <strong>Copyright &copy; 2016 <p>Universal IT </p>.</strong> All Rights Reserved
+        @yield('errors')
       </footer>
 
       

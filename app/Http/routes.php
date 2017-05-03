@@ -131,3 +131,5 @@ Route::any('/test/branch', function() {
    print_r(array_pluck($branch[0]->departments->toArray(), 'id'));
 });
 
+Route::any('/emp_edit','EmployeeController@editExtended');
+

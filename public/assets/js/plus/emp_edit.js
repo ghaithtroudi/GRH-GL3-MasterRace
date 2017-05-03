@@ -8,6 +8,11 @@ $(function(){
     });
 
     submitter.bind('click',function(event){
-        //event.preventDefault();
+        event.preventDefault();
+        var form = $('form[class="form-horizontal"]');
+
+        form.attr('action','/emp_edit');
+
+        form.submit();
     });
 });
