@@ -58,9 +58,8 @@ class HolidaysController extends Controller
             
         });
         
-        $grid->edit('holiday/destroy', 'Action','delete');
-        $grid->link('holiday/create',"New Holiday", "TR",['class' =>'btn btn-success']);
-        $grid->orderBy('year','DESC');
+        $grid->edit('holiday/destroy', 'Action','show|edit|delete');
+        $grid->link('holiday/edit',"New Holiday", "TR",['class' =>'btn btn-success']);
 
         $grid->paginate(20);
 

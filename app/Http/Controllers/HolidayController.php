@@ -18,12 +18,11 @@ class HolidayController extends Controller
      */
     public function index()
     {
-        $filter = \DataFilter::source(Holiday::with('holiday_types'));
+        $filter = \DataFilter::source(Holiday::with('holiday_type'));
 
         $filter->add('name','Name','text');
         $filter->add('start','First Date','date');
         $filter->add('end','Last Date','date');
-        $filter->add('duration','Duration','text');
         $filter->add('type','Type','select')
             ->options(['' => 'Select Type'])
             ->options(HolidayType::lists('name','id')->all());
@@ -43,82 +42,38 @@ class HolidayController extends Controller
         });
 
         $grid->add('name','Name',true);
-        $grid->add('start','First Date',true);
-        $grid->add('end','Second Date',true);
-        $grid->add('type','Type');
-        $grid->add('duration','Duration',true);
+        $grid->add('start','Start Date',true);
+        $grid->add('end','Last Date',true);
+        $grid->add('type','Type',true);
+        $grid->add('duration','Duration',true)->cell(function($value,$row){
+            $start = \DateTime::createFromFormat('Y-m-d',$row->start);
+            $end = \DateTime::createFromFormat('Y-m-d',$row->end);
+            return date_diff($start,$end)->format('%a');
+        });
 
-        $grid->edit('/holiday/edit','Action','modify|delete');
-        $grid->link('/holiday/create','New Holiday','TR',['class' => 'btn btn-success']);
+        $grid->edit('/holiday/edit','Action','show|modify|delete');
+        $grid->link('/holiday/edit','New Holiday','TR',['class' => 'btn btn-success']);
 
         $grid->paginate(config('hrm.alternative_pagination'));
 
         return view('leave.holiday.index',compact('filter','grid'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function edit()
     {
-        //
-    }
+        $edit = \DataEdit::source(new Holiday());
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $edit->add('name','Name<span class="text-danger">*</span>','text')->rule('required');
+        $edit->add('start','Start Day<span class="text-danger">*</span>','date')->rule('required');
+        $edit->add('end','End Day<span class="text-danger">*</span>','date')->rule('required|after:start');
+        $edit->add('type','Type<span class="text-danger">*</span>','select')
+        ->options(['' => 'Select'])
+            ->options(HolidayType::lists('name','id')->all())->rule('required');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        $edit->link('holiday','Holidays','TR',['class' => 'btn btn-primary'])->back();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        $edit->build();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return $edit->view('leave.holiday.edit',compact('edit'));
     }
 }

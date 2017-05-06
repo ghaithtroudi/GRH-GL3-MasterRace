@@ -80,7 +80,8 @@ Route::group(['middleware' => 'acl'], function () {
     Route::get('/leave/summary/json/{employee_id}','LeaveController@summary')->where('id', '^EMP-[0-9]*');
 
     Route::get('/holiday/destroy','HolidayController@destroy');
-    Route::resource('/holiday', 'HolidayController');
+    Route::get('/holiday', 'HolidayController@index');
+    Route::any('/holiday/edit','HolidayController@edit');
     // Registration routes...
 	Route::get('auth/register','Auth\AuthController@getRegister');
 	Route::post('auth/register','Auth\AuthController@postRegister');

@@ -162,7 +162,7 @@ class EmployeeController extends Controller
         $grid->add('status','Status',true)->cell(function($value,$row){
         	return employeeStatus($value);
         });
-        $grid->edit('/employee/edit', 'Edit','modify');
+        $grid->edit('/employee/edit', 'Edit','show|modify');
         $grid->link('/employee/edit',"New Employee", "TR",['class' =>'btn btn-success']);
         $grid->orderBy('id','ASC');
         
@@ -195,7 +195,7 @@ class EmployeeController extends Controller
 			 ->options([''=>"Select Line"])
              ->options(Line::lists("name", "id")->all());
 
-        $edit->link("employee","Employee", "TR",['class' =>'btn btn-primary'])->back();
+        $edit->link("employee","Employees", "TR",['class' =>'btn btn-primary'])->back();
 
         $edit->add('employee_id','Employee ID <span class="text-danger">*</span>', 'text')->rule('required');
         $edit->add('name','Full Name <span class="text-danger">*</span>', 'text')->rule('required');

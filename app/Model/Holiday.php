@@ -8,24 +8,24 @@ use Carbon\Carbon;
 
 class Holiday extends Model
 {
-    use SoftDeletes;
+    //use SoftDeletes;
 
-    protected $table = 'holidays';
-    protected $guarded = ['id'];
+    public $table = 'holidays';
+    public $guarded = ['id'];
 
-    public function getDateAttribute($value)
+    /*public function getDateAttribute($value)
     {
         return Carbon::parse($value)->format('d/m/Y');
-    }
+    }*/
 
-    public function setDateAttribute($value)
+    /*public function setDateAttribute($value)
     {
         $this->attributes['date'] = Carbon::createFromFormat('d/m/Y', $value)->toDateString();
-    }
+    }*/
 
-    public function holiday_types()
+    public function holiday_type()
     {
-        return $this->hasOne('App\Model\HolidayType');
+        return $this->belongsTo('App\Model\HolidayType');
     }
 
     /*public static function leaveType()
