@@ -243,6 +243,7 @@ class EmployeeController extends Controller
             'employee_id' => 'required|filled',
             'name' => 'required|filled',
             'dob' => 'required|filled|date_format:"d/m/Y"',
+            'joining_date' => 'required|filled|date_format:"d/m/Y"',
             'present_address' => 'required|filled',
             'permanent_address' => 'required|filled',
             'primary_phone' => 'required|filled|numeric',

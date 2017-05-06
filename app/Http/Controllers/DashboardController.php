@@ -26,10 +26,10 @@ class DashboardController extends Controller
 
         $totalResignedEmployees = Employee::where('status','=',3)->count();
 
-        $totalHolidays = Holiday::where('year',date('Y'))->count();
+        /*$totalHolidays = Holiday::all()->count();
         $startDay = new Carbon('first day of '.date('M').' '.date('Y') );
         $endDay = new Carbon('last day of '.date('M').' '.date('Y') );
-        $totalHolidayInMonth = Holiday::whereBetween('date',[$startDay,$endDay])->count();
+        $totalHolidayInMonth = Holiday::whereBetween('date',[$startDay,$endDay])->count();*/
 
         return view('dashboard.index', compact('employeePresents','resignedWorkers',
             'totalActiveEmployees','newStaffs','permanentStaffs','resignedStaffs',

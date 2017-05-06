@@ -23,6 +23,9 @@ class DatabaseSeeder extends Seeder
         \DB::table('designations')->truncate();;
         \DB::table('employees')->truncate();;
         \DB::table('employee_designation')->truncate();;
+        \DB::table('leave_types')->truncate();;
+        \DB::table('holiday_types')->truncate();
+        \DB::table('holidays')->truncate();;
         // \DB::truncate('users');
         // \DB::truncate('users');
 
@@ -35,6 +38,9 @@ class DatabaseSeeder extends Seeder
         $this->call(SectionTableSeeder::class);
         $this->call(BranchTableSeeder::class);
         $this->call(Employee_DesignationTableSeeder::class);
+        $this->call(LeaveTypeTableSeeder::class);
+        $this->call(HolidayTypeTableSeeder::class);
+        $this->call(HolidayTableSeeder::class);
         
         Model::reguard();
     }

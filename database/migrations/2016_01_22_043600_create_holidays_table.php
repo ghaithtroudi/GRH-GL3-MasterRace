@@ -15,13 +15,15 @@ class CreateHolidaysTable extends Migration
         Schema::create('holidays', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',100);
-            $table->integer('year');
-            $table->date('date');
-            $table->tinyInteger('type')->unsigned();
+            $table->date('start');
+            $table->date('end');
+            $table->integer('type')->unsigned();
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned();
             $table->timestamps();
-            $table->softDeletes();
+            //$table->softDeletes();
+
+            //$table->integer('year');
         });
     }
 

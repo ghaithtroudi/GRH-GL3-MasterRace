@@ -54,7 +54,7 @@
                 <span class="info-box-icon bg-yellow-active"><i class="fa fa-calendar"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Holidays(Y)</span>
-                    <span class="info-box-number">{{ $totalHolidays }}</span>
+                    <!--<span class="info-box-number"> $totalHolidays </span>-->
                 </div><!-- /.info-box-content -->
             </div><!-- /.info-box -->
 
@@ -65,7 +65,7 @@
                 <span class="info-box-icon bg-yellow-active"><i class="fa fa-calendar-plus-o"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Holidays(m)</span>
-                    <span class="info-box-number">{{ $totalHolidayInMonth }}</span>
+                    <!-- <span class="info-box-number">$totalHolidayInMonth</span> -->
                 </div><!-- /.info-box-content -->
             </div><!-- /.info-box -->
 
