@@ -3,7 +3,7 @@
 @section('title','Holiday')
 @section('sidebar')
 
-    @include('layouts.sidebar',['active' =>'holiday','parent_menu'=>'leave'])
+    @include('layouts.sidebar',['active' =>'holiday_type','parent_menu'=>'leave'])
 
 @endsection
 
@@ -26,29 +26,12 @@
                     <div class="form-group">
 
                         <div class="col-sm-offset-2 col-sm-12">
-                            {!! $edit->render('name') !!}
-                            <!-- $edit->model -->
-                        </div>
-                    </div>
-                    <div class="form-group">
-
-                        <div class="col-sm-offset-2 col-sm-12">
-                            {!! $edit->render('type') !!}
-                        </div>
-                    </div>
-                    <div class="form-group">
-
-                        <div class=" col-sm-offset-2 col-sm-12">
-                            {!! $edit->render('start') !!}
+                        {!! $edit->render('name') !!}
+                        <!-- $edit->model -->
                         </div>
                     </div>
 
                     <div class="form-group">
-
-                        <div class=" col-sm-offset-2 col-sm-12">
-                            {!! $edit->render('end') !!}
-                        </div>
-                    </div>
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-9">

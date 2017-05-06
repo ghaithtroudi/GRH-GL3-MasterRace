@@ -49,12 +49,17 @@
         <ul class="treeview-menu">
           
           <li class="@if($active == 'leavetype') active @endif">
-            <a href="{{ url('leavetype') }}"><i class="fa fa-circle-o"></i>Leaves Type</a>
+            <a href="{{ url('leavetype') }}"><i class="fa fa-circle-o"></i>Leave Types</a>
           </li>
          
-          <li class="@if($active == 'branch') active @endif">
+          <li class="@if($active == 'holiday') active @endif">
             <a href="{{ url('holiday') }}"><i class="fa fa-circle-o"></i>Holidays</a>
           </li>
+
+          <li class="@if($active == 'holiday_type') active @endif">
+            <a href="{{ url('holiday_type') }}"><i class="fa fa-circle-o"></i>Holiday Types</a>
+          </li>
+
           <li class="@if($active == 'leaveemployee') active @endif">
             <a href="{{ url('leaveemployee') }}"><i class="fa fa-circle-o"></i>Employee Leave</a>
           </li>

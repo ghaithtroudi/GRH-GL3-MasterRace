@@ -11,6 +11,6 @@ class HolidayType extends Model
 
     public function holidays()
     {
-        return $this->HasMany('App\Model\Holiday');
+        return $this->HasMany('App\Model\Holiday','type');
     }
 }
