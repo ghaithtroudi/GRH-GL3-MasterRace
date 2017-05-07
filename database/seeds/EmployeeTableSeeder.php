@@ -19,7 +19,7 @@ class EmployeeTableSeeder extends Seeder
         $type_max = EmployeeType::orderBy('id','desc')->first()->id;
         $status_max = EmployeeStatus::orderBy('id','desc')->first()->id;
     	
-        foreach (range(1,100) as $value) {
+        foreach (range(1,50) as $value) {
         	DB::table('employees')->insert([
 	            'name' => $faker->name(),
 	            'employee_id' => 'EMP-'.$faker->numberBetween(1,10000),
@@ -36,7 +36,10 @@ class EmployeeTableSeeder extends Seeder
 	            'passport' => $faker->randomNumber(5),
 	            'image' => $faker->imageUrl(200, 200, 'cats', true, 'Fake'),
 	            'status' => $faker->numberBetween(1,$status_max),
+	            'branch_id' => $faker->numberBetween(1,2),
 	            'department_id' => $faker->numberBetween(1,8),
+	            'section_id' => $faker->numberBetween(1,16),
+	            'grade_id' => $faker->numberBetween(1,10),
 	            'joining_date' => $faker->date('Y-m-d'),
 	            'created_at' => $faker->dateTime('now'),
 	            'updated_at' => $faker->dateTime('now'),

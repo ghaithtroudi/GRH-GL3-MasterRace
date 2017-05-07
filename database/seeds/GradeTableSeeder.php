@@ -16,7 +16,7 @@ class GradeTableSeeder extends Seeder
         foreach (range(1,10) as $value) {
         	DB::table('grades')->insert([
 	            'name' => $faker->name(),
-                'designation_id' => $faker->numberBetween(1,64),
+                'designation_id' => $faker->numberBetween(1,10),
 	            'created_at' => $faker->dateTime('now'),
 	            'updated_at' => $faker->dateTime('now'),
 	        ]);

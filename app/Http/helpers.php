@@ -41,7 +41,7 @@ function getDaysInaYear($year,$day ='Friday', $format, $timezone='none')
 
 function employeeStatus($status)
 {
-    return Model\EmployeeStatus::find($status)->first()->name;
+    return Model\EmployeeStatus::where('id',$status)->first()->name;
 }
 function leavePayable($flag)
 {

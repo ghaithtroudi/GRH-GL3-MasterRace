@@ -26,10 +26,10 @@ class Employee_DesignationTableSeeder extends Seeder
         foreach( $employees as $employee )
         {
             $grade_id = $employee->grade_id;
-            $grade = Grade::find($grade_id);
+            $grade = Grade::where('id',$grade_id)->first();
 
             $designation_id = $grade->designation_id;
-            $designation = Designation::find($designation_id);
+            $designation = Designation::where('id',$designation_id)->first();
 
             DB::table('employee_designation')->insert([
                 'designation_id' => $designation_id,

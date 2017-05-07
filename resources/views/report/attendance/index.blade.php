@@ -46,7 +46,7 @@
                     <td>{{ $employee->name }}</td>
                     <td>{{ $employee->employee_id }}</td>
                     <?php
-                    $leaves = \App\Model\LeaveDetail::whereBetween('start_day',[$startDay,$endDay])
+                    /*$leaves = \App\Model\LeaveDetail::whereBetween('start_day',[$startDay,$endDay])
                                                     ->with(['leave'=>function($query)use($employee){
                                                         return $query->where('employee_id',$employee->id);
                                                     }])
@@ -67,16 +67,16 @@
                             }
                         }
                         //dd($leaveDates);
-                    }
+                    }*/
 
                     ?>
                     @foreach($allDates as $date)
                         <td>
                             @if(\App\Model\Attendance::where(['employee_id'=>$employee->id, 'date'=>$date])->count())
                                 P
-                            @elseif(\App\Model\Holiday::where('date',$date)->count())
+                            @elseif(\App\Model\Holiday::where('start',$date)->count())
                                 <span class="text-green">H</span>
-                            @elseif(in_array($date,$leaveDates))
+                            @elseif(in_array($date,$allDates))
                                 <span class="text-yellow">L</span>
                             @else
 

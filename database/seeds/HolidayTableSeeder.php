@@ -21,7 +21,6 @@ class HolidayTableSeeder extends Seeder
             'end' => $faker->date(),
             'name' => $faker->name(),
             'type' => $faker->numberBetween(1,$last_id),
-            'duration' => $faker->numberBetween(1,15),
             'created_at' => $faker->date(),
             'updated_at' => date_create(time())
         ]);

@@ -14,17 +14,12 @@ use Illuminate\Support\Facades\Storage;
 
 class AttendanceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $filter = \DataFilter::source(Attendance::with('employees'));
 
         $filter->add('employees.employee_id','Employee','tags');
-        //$filter->add('date','date','date')->format('Y:M:D');
+        $filter->add('date','Date','date');
       
         $filter->submit('search');
         $filter->reset('reset');
@@ -91,7 +86,7 @@ class AttendanceController extends Controller
             $office_opening_time = Setting::where('string','office_opening_time')->first();
             $office_duration_time = Setting::where('string','office_duration_time')->first();
 
-            while(! feof($file))
+            while( !feof($file) )
             {
                 $line = fgets($file);
                 $line1 = $line;

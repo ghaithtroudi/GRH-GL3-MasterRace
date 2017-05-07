@@ -16,7 +16,7 @@ class DesignationTableSeeder extends Seeder
         foreach (range(1,10) as $value) {
         	DB::table('designations')->insert([
 	            'name' => $faker->name(),
-                'department_id' => $faker->numberBetween(1,64),
+                'department_id' => $faker->numberBetween(1,8),
 	            'description' => $faker->text(),
 	            'created_at' => $faker->dateTime('now'),
 	            'updated_at' => $faker->dateTime('now'),
