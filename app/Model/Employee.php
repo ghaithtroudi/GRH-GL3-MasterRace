@@ -64,4 +64,9 @@ class Employee extends Model
         return $this->hasMany('App\Model\Attendance','');
     }
 
+    public function employee_type()
+    {
+        return $this->belongsTo('App\Model\EmployeeType');
+    }
+
 }

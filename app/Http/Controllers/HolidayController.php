@@ -44,7 +44,9 @@ class HolidayController extends Controller
         $grid->add('name','Name',true);
         $grid->add('start','Start Date',true);
         $grid->add('end','Last Date',true);
-        $grid->add('type','Type',true);
+        $grid->add('type','Type',true)->cell(function($value,$row){
+            return HolidayType::find($row->type)->first()->name;
+        });
         $grid->add('duration','Duration',true)->cell(function($value,$row){
             $start = \DateTime::createFromFormat('Y-m-d',$row->start);
             $end = \DateTime::createFromFormat('Y-m-d',$row->end);

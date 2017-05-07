@@ -10,7 +10,7 @@
           <i class="fa fa-gear"></i> <span>Company Basic Settings </span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
-        <ul class="  treeview-menu">
+        <ul class="treeview-menu">
           
           <li class="@if($active == 'organization') active @endif">
             <a href="{{ url('organization') }}"><i class="fa fa-circle-o"></i>Organization</a>
@@ -36,10 +36,22 @@
           </li>
         </ul>
       </li>
+      <li class="@if($parent_menu == 'employee') active @endif treeview">
+        <a href="#">
+          <i class="fa fa-user"></i> <span>Employee</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class ="treeview-menu">
+          <li class=" @if($active == 'employee.employee') active @endif ">
+            <a href="{{ url('employee') }}"><i class="fa fa-circle-o"></i>Employee</a>
+          </li>
+          <li class=" @if($active == 'employee.type') active @endif ">
+            <a href="{{ url('employee_type') }}"><i class="fa fa-circle-o"></i>Type</a>
+          </li>
+        </ul>
 
-      <li class=" @if($active == 'employee') active @endif ">
-        <a href="{{ url('employee') }}"><i class="fa fa-user"></i>Employee</a>
       </li>
+
 
       <li class=" @if($parent_menu == 'leave') active @endif treeview">
         <a href="#">

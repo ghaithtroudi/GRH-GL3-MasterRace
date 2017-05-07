@@ -21,8 +21,8 @@ class HolidayTypeController extends Controller
 
         $filter->add('name','Name','text');
 
-        $filter->submit('Search');
-        $filter->reset('Reset');
+        $filter->submit('search');
+        $filter->reset('reset');
         $filter->build();
 
         $grid = \DataGrid::source($filter);

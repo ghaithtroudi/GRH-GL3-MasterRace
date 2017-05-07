@@ -40,6 +40,9 @@ Route::group(['middleware' => 'acl'], function () {
     Route::get('/employee', 'EmployeeController@index');
     Route::any('/employee/edit', 'EmployeeController@edit');
     Route::get('/employee/json/{department_id}','EmployeeController@getLists')->where('id', '[0-9]+');
+
+    Route::get('/employee_type','EmployeeTypeController@index');
+    Route::any('/employee_type/edit','EmployeeTypeController@edit');
     
     Route::get('/line', 'LineController@index');
     Route::any('/line/edit', 'LineController@edit');

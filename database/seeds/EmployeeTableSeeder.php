@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+
+use \App\Model\EmployeeType;
 class EmployeeTableSeeder extends Seeder
 {
     /**
@@ -12,6 +14,8 @@ class EmployeeTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
+
+        $type_max = EmployeeType::orderBy('id','desc')->first()->id;
     	
         foreach (range(1,100) as $value) {
         	DB::table('employees')->insert([
@@ -34,6 +38,7 @@ class EmployeeTableSeeder extends Seeder
 	            'joining_date' => $faker->date('Y-m-d'),
 	            'created_at' => $faker->dateTime('now'),
 	            'updated_at' => $faker->dateTime('now'),
+                'type' => $faker->numberBetween(1,$type_max)
 	        ]);
         }
     }
