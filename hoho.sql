@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 07, 2017 at 01:06 AM
+-- Generation Time: May 07, 2017 at 06:57 PM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
@@ -189,131 +189,136 @@ CREATE TABLE `employees` (
   `image` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   `joining_date` date NOT NULL,
   `status` tinyint(3) UNSIGNED NOT NULL,
+  `resigned` tinyint(1) NOT NULL DEFAULT '0',
   `created_by` int(10) UNSIGNED NOT NULL,
   `updated_by` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NOT NULL DEFAULT '2017-02-01 23:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '2017-02-01 23:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`id`, `grade_id`, `employee_id`, `branch_id`, `line_id`, `department_id`, `section_id`, `name`, `type`, `gender`, `dob`, `father_name`, `mother_name`, `present_address`, `permanent_address`, `primary_phone`, `secondary_phone`, `national_id`, `passport`, `birth_certificate`, `image`, `joining_date`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 'EMP-9163', 1, 0, 7, 12, 'Jameson Conn MD', 0, 2, '1983-07-03', 'Earl Mueller', 'Dr. Bernie Gutmann', '527 Tierra Stream\nSouth Elberthaven, MA 35093-0603', '0210 Kuhn Pine Suite 012\nLake Camryn, MD 49838', '075-997-0962', '1-879-107-3859x354', '70075', '87496', '54352', 'http://lorempixel.com/200/200/cats/Fake/?43002', '2002-03-21', 2, 0, 0, '2006-06-07 12:10:00', '1973-12-01 12:09:28', NULL),
-(2, 27, 'EMP-1026', 1, 0, 7, 11, 'Aliza Baumbach', 0, 1, '1989-09-22', 'Melyna Abshire', 'Mrs. Lessie Kuvalis', '70072 Kreiger Way Suite 345\nHarrismouth, GA 08375-0254', '82210 Gorczany Bypass Suite 945\nCoraliechester, GA 36839', '199-697-3293', '(525)350-9837x07254', '61007', '10315', '87537', 'http://lorempixel.com/200/200/cats/Fake/?38869', '2005-09-13', 2, 0, 0, '1974-05-04 15:59:35', '1974-01-02 20:02:57', NULL),
-(3, 33, 'EMP-5683', 1, 0, 7, 11, 'Cale Russel', 1, 1, '2003-06-12', 'Dr. Bryce Kozey', 'Sylvia Howe', '7879 Della Ports Apt. 835\r\nWest Conor, IN 13002-7940', '03764 Arvid Dam\r\nMosciskiburgh, MT 32382', '(105)859-4889x04318', '659.445.9399x95677', '21443', '56425', '46047', 'http://lorempixel.com/200/200/cats/Fake/?65244', '1984-07-27', 1, 0, 0, '1973-05-18 02:29:38', '2017-05-01 20:24:46', NULL),
-(4, 29, 'EMP-9775', 1, 0, 7, 11, 'Mollie Tromp', 0, 2, '1997-05-21', 'Mackenzie Legros', 'Lavon King', '690 Adrien Trace\nKeeleytown, LA 16243-5449', '5815 Lenna Prairie\nClotildeville, ID 15058', '518-043-0220', '243-725-2434x5261', '85699', '35149', '10769', 'http://lorempixel.com/200/200/cats/Fake/?44507', '2013-10-01', 1, 0, 0, '2014-03-29 03:10:35', '1990-01-13 18:04:58', NULL),
-(5, 19, 'EMP-6628', 1, 0, 7, 11, 'Dr. Jalon Reichel', 0, 2, '1976-08-24', 'Ulices Barton', 'Miss Onie Nienow', '267 Kemmer Trace Apt. 954\nClaudeport, NC 34025', '831 Thad Spurs Apt. 151\nWest Katherynland, TX 81795-5344', '04406614702', '(906)796-0388', '86249', '98231', '94264', 'http://lorempixel.com/200/200/cats/Fake/?49755', '1972-02-27', 2, 0, 0, '2015-10-22 17:29:23', '1979-08-05 01:29:49', NULL),
-(6, 17, 'EMP-2353', 1, 0, 7, 11, 'Hugh Bartoletti PhD', 0, 1, '1993-12-16', 'Prof. Wanda Hayes DVM', 'Gina West', '4434 Kathleen Ferry Apt. 822\nPort Emiemouth, VT 36100', '419 Harber Mill Apt. 465\nErdmantown, OR 84639-8065', '417.134.4526x399', '1-492-415-9164x5397', '17163', '70441', '82549', 'http://lorempixel.com/200/200/cats/Fake/?19496', '2006-05-17', 2, 0, 0, '1995-10-04 21:18:25', '1998-04-17 05:10:07', NULL),
-(7, 17, 'EMP-9189', 1, 0, 7, 11, 'Telly Johnston', 0, 1, '1971-03-24', 'Dr. Lilliana Kiehn I', 'Prof. Harrison Legros', '5306 Anahi Manor\nHartmannborough, IN 63854-1393', '300 Schimmel Cliffs Suite 641\nLesterhaven, PA 58815', '1-824-871-6907', '(972)689-4831x515', '83434', '5490', '214', 'http://lorempixel.com/200/200/cats/Fake/?47409', '1997-09-15', 1, 0, 0, '1996-12-05 22:16:57', '1989-07-18 20:03:57', NULL),
-(8, 13, 'EMP-9154', 1, 0, 7, 11, 'Prof. Jordi Kuphal', 0, 1, '2005-10-20', 'Mrs. Dolly Fisher', 'Prof. Melvina Ferry I', '135 Elody Islands\nLake Kay, NJ 47494-9605', '265 Collins Village Apt. 551\nSouth Eleonore, WA 10454-2109', '648.160.2144x6629', '+94(8)3412390389', '15144', '67422', '21100', 'http://lorempixel.com/200/200/cats/Fake/?80435', '1980-01-11', 1, 0, 0, '1975-12-20 12:43:06', '1999-07-13 01:25:33', NULL),
-(9, 15, 'EMP-6378', 1, 0, 7, 11, 'Velma Aufderhar I', 0, 2, '1995-04-21', 'Elmer Carter', 'Cyril Blanda IV', '62944 Jacobs Points\nRunolfssonfurt, KS 65238-1556', '84619 Sawayn Mills Apt. 094\nNorth Tito, RI 77681-8780', '1-315-044-9981x231', '(240)512-0829x39605', '99609', '59433', '3528', 'http://lorempixel.com/200/200/cats/Fake/?41427', '2008-01-08', 1, 0, 0, '1984-12-31 14:31:43', '2006-08-31 08:18:16', NULL),
-(10, 55, 'EMP-2530', 1, 0, 7, 11, 'Reid Heller', 0, 2, '1992-02-26', 'Lindsay Kub Jr.', 'Deon O\'Hara I', '64177 Durgan Plains\nGleichnermouth, OH 75228', '1911 Trantow Ports Suite 126\nLake Vincenzatown, MI 65317', '1-570-597-8747x4757', '(609)572-2617x0340', '67314', '31595', '56195', 'http://lorempixel.com/200/200/cats/Fake/?28280', '1985-10-15', 2, 0, 0, '1998-03-25 22:01:29', '1972-10-03 04:09:47', NULL),
-(11, 31, 'EMP-5046', 1, 0, 7, 11, 'Osvaldo Ritchie', 0, 2, '2013-01-17', 'Jaeden Wolf III', 'Prof. Enid Gerlach I', '343 Cronin Springs\nGoodwinview, ID 95146', '5951 Braun Cape Apt. 054\nAntwonborough, WY 14569', '911-023-0390', '683-758-2109x0220', '92471', '79863', '35432', 'http://lorempixel.com/200/200/cats/Fake/?37546', '1984-07-02', 2, 0, 0, '1995-02-06 03:06:32', '1973-05-23 08:37:31', NULL),
-(12, 64, 'EMP-7014', 1, 0, 7, 11, 'Stacey Feil I', 0, 2, '1973-11-06', 'Walton Gottlieb', 'Miss Bulah Bogan PhD', '3879 Wiegand Tunnel Apt. 386\nGloverview, AR 32288-1339', '5527 Lexi Estates Suite 008\nSouth Kennedi, MN 20706', '142.088.7106x0582', '(103)870-5268x53320', '16757', '67115', '56743', 'http://lorempixel.com/200/200/cats/Fake/?57330', '1981-09-25', 1, 0, 0, '1981-06-17 00:38:56', '2016-09-11 20:48:21', NULL),
-(13, 58, 'EMP-7946', 1, 0, 7, 11, 'Ena Ritchie', 0, 1, '1977-10-30', 'Gus Sanford', 'Leonie Grady III', '7372 Hayes Ville\nNew Raheem, NC 46216-9506', '317 Hickle Hills\nCitlallishire, VT 91076', '191-822-7631x5702', '1-872-482-1411', '90415', '91996', '49578', 'http://lorempixel.com/200/200/cats/Fake/?70711', '2003-08-19', 2, 0, 0, '2013-09-07 07:08:11', '2009-08-18 22:55:42', NULL),
-(14, 28, 'EMP-7624', 1, 0, 7, 11, 'Rae Romaguera', 0, 1, '1995-04-10', 'Terrell Treutel', 'Cleve Jacobson', '028 Hahn Court Apt. 805\nStarkville, CT 39763-8289', '3197 Luettgen Overpass\nNorth Clemens, GA 71808', '(447)126-8051x2344', '1-324-460-7469', '43726', '63922', '41042', 'http://lorempixel.com/200/200/cats/Fake/?75387', '1986-03-03', 1, 0, 0, '2016-05-07 07:56:31', '1978-03-21 04:56:25', NULL),
-(15, 28, 'EMP-8496', 1, 0, 7, 11, 'Boyd Nader', 0, 1, '1993-01-15', 'Blaze Rohan', 'Dr. Anya Barrows II', '916 Fanny Roads\nEast Rodrigo, IL 07508-3912', '11774 Leilani Unions Suite 608\nNorth Norris, WI 91137-4444', '1-887-913-2595x736', '690-144-6535', '79364', '15552', '24389', 'http://lorempixel.com/200/200/cats/Fake/?80706', '2001-06-16', 2, 0, 0, '2014-05-25 21:21:01', '1973-06-05 03:15:17', NULL),
-(16, 13, 'EMP-3457', 1, 0, 7, 11, 'Giovanna Jacobs I', 0, 2, '2015-05-18', 'Prof. Wilhelm Kshlerin V', 'Bertram Marquardt', '701 Cristobal Place Apt. 584\nPort Ebbaland, IL 65578-9585', '6523 Fahey Ford\nSouth Candace, HI 91896-2522', '977-350-8210x58422', '513.743.1423x3027', '5615', '31794', '73428', 'http://lorempixel.com/200/200/cats/Fake/?86286', '2016-03-19', 2, 0, 0, '2003-01-07 02:45:30', '2014-05-02 17:42:38', NULL),
-(17, 49, 'EMP-9882', 1, 0, 7, 11, 'Elwin Hyatt', 0, 2, '1983-02-09', 'Joelle Kuhn', 'Miss Madge O\'Conner', '583 Pink Cliffs Apt. 949\nManuelhaven, NM 92327-1210', '250 Lenny Brook\nEast Esta, NE 92268-9914', '(507)264-5546x142', '454.498.2401', '70388', '99258', '39188', 'http://lorempixel.com/200/200/cats/Fake/?75325', '1992-03-03', 1, 0, 0, '1970-10-14 09:37:55', '2015-01-12 23:30:47', NULL),
-(18, 8, 'EMP-1135', 1, 0, 7, 11, 'Clifton Tromp', 0, 2, '1987-04-04', 'Gia Mosciski', 'Garrison Gulgowski IV', '120 Melvin Creek Suite 762\nLake Sherman, AL 28517-5902', '3636 Kristopher Junction Apt. 073\nEast Leora, TX 54461', '1-373-375-3402x49678', '1-152-669-4347x1708', '28336', '77196', '62035', 'http://lorempixel.com/200/200/cats/Fake/?42137', '1995-02-15', 2, 0, 0, '1979-06-16 12:15:00', '1985-12-21 09:34:06', NULL),
-(19, 2, 'EMP-8995', 1, 0, 7, 11, 'Crystel Turcotte', 0, 1, '1995-12-13', 'Eva Langosh', 'David Runolfsson', '95122 Aurore Prairie Suite 887\nShieldsfort, AK 42627-5835', '373 Hartmann Cliffs\nWest Kathryne, OH 79293-0951', '(973)656-0032x2079', '+95(7)6139275582', '67369', '71756', '57994', 'http://lorempixel.com/200/200/cats/Fake/?61507', '1987-03-29', 2, 0, 0, '2012-11-08 08:36:12', '1989-08-29 03:49:38', NULL),
-(20, 31, 'EMP-7678', 1, 0, 7, 11, 'Fredrick Feil', 0, 1, '1992-10-31', 'Geovanni Grant', 'Mylene Watsica', '64044 Devante Hill\nFeilside, ID 56060', '433 Bill Gateway Suite 534\nSouth Chasityberg, NJ 79074-5702', '1-158-755-8102', '512.714.5743', '12749', '94992', '87463', 'http://lorempixel.com/200/200/cats/Fake/?81260', '2005-05-05', 1, 0, 0, '1971-11-25 00:48:10', '1987-06-18 23:33:31', NULL),
-(21, 33, 'EMP-8376', 1, 0, 7, 11, 'Prof. Brendan Carter', 0, 1, '2006-06-25', 'Prof. Aiyana Swaniawski', 'Maude Gutmann', '970 Aliza Forest Apt. 693\nBransonfurt, HI 45617', '2241 Boyer Pine Suite 091\nWest Roosevelt, AK 80401-9336', '+71(4)8015947341', '07315916688', '7304', '10666', '40894', 'http://lorempixel.com/200/200/cats/Fake/?47901', '1973-07-13', 2, 0, 0, '1979-04-23 22:42:46', '1984-04-22 11:36:27', NULL),
-(22, 30, 'EMP-1181', 1, 0, 7, 11, 'Gage Kuhlman', 0, 1, '1985-08-25', 'Mrs. Zoie Walsh I', 'Mr. Howell Prohaska III', '3430 Christiansen Cliff\nPort Sibyl, MD 74995-9798', '61012 Rhiannon Flat\nTaliaton, AK 26568-5542', '757.748.6245x92126', '311-597-8724x601', '80300', '53767', '53287', 'http://lorempixel.com/200/200/cats/Fake/?32344', '2004-08-30', 1, 0, 0, '2002-09-22 23:06:31', '2003-11-09 14:34:29', NULL),
-(23, 22, 'EMP-7145', 1, 0, 7, 11, 'Neha Ankunding', 0, 1, '2006-12-19', 'Cristal Hahn', 'Jeremy Zemlak Sr.', '3380 Kurt Trail\nConroytown, IN 76792', '2146 Danny Freeway Apt. 527\nLeviland, NJ 96564-3195', '1-668-875-6331', '(269)523-8751x4758', '98140', '60791', '83343', 'http://lorempixel.com/200/200/cats/Fake/?11569', '1971-09-08', 2, 0, 0, '2010-10-05 08:27:21', '2009-04-13 22:11:18', NULL),
-(24, 47, 'EMP-600', 1, 0, 7, 11, 'Dejon Simonis', 0, 1, '2016-06-11', 'Hulda Brekke', 'Lisette Schiller', '97954 Joan Circles\nWeimannbury, VT 44631-9273', '70073 Antwon Brook\nWest Cameron, NM 79691', '1-784-129-0405x7570', '1-747-728-8914', '82070', '24380', '54325', 'http://lorempixel.com/200/200/cats/Fake/?61322', '2007-08-04', 2, 0, 0, '2010-12-15 02:59:42', '1973-03-01 08:52:21', NULL),
-(25, 4, 'EMP-6435', 1, 0, 7, 11, 'Prof. Brooke Adams', 0, 2, '1975-09-12', 'Chesley Stokes V', 'Ansel Hermann', '415 Gussie Ferry Apt. 197\nJadynshire, AR 63337', '54479 Krajcik Estates\nNew Tyreek, LA 00584', '663.729.2285x707', '729.325.6840x372', '55650', '60861', '54036', 'http://lorempixel.com/200/200/cats/Fake/?44377', '1981-10-01', 2, 0, 0, '2008-01-20 12:59:30', '1984-08-21 18:04:04', NULL),
-(26, 1, 'EMP-240', 1, 0, 7, 11, 'Halle Ortiz', 0, 2, '1986-07-26', 'Prof. Alec Tromp', 'Miss Magali Yundt', '951 Cummerata Bridge Suite 875\nSouth Savannamouth, AR 24861', '30529 Pagac Spurs Apt. 874\nOfeliafort, MD 78559', '260.770.4589x950', '+70(9)0528893177', '17280', '28644', '99126', 'http://lorempixel.com/200/200/cats/Fake/?16765', '1985-09-11', 2, 0, 0, '1995-11-27 14:45:02', '1998-02-03 14:10:36', NULL),
-(27, 23, 'EMP-2957', 1, 0, 7, 11, 'Nicola Sanford', 0, 1, '1993-04-30', 'Isabell Kris', 'Darrion Wintheiser', '02254 Malvina Square Apt. 123\nDickinsonmouth, OK 29943-4973', '53646 Jackie Canyon Suite 642\nJessikaberg, DC 48928-4854', '278-107-1432', '643-114-6024x3850', '53118', '11884', '4353', 'http://lorempixel.com/200/200/cats/Fake/?45340', '1990-09-26', 1, 0, 0, '1975-02-07 10:18:01', '1986-11-06 22:18:39', NULL),
-(28, 59, 'EMP-216', 1, 0, 7, 11, 'Kaelyn Haag', 0, 1, '2008-01-14', 'Mr. Cornelius Monahan', 'Josephine McGlynn', '71092 Cummings Islands Suite 956\nHageneshaven, CA 88068-0418', '488 Clinton Spring Apt. 690\nWest Amirshire, UT 77803-1267', '(772)106-0796', '850-749-1312', '88507', '56656', '16507', 'http://lorempixel.com/200/200/cats/Fake/?71002', '2016-07-22', 2, 0, 0, '1994-10-27 22:13:24', '1998-04-26 20:36:48', NULL),
-(29, 16, 'EMP-2891', 1, 0, 7, 11, 'Ms. Thea Hamill PhD', 0, 2, '1971-04-27', 'Houston Herzog', 'Jana Denesik', '827 Kayli Squares\nWest Sunnyfurt, NE 55553', '142 Genevieve Bridge Apt. 545\nLake Donald, WA 61212-1054', '343.602.1303x423', '1-591-328-8036x4753', '8834', '68736', '15456', 'http://lorempixel.com/200/200/cats/Fake/?25097', '2001-06-01', 2, 0, 0, '1971-12-15 20:42:32', '1999-08-23 07:54:18', NULL),
-(30, 9, 'EMP-7759', 1, 0, 7, 11, 'Billy McDermott', 0, 1, '2008-09-10', 'Austin Bode', 'Josiah Wolf I', '5972 Olson Expressway Suite 680\nSouth Kaleb, NE 51257-9495', '33110 Schaefer Well Apt. 874\nWest Anne, ND 05728', '499-127-1642x41093', '090.125.6641x28503', '57272', '47693', '71572', 'http://lorempixel.com/200/200/cats/Fake/?80498', '1971-01-13', 2, 0, 0, '2001-05-07 10:43:15', '1977-07-13 20:38:01', NULL),
-(31, 9, 'EMP-5107', 1, 0, 7, 11, 'Lonzo Kreiger', 0, 2, '1984-04-21', 'Wyman Fritsch', 'Samson Tremblay III', '694 Mathias Forks\nEast Lenorashire, GA 89465', '741 Daisha Bypass\nPort Germaineport, TX 82358-8216', '1-682-993-6534', '+44(7)2257919260', '34436', '22994', '86688', 'http://lorempixel.com/200/200/cats/Fake/?51791', '1984-05-16', 2, 0, 0, '2004-09-07 20:10:32', '1992-02-09 18:14:34', NULL),
-(32, 33, 'EMP-8786', 1, 0, 7, 11, 'Fabian Purdy IV', 0, 2, '1996-06-05', 'Pearlie Kris', 'Skye Abbott', '0779 Joaquin Vista\nEast Emmanuel, RI 86193', '449 Leann Stream\nSouth Eltaview, KY 68540', '(563)320-5616', '(604)611-2594x3573', '28251', '59683', '7651', 'http://lorempixel.com/200/200/cats/Fake/?63190', '1993-07-14', 1, 0, 0, '1997-03-27 18:09:46', '1991-05-24 20:14:15', NULL),
-(33, 16, 'EMP-812', 1, 0, 7, 11, 'Willa Kunze', 0, 1, '2006-07-12', 'Kaden Macejkovic', 'Johnnie Ritchie', '84969 Herzog Station\nEast Bernice, VA 45349-8713', '056 Zieme Viaduct Apt. 811\nFarrellbury, CA 55733-2347', '+29(8)0653832584', '091.759.8198x264', '45045', '30613', '81460', 'http://lorempixel.com/200/200/cats/Fake/?58471', '1975-04-27', 2, 0, 0, '1978-09-17 21:20:25', '1971-09-13 00:57:29', NULL),
-(34, 19, 'EMP-6013', 1, 0, 7, 11, 'Prof. Torrance Emmerich', 0, 1, '1998-09-16', 'Adrianna Jones', 'Jackie Breitenberg', '921 Jalen Villages\nTillmanview, OR 74756', '4183 Howe Spurs Suite 189\nEast Richardmouth, DC 20551', '08687594105', '735-889-0250x139', '76293', '70025', '54065', 'http://lorempixel.com/200/200/cats/Fake/?90933', '2014-01-15', 2, 0, 0, '1981-04-05 21:35:38', '1997-11-03 02:02:38', NULL),
-(35, 36, 'EMP-3569', 1, 0, 7, 11, 'Conner Marquardt', 0, 1, '1972-04-05', 'Graham Nienow', 'Mr. Marcelino Champlin II', '3937 Padberg Plains Apt. 133\nEast Calistad, IN 31989', '3807 Connelly Harbors Apt. 125\nEast Bernitafurt, NV 45196-3263', '176.218.5814x04513', '802-254-1227x9808', '7135', '62775', '45506', 'http://lorempixel.com/200/200/cats/Fake/?89334', '1970-08-25', 1, 0, 0, '1991-01-10 15:33:57', '2010-02-01 14:50:51', NULL),
-(36, 23, 'EMP-297', 1, 0, 7, 11, 'Brandon Berge', 0, 2, '2015-06-04', 'Maybelle Beahan', 'Prof. Rex Harber', '56551 Stacey Vista\nEast Luisaton, LA 90854', '751 Ransom Turnpike\nJacobstown, FL 29757-0100', '764-529-8695', '1-959-069-3949x598', '51854', '53830', '26058', 'http://lorempixel.com/200/200/cats/Fake/?22088', '1980-03-05', 2, 0, 0, '1976-03-25 09:41:58', '1994-02-20 16:54:27', NULL),
-(37, 3, 'EMP-8772', 1, 0, 7, 11, 'Bradly Huel DVM', 0, 2, '2015-06-09', 'Dr. Marcelle Rolfson', 'Elsa Kulas', '7310 Roberts Islands\nWest Candelario, OR 09742-7369', '99528 Reba Well Apt. 405\nEast Selenaview, NJ 93831', '(119)346-7547x897', '1-622-581-8552', '35573', '48169', '27252', 'http://lorempixel.com/200/200/cats/Fake/?20762', '1977-12-06', 1, 0, 0, '1980-10-19 00:14:58', '2001-10-22 08:28:48', NULL),
-(38, 24, 'EMP-1606', 1, 0, 7, 11, 'Lauriane Gleason', 0, 2, '1992-04-28', 'Finn Rosenbaum', 'Ms. Roxane Grant Sr.', '74854 Marian Extension Apt. 440\nKadinport, WI 18932-7347', '787 Reece Radial Apt. 823\nAufderharburgh, IL 23779', '279-404-9586x100', '(640)670-5406', '87094', '37418', '54185', 'http://lorempixel.com/200/200/cats/Fake/?85667', '1974-08-21', 1, 0, 0, '2010-12-07 09:02:38', '1998-11-16 15:58:16', NULL),
-(39, 38, 'EMP-4930', 1, 0, 7, 11, 'Prof. Daisha Kutch', 0, 2, '1999-11-21', 'Lucile Bogisich', 'Mrs. Georgette Schuster III', '7626 Casper Prairie Suite 369\nJenniestad, NY 47813-3164', '4651 Rempel Freeway\nEast Jay, SC 24438-8956', '1-613-743-2745', '930-694-9228x8852', '617', '56181', '16244', 'http://lorempixel.com/200/200/cats/Fake/?55383', '2007-09-30', 2, 0, 0, '2006-11-15 20:28:55', '1983-11-26 19:44:25', NULL),
-(40, 45, 'EMP-4186', 1, 0, 7, 11, 'Kathleen Hilpert MD', 0, 1, '2000-03-20', 'Lacey Parisian', 'Braulio Tromp', '5392 Tre Lodge Apt. 508\nMorrisport, AZ 16317-8270', '7728 Kylee Road Apt. 357\nEast Lester, DE 25089-4228', '139.923.9671x2395', '413.841.4639x04955', '99358', '93118', '12026', 'http://lorempixel.com/200/200/cats/Fake/?93171', '2011-09-23', 1, 0, 0, '1996-09-11 08:21:43', '1970-09-05 09:17:30', NULL),
-(41, 8, 'EMP-4742', 1, 0, 7, 11, 'Julia Jenkins', 0, 2, '2011-06-13', 'Prof. Jake Parisian', 'Prof. Kirk Watsica Jr.', '3701 Kuhn Land Suite 850\nEichmannhaven, MD 77486', '161 Aryanna Parkways\nMagnoliafort, NE 75800-3485', '236-011-7526', '527-870-5609x26760', '856', '66692', '44927', 'http://lorempixel.com/200/200/cats/Fake/?30018', '1979-08-09', 1, 0, 0, '1980-11-19 14:35:02', '2001-01-11 19:28:49', NULL),
-(42, 39, 'EMP-4660', 1, 0, 7, 11, 'Prince Sauer', 0, 1, '2005-08-24', 'Claire Welch', 'Barbara Mitchell V', '975 Delia Parkways Apt. 190\nSouth Reillystad, ID 93230-8260', '220 Willy Mount\nMaximilliachester, AZ 55385-6597', '(530)992-6003x6187', '08564280549', '45114', '30094', '61835', 'http://lorempixel.com/200/200/cats/Fake/?57426', '1981-06-05', 1, 0, 0, '1983-04-20 09:30:52', '1974-03-03 01:42:24', NULL),
-(43, 10, 'EMP-5084', 1, 0, 7, 11, 'Granville White', 0, 1, '1996-03-22', 'Freddy O\'Keefe', 'Mr. Wilfredo Raynor', '54324 Bill Junction Apt. 502\nVirginieside, OH 42754-3919', '0405 Maeve Trail\nNorth Daphnefurt, MS 18176', '1-913-246-1546x054', '+63(3)1608120518', '74960', '74189', '77531', 'http://lorempixel.com/200/200/cats/Fake/?44828', '1997-07-14', 1, 0, 0, '2003-03-01 09:52:44', '1983-03-19 10:24:52', NULL),
-(44, 23, 'EMP-6786', 1, 0, 7, 11, 'Khalil Harber DVM', 0, 2, '2015-07-22', 'Prof. Hildegard Klocko', 'Lucile Strosin', '8631 Daron Mission\nWatsicaview, WA 41474-9889', '73299 Kira Pass Apt. 472\nKozeyhaven, PA 04729-6220', '1-648-650-8100x56548', '484-530-9410x6834', '77510', '5332', '54491', 'http://lorempixel.com/200/200/cats/Fake/?98395', '2004-01-03', 2, 0, 0, '2009-10-17 07:40:51', '1997-11-23 11:27:24', NULL),
-(45, 52, 'EMP-5936', 1, 0, 7, 11, 'Shemar Denesik', 0, 2, '1983-03-15', 'Dixie Eichmann', 'Linwood Stanton IV', '0188 Schulist Summit Apt. 090\nMargarettaland, NE 61218-8537', '67856 Prohaska Corner\nBentonview, SC 67659', '911-028-5936x93863', '04407047076', '91096', '10970', '19112', 'http://lorempixel.com/200/200/cats/Fake/?38275', '2001-07-24', 1, 0, 0, '1995-07-14 19:41:31', '1990-08-20 12:44:45', NULL),
-(46, 21, 'EMP-835', 1, 0, 7, 11, 'Mr. Daron Hartmann', 0, 2, '1984-08-15', 'Mabel Friesen V', 'Clemmie Collins Sr.', '4979 Cremin Ford Suite 838\nLake Tavares, SD 16901-5317', '81053 Pacocha Harbor Suite 441\nNorth Sid, WY 62171-5568', '346-645-9129x74975', '1-482-669-4335', '52021', '75081', '76182', 'http://lorempixel.com/200/200/cats/Fake/?55761', '1992-06-19', 1, 0, 0, '1985-12-25 15:46:30', '1997-10-06 02:57:34', NULL),
-(47, 45, 'EMP-9019', 1, 0, 7, 11, 'Mr. Ansley Cummerata', 0, 1, '1993-08-03', 'Percival Prosacco V', 'Katharina Wolf', '7760 Ricky Islands Suite 435\nIsabelside, NC 03020', '57668 Turcotte Corner\nPort Lucindahaven, KS 25046-1272', '1-988-197-2807x6100', '642.884.6390x8493', '71051', '69825', '87291', 'http://lorempixel.com/200/200/cats/Fake/?17452', '2008-11-15', 1, 0, 0, '1977-04-23 02:05:09', '1983-12-15 18:20:53', NULL),
-(48, 17, 'EMP-7420', 1, 0, 7, 11, 'Elvera Kuhlman I', 0, 1, '1983-02-21', 'Prof. Mayra Grimes PhD', 'Miss Myrtis Kuvalis Jr.', '00243 Janessa Bypass Suite 576\nGraysonborough, OK 03130', '755 Bayer Avenue\nReichelberg, ME 72515-6210', '1-270-221-1426x3390', '02805858614', '75621', '64212', '41658', 'http://lorempixel.com/200/200/cats/Fake/?77089', '1977-01-07', 2, 0, 0, '2005-08-03 22:38:56', '2013-09-11 13:06:55', NULL),
-(49, 25, 'EMP-5673', 1, 0, 7, 11, 'Zita Lockman', 0, 1, '2014-09-19', 'Alexzander Towne I', 'Vito Sporer', '253 Angelina Crest Suite 939\nAndersonburgh, OK 55987-5338', '0607 Schmitt Mountains Apt. 986\nStantonburgh, HI 72346-3880', '860-989-5864', '08166735693', '58689', '96094', '93244', 'http://lorempixel.com/200/200/cats/Fake/?30600', '1980-06-21', 2, 0, 0, '1982-08-01 00:55:28', '2001-09-02 13:12:04', NULL),
-(50, 56, 'EMP-1723', 1, 0, 7, 11, 'Tatum Feest I', 0, 2, '1972-04-18', 'Griffin Kautzer IV', 'Kathlyn Ward', '27131 Mosciski Plaza Apt. 016\nEast Stefanville, CT 72896', '3840 Tevin Dale\nJuddville, ND 55796-3931', '+11(3)7908013838', '839-867-1388', '18873', '85754', '46455', 'http://lorempixel.com/200/200/cats/Fake/?27938', '1992-08-18', 2, 0, 0, '2003-11-05 21:01:18', '2004-06-01 12:38:57', NULL),
-(51, 4, 'EMP-4061', 1, 0, 7, 11, 'Ernie Gutkowski', 0, 1, '1973-04-17', 'Zion Marvin', 'Florian Barrows V', '91611 Alda Inlet\nJenkinston, ND 16217-0877', '75804 Oceane Freeway\nWalshside, IN 44220', '(221)863-6910x6176', '(001)865-7722', '41010', '35561', '11474', 'http://lorempixel.com/200/200/cats/Fake/?45769', '2007-04-27', 2, 0, 0, '1972-11-30 11:43:29', '1990-08-28 06:30:36', NULL),
-(52, 32, 'EMP-8338', 1, 0, 7, 11, 'Gudrun Lubowitz', 0, 1, '1986-05-29', 'Timmothy Blick', 'Madalyn Cronin', '8733 O\'Kon Forge\nCorbinburgh, MD 46474-6854', '2615 Schmidt Extension Suite 563\nSouth Brianaberg, LA 19148', '870-903-9291x29451', '1-141-465-6284x728', '24729', '21377', '3380', 'http://lorempixel.com/200/200/cats/Fake/?87276', '1977-11-06', 2, 0, 0, '1977-08-09 11:42:28', '2014-03-02 23:17:19', NULL),
-(53, 8, 'EMP-4343', 1, 0, 7, 11, 'Dr. Ella Pfeffer IV', 0, 2, '1995-05-23', 'Karl Stoltenberg II', 'Mustafa Waelchi', '387 Hettinger Unions\nLemkefort, MT 18339-3632', '1132 Harber Wells\nLynchberg, CO 39349-4751', '+77(4)5704038084', '987-909-4508', '61935', '49774', '33469', 'http://lorempixel.com/200/200/cats/Fake/?50034', '2009-12-10', 2, 0, 0, '2011-04-11 08:01:34', '2012-07-02 22:22:48', NULL),
-(54, 7, 'EMP-3284', 1, 0, 7, 11, 'Mr. Loyal Crona MD', 0, 2, '1973-11-16', 'Prof. Jazmyn Kuvalis I', 'Dr. Kelvin Gorczany DVM', '0432 Jarrell Crest Apt. 887\nPasqualeton, NM 52587', '34548 Kelvin Court\nWest Salvatorefurt, NY 43342-7145', '(369)623-6290x7251', '+05(2)2044584115', '21109', '54424', '1655', 'http://lorempixel.com/200/200/cats/Fake/?77285', '2005-10-23', 1, 0, 0, '1992-12-07 22:15:21', '2004-12-23 12:58:09', NULL),
-(55, 44, 'EMP-3546', 1, 0, 7, 11, 'Jovan Cummerata', 0, 1, '2011-01-15', 'Sylvan Crist DDS', 'Mr. Deontae Weissnat', '5493 Lowe Green Suite 879\nNew Patrick, KS 41766', '86187 Toni Manor Suite 142\nWest Gregorio, WY 05020', '+69(4)3214618555', '(733)569-4604', '36748', '73685', '91978', 'http://lorempixel.com/200/200/cats/Fake/?48085', '1974-11-19', 1, 0, 0, '1981-11-26 11:50:06', '1983-09-24 23:37:37', NULL),
-(56, 47, 'EMP-1792', 1, 0, 7, 11, 'Diamond Maggio', 0, 1, '2012-06-07', 'Mr. Vidal Rowe III', 'Cristina Treutel V', '45824 Bradtke Loaf\nGoodwinbury, PA 88526-1048', '392 Ansel Mountains Apt. 637\nLake Romaineberg, CO 48050-9625', '(272)737-0807x180', '1-366-602-5874x99928', '20328', '30445', '37376', 'http://lorempixel.com/200/200/cats/Fake/?14978', '1978-02-06', 2, 0, 0, '1973-06-24 13:50:08', '1992-04-12 12:20:43', NULL),
-(57, 44, 'EMP-8310', 1, 0, 7, 11, 'Prof. Tyrique Stroman MD', 0, 1, '1990-03-23', 'Duane Runolfsson', 'Jacynthe Bashirian PhD', '215 Gilda Rapids\nNorth Erich, NM 15619-2001', '2593 Kaya Forks\nSimeonfurt, ID 51821', '025-887-4033x69067', '(723)599-6281x1507', '81598', '42351', '8576', 'http://lorempixel.com/200/200/cats/Fake/?34480', '1976-06-02', 1, 0, 0, '1982-07-04 05:48:48', '2011-10-13 22:51:56', NULL),
-(58, 42, 'EMP-614', 1, 0, 7, 11, 'Mr. Raphael Waters', 0, 1, '1985-12-24', 'Velda Frami II', 'Ms. Loren Dickens', '00649 Everett Trail\nEricburgh, NE 70558-1711', '304 Erdman Prairie Suite 092\nMelbaville, TN 81250', '(046)742-6876', '738-173-4050x489', '87513', '51029', '32881', 'http://lorempixel.com/200/200/cats/Fake/?33354', '2000-01-13', 1, 0, 0, '2016-10-13 10:21:46', '2014-11-06 20:53:43', NULL),
-(59, 1, 'EMP-4600', 1, 0, 7, 11, 'Camille Hills', 0, 2, '1989-06-16', 'Augustus Dicki DDS', 'Coty Pollich', '087 Torphy Summit\nNorth Lafayetteview, HI 88551-5172', '07735 Vanessa Well Suite 553\nVerlafort, AZ 84813', '(736)559-1904x88330', '675.940.5461', '32246', '94238', '96572', 'http://lorempixel.com/200/200/cats/Fake/?48825', '1980-02-09', 1, 0, 0, '1990-09-29 03:57:31', '2012-02-08 19:12:22', NULL),
-(60, 56, 'EMP-4042', 1, 0, 7, 11, 'Britney Beier DVM', 0, 2, '1995-05-25', 'Ms. Shanon Breitenberg Jr.', 'Marcella Larson', '5840 Denesik Inlet\nWest Angelita, AR 25727', '38760 Janelle Pass Suite 439\nCormiermouth, DC 18486-2931', '06987376584', '877-859-8881', '79902', '90501', '27678', 'http://lorempixel.com/200/200/cats/Fake/?89034', '1984-09-22', 1, 0, 0, '1991-08-03 07:52:24', '2017-04-12 13:43:55', NULL),
-(61, 39, 'EMP-204', 1, 0, 7, 11, 'Monserrat Mann', 0, 2, '2010-11-30', 'Keshawn Conroy Jr.', 'Retha Ferry', '762 Wehner Street\nMelvinmouth, WA 82751-3279', '01659 Schroeder Summit\nDeannaside, MS 53784', '191-890-4675x49420', '884-275-1912', '14224', '6098', '66864', 'http://lorempixel.com/200/200/cats/Fake/?55120', '1981-04-24', 2, 0, 0, '2008-07-19 19:51:06', '2014-09-08 11:04:13', NULL),
-(62, 59, 'EMP-2984', 1, 0, 7, 11, 'Sven Gulgowski', 0, 1, '2007-06-13', 'Kay Ullrich III', 'Bette McLaughlin', '728 Emmerich Heights Apt. 668\nHegmannville, NM 20806-8306', '9123 Kreiger Curve Apt. 223\nSmithamshire, OH 03318', '1-539-436-0513', '1-825-864-9351', '65492', '79809', '40296', 'http://lorempixel.com/200/200/cats/Fake/?81897', '1982-12-02', 2, 0, 0, '1992-03-13 11:11:06', '1989-02-10 23:46:57', NULL),
-(63, 11, 'EMP-8307', 1, 0, 7, 11, 'Keshaun Hessel', 0, 1, '1993-09-04', 'Jewell Tremblay', 'Earlene Aufderhar', '9702 Karlie Ports\nNorth Monroeside, ID 16612', '221 Stephanie Knolls\nMarymouth, UT 52644', '1-796-937-9738x2403', '054.861.0927x7293', '64708', '25518', '30431', 'http://lorempixel.com/200/200/cats/Fake/?70887', '1975-10-06', 2, 0, 0, '1977-03-11 18:48:37', '2006-04-01 03:39:30', NULL),
-(64, 1, 'EMP-3783', 1, 0, 7, 11, 'Vicky Heathcote I', 0, 1, '2010-05-12', 'Maurine Romaguera', 'Prof. Magnolia Gerlach II', '90141 Aleen Drive\nNorth Roxanne, IL 82529-5203', '26534 Brakus Drives\nOrenborough, AR 62643', '874.656.2538', '08544960550', '91662', '17135', '26404', 'http://lorempixel.com/200/200/cats/Fake/?90491', '1995-03-30', 1, 0, 0, '1970-04-21 16:39:46', '1991-12-30 00:36:23', NULL),
-(65, 10, 'EMP-5105', 1, 0, 7, 11, 'Pietro Lind', 0, 2, '2014-09-25', 'Dr. Crawford Wehner PhD', 'Miss Bethany Bogisich II', '49288 Clyde Lane Apt. 949\nVioletteberg, MO 47226-9693', '6571 Henri Track\nLeonburgh, WA 57508', '488-902-9003', '1-357-624-8767x9756', '74239', '57624', '81023', 'http://lorempixel.com/200/200/cats/Fake/?26239', '1991-07-10', 2, 0, 0, '2011-01-22 12:34:51', '1974-08-01 14:41:51', NULL),
-(66, 36, 'EMP-294', 1, 0, 7, 11, 'Walker Considine', 0, 1, '1994-06-07', 'Carmen Mosciski', 'Makayla Mante Sr.', '046 Jerel Park\nPort Dangelo, CA 91965-7943', '03634 Skiles Road\nDaniellaport, ID 84060-0278', '1-526-142-1699', '(298)306-8628x1912', '27281', '93591', '19725', 'http://lorempixel.com/200/200/cats/Fake/?99894', '1993-02-18', 1, 0, 0, '1972-06-01 19:13:43', '2009-08-25 15:51:58', NULL),
-(67, 39, 'EMP-5244', 1, 0, 7, 11, 'Prof. Zander Parker DDS', 0, 2, '2006-06-10', 'Loyal Abshire', 'Aniyah Flatley', '416 Kassulke Divide Suite 753\nNew Alexandra, WI 00659-1760', '9706 Tromp Shores Apt. 329\nBernardhaven, WA 62091', '031-650-2136', '(766)416-6591x483', '7818', '26323', '82107', 'http://lorempixel.com/200/200/cats/Fake/?41600', '2007-03-15', 2, 0, 0, '1975-09-26 21:07:25', '1984-10-16 13:07:41', NULL),
-(68, 31, 'EMP-739', 1, 0, 7, 11, 'Elisabeth Gusikowski', 0, 1, '1991-06-08', 'Elaina Cummerata IV', 'Charlie Gislason', '5386 Beatty Club\nDasiamouth, MT 99170', '31126 Rosie Cove Suite 747\nLake Malachifurt, WV 63986-6298', '(780)932-0436', '309-952-2673', '75432', '46242', '93629', 'http://lorempixel.com/200/200/cats/Fake/?85334', '1987-01-04', 2, 0, 0, '2013-05-17 03:39:09', '1996-05-02 01:38:58', NULL),
-(69, 4, 'EMP-6635', 1, 0, 7, 11, 'Miss Carissa Nitzsche', 0, 2, '1971-01-03', 'Barney Collier', 'Muriel Kunde', '7739 Krajcik Flat\nMedhursthaven, MN 25279-9981', '392 Kole Mountain\nNew Jalyn, CO 34117', '323-601-6458x707', '1-809-375-6187', '39376', '10215', '41762', 'http://lorempixel.com/200/200/cats/Fake/?99377', '2002-03-05', 2, 0, 0, '2003-11-23 14:02:20', '2010-06-07 08:36:37', NULL),
-(70, 46, 'EMP-5840', 1, 0, 7, 11, 'Samir Muller', 0, 2, '1982-11-08', 'Mr. Rigoberto Braun', 'Napoleon Quigley DVM', '531 Jena Ford\nAufderharview, WY 04566', '98743 Ephraim Mission\nOkunevahaven, KY 54880', '290-839-1458', '937-772-8081x39619', '14675', '34231', '62909', 'http://lorempixel.com/200/200/cats/Fake/?97635', '1973-09-26', 2, 0, 0, '2006-06-17 13:01:51', '2012-04-04 14:17:28', NULL),
-(71, 41, 'EMP-5571', 1, 0, 7, 11, 'Mrs. Betty Schamberger DVM', 0, 2, '2004-08-13', 'Vivienne Carter', 'Gregory Witting', '860 Treutel Passage Apt. 605\nNew Domenicton, SC 61408', '8801 Koelpin Ways\nAlexandrastad, WY 41520', '(116)307-1809x7912', '950-346-0730x24833', '87204', '72775', '52158', 'http://lorempixel.com/200/200/cats/Fake/?43557', '1991-04-26', 1, 0, 0, '1979-08-29 00:35:32', '2008-07-24 04:33:44', NULL),
-(72, 19, 'EMP-8449', 1, 0, 7, 11, 'Cicero Kerluke', 0, 1, '1993-04-12', 'Malika Ortiz', 'Ms. Icie Rosenbaum', '96688 Keegan Islands\nBreitenbergshire, OK 67996-6666', '6545 Ryann Orchard\nLake Jamel, SC 81024-1324', '+37(7)8060650917', '953-144-3117x740', '41502', '13602', '75325', 'http://lorempixel.com/200/200/cats/Fake/?81377', '2013-01-19', 2, 0, 0, '2012-11-06 19:45:27', '1992-08-03 21:55:22', NULL),
-(73, 5, 'EMP-7658', 1, 0, 7, 11, 'Jazmyn Labadie', 0, 1, '1994-11-12', 'Vito Monahan', 'Jadyn Watsica', '74721 Rosalind Way Apt. 978\nJacobsport, OR 88127', '830 Taya Shores Suite 284\nLednertown, IN 36185', '539-637-6355x529', '396.344.1596', '92514', '59292', '63095', 'http://lorempixel.com/200/200/cats/Fake/?19796', '2010-08-06', 2, 0, 0, '1988-10-20 19:10:24', '1971-06-04 10:24:09', NULL),
-(74, 59, 'EMP-4651', 1, 0, 7, 11, 'Prof. Chase Heathcote', 0, 1, '1996-10-22', 'Columbus Pollich', 'Jewel McKenzie', '055 Francisco Station Apt. 763\nPort Clifford, SC 39048', '4491 Alanis Groves Suite 718\nJulietville, NJ 82305-0283', '(257)348-5256', '+89(9)6426919454', '40159', '18399', '95129', 'http://lorempixel.com/200/200/cats/Fake/?99167', '1980-02-12', 1, 0, 0, '2007-06-21 03:04:27', '1974-10-03 05:00:46', NULL),
-(75, 30, 'EMP-867', 1, 0, 7, 11, 'Casandra Waelchi', 0, 1, '2013-01-24', 'Mr. Giovanni Funk DDS', 'Braeden Paucek', '269 Haven Squares Apt. 386\nSouth Araceli, NE 19190-2644', '073 Bernita Shore Suite 715\nWest Tabitha, TN 97845-7110', '05435926675', '(891)594-3990', '37702', '72188', '97686', 'http://lorempixel.com/200/200/cats/Fake/?24548', '1985-11-25', 2, 0, 0, '2015-05-21 06:38:12', '2002-09-07 15:51:47', NULL),
-(76, 12, 'EMP-6293', 1, 0, 7, 11, 'Prof. Jaden Murray IV', 0, 1, '1975-12-17', 'Kaleigh Powlowski', 'Nathanial Kshlerin', '9652 Brown Dam\nAlexismouth, UT 61923-9707', '2260 Kuhic Canyon\nGottliebton, OK 07923-4615', '(163)159-3451', '938.461.8073', '23949', '74588', '18251', 'http://lorempixel.com/200/200/cats/Fake/?24789', '1988-08-15', 1, 0, 0, '2000-01-18 23:18:58', '2001-06-17 13:30:04', NULL),
-(77, 26, 'EMP-3017', 1, 0, 7, 11, 'Lizzie Franecki', 0, 1, '1986-10-25', 'Ward Beer', 'Loma Wisozk Sr.', '377 Heaney Locks Apt. 754\nTheomouth, LA 13805', '27039 Sarah Station\nMissouriborough, UT 23018', '1-646-973-6022', '765.751.7023x0386', '37447', '31259', '98995', 'http://lorempixel.com/200/200/cats/Fake/?25513', '2001-02-05', 1, 0, 0, '1996-06-22 10:07:56', '1974-03-24 17:19:39', NULL),
-(78, 26, 'EMP-7942', 1, 0, 7, 11, 'Dr. Leif Boehm', 0, 1, '1980-05-27', 'Madeline Hand', 'Liliane Buckridge', '221 Strosin Mission Apt. 262\nEast Gunner, LA 80623', '848 Albina Haven Apt. 731\nWest Marlee, NH 13630', '(319)968-5325x1258', '(701)092-4252', '71849', '46563', '42280', 'http://lorempixel.com/200/200/cats/Fake/?71681', '1991-01-18', 1, 0, 0, '2010-01-16 08:02:16', '2016-07-01 14:05:30', NULL),
-(79, 4, 'EMP-733', 1, 0, 7, 11, 'Miss Carlee Bergstrom', 0, 1, '1992-02-11', 'Dr. Ronny Senger MD', 'Ramona Schmeler', '1500 Bednar Springs Apt. 786\nMonahanhaven, MA 90959', '391 Dawn Mountains Suite 837\nSydniside, ID 07617', '(458)203-2439x6208', '782-473-7688x823', '19273', '83195', '87348', 'http://lorempixel.com/200/200/cats/Fake/?91370', '2011-04-08', 1, 0, 0, '2004-06-19 07:13:20', '1987-01-01 21:14:27', NULL),
-(80, 4, 'EMP-8232', 1, 0, 7, 11, 'Gloria O\'Keefe', 0, 2, '2016-07-21', 'Zane Wiza II', 'Dr. Antone Fisher', '8800 Alex Shoals\nLake Ashtonchester, AK 70669', '19148 Nestor Overpass Suite 731\nGermaineside, WA 07020', '(053)290-7428x9145', '810.863.8605x249', '92241', '44443', '44812', 'http://lorempixel.com/200/200/cats/Fake/?37859', '1973-02-14', 1, 0, 0, '2016-09-16 15:51:46', '1978-04-01 16:12:38', NULL),
-(81, 29, 'EMP-5878', 1, 0, 7, 11, 'Mrs. Herminia Maggio', 0, 1, '1973-01-09', 'Lenore Aufderhar', 'Ila Blick', '9987 Reece Circle\nPort Vincechester, OK 95049', '90581 Beatrice Crescent\nLockmanton, OK 76517-5273', '1-305-285-6379x9357', '783-102-5217', '80032', '36136', '42505', 'http://lorempixel.com/200/200/cats/Fake/?91844', '1980-12-28', 2, 0, 0, '1975-12-04 18:23:40', '2008-09-17 04:46:58', NULL),
-(82, 60, 'EMP-6377', 1, 0, 7, 11, 'Prof. Lawson Effertz', 0, 2, '1998-08-22', 'Rico Fisher', 'Nikita Dickens', '65060 Glover Groves Suite 150\nSouth Ruby, TX 98962-8826', '05534 Charlie Burgs\nOrtizstad, DC 61990', '1-805-531-9049x2414', '(929)485-6637x6017', '86639', '22691', '97410', 'http://lorempixel.com/200/200/cats/Fake/?41390', '2010-04-20', 2, 0, 0, '2010-06-11 23:08:44', '1981-05-25 11:53:27', NULL),
-(83, 64, 'EMP-9731', 1, 0, 7, 11, 'Miss Velda Dare PhD', 0, 2, '2012-06-09', 'Kirstin Schultz', 'Griffin Ankunding PhD', '09069 Predovic Islands Suite 168\nSouth Austin, MO 39171', '867 Lehner Track Apt. 728\nSouth Betty, CA 79154', '(532)747-1833', '1-951-696-9912', '60879', '71294', '70621', 'http://lorempixel.com/200/200/cats/Fake/?71519', '2007-08-25', 2, 0, 0, '2015-05-07 10:28:54', '1979-02-03 08:43:47', NULL),
-(84, 57, 'EMP-1059', 1, 0, 7, 11, 'Isadore Boyer', 0, 1, '1992-05-21', 'Mrs. Michele Huels', 'Jerrell Mante II', '859 Goodwin Locks Suite 720\nSporerburgh, NM 57465-0316', '21595 Frami Drive Suite 891\nJaydonland, WI 56716', '469-336-7546x202', '(083)717-8384x55111', '48237', '78086', '68015', 'http://lorempixel.com/200/200/cats/Fake/?55714', '1998-04-17', 2, 0, 0, '2000-10-27 02:46:23', '1971-11-17 14:31:59', NULL),
-(85, 37, 'EMP-5100', 1, 0, 7, 11, 'Wilma Bogan', 0, 1, '1987-03-24', 'Dr. Polly Schulist V', 'Lawrence Botsford', '973 Mona Forks\nLake Sasha, NE 46837-8791', '0083 McGlynn Parkways\nRebekaberg, DE 08598-5017', '(049)513-1847x4594', '205-881-9435x273', '30353', '46081', '86179', 'http://lorempixel.com/200/200/cats/Fake/?18770', '1972-09-06', 2, 0, 0, '1989-10-18 14:52:07', '1990-11-25 05:05:30', NULL),
-(86, 61, 'EMP-1116', 1, 0, 7, 11, 'Cordia Wisoky', 0, 1, '1975-08-29', 'Prof. Joesph Schultz', 'Sigurd Green', '05454 Edwardo Field\nNorth Zoila, KS 40750', '696 Purdy Street Suite 537\nReillystad, MI 21954-1096', '275-716-7208x2047', '(202)286-5697x45720', '36583', '81962', '81694', 'http://lorempixel.com/200/200/cats/Fake/?52928', '2001-10-08', 1, 0, 0, '1983-02-11 07:19:02', '1992-04-23 22:06:29', NULL),
-(87, 1, 'EMP-911', 1, 0, 7, 11, 'Dr. Miracle Block', 0, 1, '1983-07-11', 'Elmira Tremblay', 'Dr. Diana Goldner DVM', '31260 Lavada Island Apt. 246\nEast Darrenview, AL 83195', '092 Huel Meadows Suite 791\nPort Pasquale, OR 22542-4203', '651-239-5262', '155.985.3948', '18625', '47275', '89487', 'http://lorempixel.com/200/200/cats/Fake/?78806', '2003-09-11', 2, 0, 0, '2007-11-21 00:05:42', '1983-03-31 04:22:19', NULL),
-(88, 12, 'EMP-2405', 1, 0, 7, 11, 'Darrell Bradtke DDS', 0, 1, '2014-03-10', 'Fabian Konopelski', 'Garth Anderson Sr.', '15794 Morar Route Apt. 872\nLake Leopoldoside, PA 56608', '95784 Kassandra Mountains Apt. 131\nHelgaland, FL 04299', '(386)988-6541x39388', '(136)524-0760', '77342', '36506', '1113', 'http://lorempixel.com/200/200/cats/Fake/?11351', '1994-05-04', 1, 0, 0, '1997-03-26 22:50:45', '1994-03-29 14:54:44', NULL),
-(89, 62, 'EMP-3230', 1, 0, 7, 11, 'Mrs. Rosalind Schiller IV', 0, 1, '2011-05-13', 'Santina Thompson I', 'Mrs. Estell Thiel', '11561 Sylvester Field Apt. 124\nStokesborough, HI 42413-8005', '1834 McClure Plains\nSouth Phyllisfort, AR 94991', '1-932-110-2399x82651', '(391)949-2516', '23672', '46413', '15528', 'http://lorempixel.com/200/200/cats/Fake/?29450', '1978-01-05', 1, 0, 0, '1984-05-22 03:00:13', '1979-05-24 06:21:36', NULL),
-(90, 36, 'EMP-7013', 1, 0, 7, 11, 'Savanna Fay', 0, 1, '2006-10-20', 'Mrs. Alexanne Shields', 'Giuseppe Rohan DVM', '2599 Dixie Causeway\nSchowalterfort, KS 67537-6339', '00355 Klein Manors Apt. 601\nLake Orenburgh, WV 07143', '079.227.8346', '189.812.2597x169', '13923', '61172', '63102', 'http://lorempixel.com/200/200/cats/Fake/?28704', '2015-07-06', 2, 0, 0, '2001-01-16 18:03:43', '1985-11-18 00:38:42', NULL),
-(91, 18, 'EMP-2791', 1, 0, 7, 11, 'Mr. Domenick Brown', 0, 1, '2007-05-14', 'Prof. Candelario Brakus MD', 'General McClure', '7852 Aufderhar Union\nRansomfurt, AL 49965', '35846 Jacobi Junction\nNew Jaidachester, NM 71745-0477', '+69(0)2765585612', '05271722150', '28990', '16471', '79829', 'http://lorempixel.com/200/200/cats/Fake/?34026', '2008-07-11', 2, 0, 0, '1988-04-04 01:31:08', '2008-02-21 23:03:11', NULL),
-(92, 43, 'EMP-3956', 1, 0, 7, 11, 'Miss Shanel Douglas', 0, 2, '1983-04-05', 'Elda Blanda MD', 'Veronica Rempel DVM', '0858 Jimmie Trail\nNienowfurt, VT 03693-8089', '55543 Tiana Branch Suite 701\nRunolfssonmouth, IN 76084-2611', '765.767.7818x69910', '740.311.8405x9498', '54424', '5160', '37058', 'http://lorempixel.com/200/200/cats/Fake/?84922', '2004-07-08', 2, 0, 0, '1993-07-25 04:46:20', '1985-12-14 01:27:27', NULL),
-(93, 34, 'EMP-2039', 1, 0, 7, 11, 'Caroline Ebert', 0, 1, '1994-01-24', 'Miguel Bashirian', 'Kira Quigley', '0393 Heather Cliffs Apt. 936\nArthurborough, NY 71864-8997', '5213 Hauck Route\nNorth Steve, IA 83400', '1-420-708-6264', '1-982-428-0748x4858', '71324', '96761', '64828', 'http://lorempixel.com/200/200/cats/Fake/?21681', '1979-01-20', 2, 0, 0, '2010-01-28 16:15:47', '1988-10-22 03:41:02', NULL),
-(94, 42, 'EMP-8444', 1, 0, 7, 11, 'Mr. Isac Lowe', 0, 2, '1985-06-13', 'Jennings Rogahn', 'Prof. Tomasa West Jr.', '42688 Boyle Rapids Apt. 328\nJudgefort, IA 34024-7621', '9839 Barton Unions\nPort Anthony, ND 43553', '1-436-925-0010', '318.489.5144', '85335', '72078', '8942', 'http://lorempixel.com/200/200/cats/Fake/?37482', '1996-01-15', 1, 0, 0, '2015-02-01 15:31:17', '2013-04-10 19:10:39', NULL),
-(95, 58, 'EMP-251', 1, 0, 7, 11, 'Prof. Ward Heaney IV', 0, 2, '1980-01-16', 'Ms. Deborah Ziemann', 'Glennie Treutel', '83410 Waelchi Rest\nMetzhaven, RI 94994-9328', '4403 Hane Expressway Suite 014\nNew Nicholasfurt, NE 22624', '+69(9)1554300291', '285-269-7131', '16445', '73245', '47097', 'http://lorempixel.com/200/200/cats/Fake/?42834', '1991-05-04', 2, 0, 0, '1986-01-16 10:16:34', '2007-01-14 05:00:12', NULL),
-(96, 52, 'EMP-1334', 1, 0, 7, 11, 'Roy Hettinger', 0, 2, '1979-05-31', 'Gay Beatty', 'Corrine Strosin', '0354 Reyna Crossing Suite 687\nNew Macieberg, ID 26769', '3115 Sienna Run\nSchroederhaven, OH 77029', '337-246-0093x516', '(545)648-0063x951', '1103', '95501', '53159', 'http://lorempixel.com/200/200/cats/Fake/?96095', '1991-08-24', 1, 0, 0, '2006-08-20 05:22:00', '1983-02-05 12:55:02', NULL),
-(97, 4, 'EMP-2361', 1, 0, 7, 11, 'Bernadette Sporer MD', 0, 2, '2015-12-21', 'Porter Glover MD', 'Niko Renner', '41112 Schaefer Drive Apt. 914\nLubowitzville, NE 11378', '600 Waelchi Spur Apt. 759\nSusannaborough, WI 55285', '1-769-724-3455x74340', '(047)818-4698', '22333', '89278', '7375', 'http://lorempixel.com/200/200/cats/Fake/?19109', '1974-08-14', 2, 0, 0, '1997-10-31 13:56:16', '2012-10-17 04:50:50', NULL),
-(98, 1, 'EMP-4047', 1, 0, 7, 11, 'Prof. Thalia Berge', 0, 1, '1980-04-19', 'Miss Felicity Willms', 'Prof. Harmony Kling PhD', '5053 Lockman Greens\nAbbottfort, FL 52802-9918', '824 Kunde Fort Apt. 194\nWest Delphabury, NE 23450', '(021)685-3254x36205', '178-383-6878x82464', '82760', '21887', '11150', 'http://lorempixel.com/200/200/cats/Fake/?35733', '1980-07-23', 2, 0, 0, '1996-05-04 14:06:43', '2000-11-10 15:14:52', NULL),
-(99, 35, 'EMP-562', 1, 0, 7, 11, 'Foster Parker DDS', 0, 1, '2010-09-26', 'Laurel Sauer', 'Deja Schmeler', '5296 Cormier Crescent Apt. 824\nPort Augustafort, MI 96779-9584', '60548 Lilliana Street Apt. 258\nGislasonshire, NE 56618', '1-768-609-6245', '507.261.7080', '31010', '33182', '15931', 'http://lorempixel.com/200/200/cats/Fake/?39440', '2010-08-27', 2, 0, 0, '1989-03-22 08:39:44', '1977-09-05 18:24:16', NULL),
-(100, 2, 'EMP-9440', 1, 0, 7, 11, 'Dr. Kenton Cruickshank', 0, 1, '1979-09-22', 'Elmo Turner', 'Ross Schinner', '157 Paolo Ports Apt. 646\nFritschfort, OK 43463-2666', '68229 Athena Key Suite 163\nEast Icie, OH 25996-8688', '375-648-7226x347', '096.910.0826x3856', '1710', '24760', '32364', 'http://lorempixel.com/200/200/cats/Fake/?79640', '1972-01-18', 2, 0, 0, '1986-05-31 11:25:52', '1996-02-28 11:41:27', NULL),
-(101, 0, 'EMP-9001', 1, 52, 7, 12, 'Yarn Chtutisbulkenhaus', 1, 1, '2017-05-16', 'Yorn', NULL, 'yaan', 'yoon', '12132318', '12132318', '12132318', '12132318', '12132318', '', '2017-05-23', 1, 0, 0, '2017-05-02 04:04:32', '2017-05-02 04:04:32', NULL),
-(102, 4, 'EMP-6541', 1, 12, 3, 11, 'qsdqsdqsdqs', 1, 1, '2017-05-23', 'sqdqsdqs', NULL, 'dqsdqsdqs', 'dqsdqsdqsd', '4654645654', '54645645645', '654645645645', '54645654645645', '4564565464', 'avatar.png', '2017-05-16', 1, 0, 0, '2017-05-02 05:25:59', '2017-05-02 05:25:59', NULL),
-(103, 1, '5365454', 1, 52, 7, 12, 'sqdqsdsqd', 2, 1, '2017-05-02', 'sqdqsdqs', NULL, 'qsdqsdqsdqs', 'dqsdqsd', '5465464564', '54645645654', '6546456456', '546456456', '45645645', 'avatar.png', '2017-05-31', 2, 0, 0, '2017-05-02 05:29:39', '2017-05-02 05:29:39', NULL),
-(104, 61, '456456', 1, 13, 7, 1, '45sdfdsf', 1, 1, '2017-05-17', 'dsfsdfsdf', NULL, 'sdfsdfsdfsdf', 'sdfsdfdsfsd', '45645645645', '5445645654', '645645654', 'sdsdqsqsd', 'qsdqsdqsdqs', 'avatar21.png', '2017-05-17', 1, 0, 0, '2017-05-02 05:47:05', '2017-05-02 05:47:05', NULL),
-(105, 18, '524345345', 1, 64, 3, 13, 'dfsdfsdfsddsf', 1, 1, '2017-05-01', 'sdfsdfsdfsd', NULL, 'fsdfsdfs', 'dfsdfsdfsd', '5446456', '645645645', '6456456', '45645645', '45645645', 'avatar2.png', '2017-05-01', 1, 0, 0, '2017-05-02 05:49:51', '2017-05-02 05:49:51', NULL),
-(106, 55, 'zdsfsd', 1, 30, 1, 14, 'fdsfsdfsdf', 1, 1, '2017-05-24', 'dsfsdfsdfs', NULL, 'fdsfsdfds', 'fdsfdsfd', 'ssdfsdfsdf', 'fdsfsfdf', 'dsfsdfsd', 'fdsfsd', 'fsdfsdf', 'avatar3.png', '2017-05-03', 2, 0, 0, '2017-05-02 06:15:29', '2017-05-02 06:15:29', NULL),
-(107, 15, 'dsqdqsds', 1, 10, 1, 14, 'sqdqsdsdqs', 2, 1, '0000-00-00', 'sqdqsdsqdq', NULL, 'sdqsqdqsdqsdqs', 'dsqdqsdqsqs', '112354694984', '', '', '', '', '107.png', '0000-00-00', 2, 0, 0, '2017-05-03 18:11:48', '2017-05-03 18:11:48', NULL),
-(109, 15, 'EMP-9999', 1, 10, 1, 14, 'sqdqsdsdqs', 2, 1, '0000-00-00', 'sqdqsdsqdq', NULL, 'sdqsqdqsdqsdqs', 'dsqdqsdqsqs', '112354694984', '', '', '', '', '108.png', '0000-00-00', 2, 0, 0, '2017-05-03 18:14:26', '2017-05-03 18:14:26', NULL),
-(110, 15, 'EMP-8000', 1, 10, 1, 14, 'sqdqsdsdqs', 2, 1, '0000-00-00', 'sqdqsdsqdq', NULL, 'sdqsqdqsdqsdqs', 'dsqdqsdqsqs', '112354694984', '', '', '', '', '110.png', '0000-00-00', 2, 0, 0, '2017-05-03 18:14:52', '2017-05-03 18:14:52', NULL),
-(111, 13, 'EMP-989', 1, 0, 3, 11, 'jack jack', 1, 1, '0000-00-00', 'qsdqsdqs', NULL, 'sqdqsdsqdq', 'dsqdqsdqs', '6546545456', '', '', '', '', '111.png', '0000-00-00', 1, 0, 0, '2017-05-03 18:27:37', '2017-05-03 18:27:37', NULL),
-(114, 13, 'EMP-1586', 1, 0, 3, 11, 'jack jack', 1, 1, '2017-04-30', 'qsdqsdqs', NULL, 'sqdqsdsqdq', 'dsqdqsdqs', '6546545456', '', '', '', '', '112.png', '2017-04-30', 1, 0, 0, '2017-05-03 18:44:34', '2017-05-03 18:44:34', NULL),
-(115, 20, 'EMP-5417', 2, 7, 6, 3, 'qdsdqsdqsdqs', 1, 1, '2017-04-30', 'sqdqsdsqdq', NULL, 'qsqsdqsdqsdqs', 'sqdqsdqsdqsdqs', '1561651661', '', '', '', '', '115.png', '2017-04-30', 1, 0, 0, '2017-05-03 19:12:19', '2017-05-03 19:12:19', NULL),
-(116, 56, 'EMP-4589', 1, 31, 5, 4, 'ggggggggggggggggggggg', 2, 1, '0000-00-00', 'sdfsdfsd', NULL, 'dfsfsdfdsfsd', 'fdsfsdfsdfsd', '654654654', '', '', '', '', '116.png', '0000-00-00', 2, 0, 0, '2017-05-03 23:07:52', '2017-05-04 01:04:32', NULL);
+INSERT INTO `employees` (`id`, `grade_id`, `employee_id`, `branch_id`, `line_id`, `department_id`, `section_id`, `name`, `type`, `gender`, `dob`, `father_name`, `mother_name`, `present_address`, `permanent_address`, `primary_phone`, `secondary_phone`, `national_id`, `passport`, `birth_certificate`, `image`, `joining_date`, `status`, `resigned`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(1, 1, 'EMP-9163', 1, 0, 7, 12, 'Jameson Conn MD', 0, 2, '1983-07-03', 'Earl Mueller', 'Dr. Bernie Gutmann', '527 Tierra Stream\nSouth Elberthaven, MA 35093-0603', '0210 Kuhn Pine Suite 012\nLake Camryn, MD 49838', '075-997-0962', '1-879-107-3859x354', '70075', '87496', '54352', 'http://lorempixel.com/200/200/cats/Fake/?43002', '2002-03-21', 2, 0, 0, 0, '2006-06-07 12:10:00', '1973-12-01 12:09:28'),
+(2, 27, 'EMP-1026', 1, 0, 7, 11, 'Aliza Baumbach', 0, 1, '1989-09-22', 'Melyna Abshire', 'Mrs. Lessie Kuvalis', '70072 Kreiger Way Suite 345\nHarrismouth, GA 08375-0254', '82210 Gorczany Bypass Suite 945\nCoraliechester, GA 36839', '199-697-3293', '(525)350-9837x07254', '61007', '10315', '87537', 'http://lorempixel.com/200/200/cats/Fake/?38869', '2005-09-13', 2, 0, 0, 0, '1974-05-04 15:59:35', '1974-01-02 20:02:57'),
+(3, 33, 'EMP-5683', 1, 0, 7, 11, 'Cale Russel', 1, 1, '2003-06-12', 'Dr. Bryce Kozey', 'Sylvia Howe', '7879 Della Ports Apt. 835\r\nWest Conor, IN 13002-7940', '03764 Arvid Dam\r\nMosciskiburgh, MT 32382', '(105)859-4889x04318', '659.445.9399x95677', '21443', '56425', '46047', 'http://lorempixel.com/200/200/cats/Fake/?65244', '1984-07-27', 1, 0, 0, 0, '1973-05-18 02:29:38', '2017-05-01 20:24:46'),
+(4, 29, 'EMP-9775', 1, 0, 7, 11, 'Mollie Tromp', 0, 2, '1997-05-21', 'Mackenzie Legros', 'Lavon King', '690 Adrien Trace\nKeeleytown, LA 16243-5449', '5815 Lenna Prairie\nClotildeville, ID 15058', '518-043-0220', '243-725-2434x5261', '85699', '35149', '10769', 'http://lorempixel.com/200/200/cats/Fake/?44507', '2013-10-01', 1, 0, 0, 0, '2014-03-29 03:10:35', '1990-01-13 18:04:58'),
+(5, 19, 'EMP-6628', 1, 0, 7, 11, 'Dr. Jalon Reichel', 0, 2, '1976-08-24', 'Ulices Barton', 'Miss Onie Nienow', '267 Kemmer Trace Apt. 954\nClaudeport, NC 34025', '831 Thad Spurs Apt. 151\nWest Katherynland, TX 81795-5344', '04406614702', '(906)796-0388', '86249', '98231', '94264', 'http://lorempixel.com/200/200/cats/Fake/?49755', '1972-02-27', 2, 0, 0, 0, '2015-10-22 17:29:23', '1979-08-05 01:29:49'),
+(6, 17, 'EMP-2353', 1, 0, 7, 11, 'Hugh Bartoletti PhD', 0, 1, '1993-12-16', 'Prof. Wanda Hayes DVM', 'Gina West', '4434 Kathleen Ferry Apt. 822\nPort Emiemouth, VT 36100', '419 Harber Mill Apt. 465\nErdmantown, OR 84639-8065', '417.134.4526x399', '1-492-415-9164x5397', '17163', '70441', '82549', 'http://lorempixel.com/200/200/cats/Fake/?19496', '2006-05-17', 2, 0, 0, 0, '1995-10-04 21:18:25', '1998-04-17 05:10:07'),
+(7, 17, 'EMP-9189', 1, 0, 7, 11, 'Telly Johnston', 0, 1, '1971-03-24', 'Dr. Lilliana Kiehn I', 'Prof. Harrison Legros', '5306 Anahi Manor\nHartmannborough, IN 63854-1393', '300 Schimmel Cliffs Suite 641\nLesterhaven, PA 58815', '1-824-871-6907', '(972)689-4831x515', '83434', '5490', '214', 'http://lorempixel.com/200/200/cats/Fake/?47409', '1997-09-15', 1, 0, 0, 0, '1996-12-05 22:16:57', '1989-07-18 20:03:57'),
+(8, 13, 'EMP-9154', 1, 0, 7, 11, 'Prof. Jordi Kuphal', 0, 1, '2005-10-20', 'Mrs. Dolly Fisher', 'Prof. Melvina Ferry I', '135 Elody Islands\nLake Kay, NJ 47494-9605', '265 Collins Village Apt. 551\nSouth Eleonore, WA 10454-2109', '648.160.2144x6629', '+94(8)3412390389', '15144', '67422', '21100', 'http://lorempixel.com/200/200/cats/Fake/?80435', '1980-01-11', 1, 0, 0, 0, '1975-12-20 12:43:06', '1999-07-13 01:25:33'),
+(9, 15, 'EMP-6378', 1, 0, 7, 11, 'Velma Aufderhar I', 0, 2, '1995-04-21', 'Elmer Carter', 'Cyril Blanda IV', '62944 Jacobs Points\nRunolfssonfurt, KS 65238-1556', '84619 Sawayn Mills Apt. 094\nNorth Tito, RI 77681-8780', '1-315-044-9981x231', '(240)512-0829x39605', '99609', '59433', '3528', 'http://lorempixel.com/200/200/cats/Fake/?41427', '2008-01-08', 1, 0, 0, 0, '1984-12-31 14:31:43', '2006-08-31 08:18:16'),
+(10, 55, 'EMP-2530', 1, 0, 7, 11, 'Reid Heller', 0, 2, '1992-02-26', 'Lindsay Kub Jr.', 'Deon O\'Hara I', '64177 Durgan Plains\nGleichnermouth, OH 75228', '1911 Trantow Ports Suite 126\nLake Vincenzatown, MI 65317', '1-570-597-8747x4757', '(609)572-2617x0340', '67314', '31595', '56195', 'http://lorempixel.com/200/200/cats/Fake/?28280', '1985-10-15', 2, 0, 0, 0, '1998-03-25 22:01:29', '1972-10-03 04:09:47'),
+(11, 31, 'EMP-5046', 1, 0, 7, 11, 'Osvaldo Ritchie', 0, 2, '2013-01-17', 'Jaeden Wolf III', 'Prof. Enid Gerlach I', '343 Cronin Springs\nGoodwinview, ID 95146', '5951 Braun Cape Apt. 054\nAntwonborough, WY 14569', '911-023-0390', '683-758-2109x0220', '92471', '79863', '35432', 'http://lorempixel.com/200/200/cats/Fake/?37546', '1984-07-02', 2, 0, 0, 0, '1995-02-06 03:06:32', '1973-05-23 08:37:31'),
+(12, 64, 'EMP-7014', 1, 0, 7, 11, 'Stacey Feil I', 0, 2, '1973-11-06', 'Walton Gottlieb', 'Miss Bulah Bogan PhD', '3879 Wiegand Tunnel Apt. 386\nGloverview, AR 32288-1339', '5527 Lexi Estates Suite 008\nSouth Kennedi, MN 20706', '142.088.7106x0582', '(103)870-5268x53320', '16757', '67115', '56743', 'http://lorempixel.com/200/200/cats/Fake/?57330', '1981-09-25', 1, 0, 0, 0, '1981-06-17 00:38:56', '2016-09-11 20:48:21'),
+(13, 58, 'EMP-7946', 1, 0, 7, 11, 'Ena Ritchie', 0, 1, '1977-10-30', 'Gus Sanford', 'Leonie Grady III', '7372 Hayes Ville\nNew Raheem, NC 46216-9506', '317 Hickle Hills\nCitlallishire, VT 91076', '191-822-7631x5702', '1-872-482-1411', '90415', '91996', '49578', 'http://lorempixel.com/200/200/cats/Fake/?70711', '2003-08-19', 2, 0, 0, 0, '2013-09-07 07:08:11', '2009-08-18 22:55:42'),
+(14, 28, 'EMP-7624', 1, 0, 7, 11, 'Rae Romaguera', 0, 1, '1995-04-10', 'Terrell Treutel', 'Cleve Jacobson', '028 Hahn Court Apt. 805\nStarkville, CT 39763-8289', '3197 Luettgen Overpass\nNorth Clemens, GA 71808', '(447)126-8051x2344', '1-324-460-7469', '43726', '63922', '41042', 'http://lorempixel.com/200/200/cats/Fake/?75387', '1986-03-03', 1, 0, 0, 0, '2016-05-07 07:56:31', '1978-03-21 04:56:25'),
+(15, 28, 'EMP-8496', 1, 0, 7, 11, 'Boyd Nader', 0, 1, '1993-01-15', 'Blaze Rohan', 'Dr. Anya Barrows II', '916 Fanny Roads\nEast Rodrigo, IL 07508-3912', '11774 Leilani Unions Suite 608\nNorth Norris, WI 91137-4444', '1-887-913-2595x736', '690-144-6535', '79364', '15552', '24389', 'http://lorempixel.com/200/200/cats/Fake/?80706', '2001-06-16', 2, 0, 0, 0, '2014-05-25 21:21:01', '1973-06-05 03:15:17'),
+(16, 13, 'EMP-3457', 1, 0, 7, 11, 'Giovanna Jacobs I', 0, 2, '2015-05-18', 'Prof. Wilhelm Kshlerin V', 'Bertram Marquardt', '701 Cristobal Place Apt. 584\nPort Ebbaland, IL 65578-9585', '6523 Fahey Ford\nSouth Candace, HI 91896-2522', '977-350-8210x58422', '513.743.1423x3027', '5615', '31794', '73428', 'http://lorempixel.com/200/200/cats/Fake/?86286', '2016-03-19', 2, 0, 0, 0, '2003-01-07 02:45:30', '2014-05-02 17:42:38'),
+(17, 49, 'EMP-9882', 1, 0, 7, 11, 'Elwin Hyatt', 0, 2, '1983-02-09', 'Joelle Kuhn', 'Miss Madge O\'Conner', '583 Pink Cliffs Apt. 949\nManuelhaven, NM 92327-1210', '250 Lenny Brook\nEast Esta, NE 92268-9914', '(507)264-5546x142', '454.498.2401', '70388', '99258', '39188', 'http://lorempixel.com/200/200/cats/Fake/?75325', '1992-03-03', 1, 0, 0, 0, '1970-10-14 09:37:55', '2015-01-12 23:30:47'),
+(18, 8, 'EMP-1135', 1, 0, 7, 11, 'Clifton Tromp', 0, 2, '1987-04-04', 'Gia Mosciski', 'Garrison Gulgowski IV', '120 Melvin Creek Suite 762\nLake Sherman, AL 28517-5902', '3636 Kristopher Junction Apt. 073\nEast Leora, TX 54461', '1-373-375-3402x49678', '1-152-669-4347x1708', '28336', '77196', '62035', 'http://lorempixel.com/200/200/cats/Fake/?42137', '1995-02-15', 2, 0, 0, 0, '1979-06-16 12:15:00', '1985-12-21 09:34:06'),
+(19, 2, 'EMP-8995', 1, 0, 7, 11, 'Crystel Turcotte', 0, 1, '1995-12-13', 'Eva Langosh', 'David Runolfsson', '95122 Aurore Prairie Suite 887\nShieldsfort, AK 42627-5835', '373 Hartmann Cliffs\nWest Kathryne, OH 79293-0951', '(973)656-0032x2079', '+95(7)6139275582', '67369', '71756', '57994', 'http://lorempixel.com/200/200/cats/Fake/?61507', '1987-03-29', 2, 0, 0, 0, '2012-11-08 08:36:12', '1989-08-29 03:49:38'),
+(20, 31, 'EMP-7678', 1, 0, 7, 11, 'Fredrick Feil', 0, 1, '1992-10-31', 'Geovanni Grant', 'Mylene Watsica', '64044 Devante Hill\nFeilside, ID 56060', '433 Bill Gateway Suite 534\nSouth Chasityberg, NJ 79074-5702', '1-158-755-8102', '512.714.5743', '12749', '94992', '87463', 'http://lorempixel.com/200/200/cats/Fake/?81260', '2005-05-05', 1, 0, 0, 0, '1971-11-25 00:48:10', '1987-06-18 23:33:31'),
+(21, 33, 'EMP-8376', 1, 0, 7, 11, 'Prof. Brendan Carter', 0, 1, '2006-06-25', 'Prof. Aiyana Swaniawski', 'Maude Gutmann', '970 Aliza Forest Apt. 693\nBransonfurt, HI 45617', '2241 Boyer Pine Suite 091\nWest Roosevelt, AK 80401-9336', '+71(4)8015947341', '07315916688', '7304', '10666', '40894', 'http://lorempixel.com/200/200/cats/Fake/?47901', '1973-07-13', 2, 0, 0, 0, '1979-04-23 22:42:46', '1984-04-22 11:36:27'),
+(22, 30, 'EMP-1181', 1, 0, 7, 11, 'Gage Kuhlman', 0, 1, '1985-08-25', 'Mrs. Zoie Walsh I', 'Mr. Howell Prohaska III', '3430 Christiansen Cliff\nPort Sibyl, MD 74995-9798', '61012 Rhiannon Flat\nTaliaton, AK 26568-5542', '757.748.6245x92126', '311-597-8724x601', '80300', '53767', '53287', 'http://lorempixel.com/200/200/cats/Fake/?32344', '2004-08-30', 1, 0, 0, 0, '2002-09-22 23:06:31', '2003-11-09 14:34:29'),
+(23, 22, 'EMP-7145', 1, 0, 7, 11, 'Neha Ankunding', 0, 1, '2006-12-19', 'Cristal Hahn', 'Jeremy Zemlak Sr.', '3380 Kurt Trail\nConroytown, IN 76792', '2146 Danny Freeway Apt. 527\nLeviland, NJ 96564-3195', '1-668-875-6331', '(269)523-8751x4758', '98140', '60791', '83343', 'http://lorempixel.com/200/200/cats/Fake/?11569', '1971-09-08', 2, 0, 0, 0, '2010-10-05 08:27:21', '2009-04-13 22:11:18'),
+(24, 47, 'EMP-600', 1, 0, 7, 11, 'Dejon Simonis', 0, 1, '2016-06-11', 'Hulda Brekke', 'Lisette Schiller', '97954 Joan Circles\nWeimannbury, VT 44631-9273', '70073 Antwon Brook\nWest Cameron, NM 79691', '1-784-129-0405x7570', '1-747-728-8914', '82070', '24380', '54325', 'http://lorempixel.com/200/200/cats/Fake/?61322', '2007-08-04', 2, 0, 0, 0, '2010-12-15 02:59:42', '1973-03-01 08:52:21'),
+(25, 4, 'EMP-6435', 1, 0, 7, 11, 'Prof. Brooke Adams', 0, 2, '1975-09-12', 'Chesley Stokes V', 'Ansel Hermann', '415 Gussie Ferry Apt. 197\nJadynshire, AR 63337', '54479 Krajcik Estates\nNew Tyreek, LA 00584', '663.729.2285x707', '729.325.6840x372', '55650', '60861', '54036', 'http://lorempixel.com/200/200/cats/Fake/?44377', '1981-10-01', 2, 0, 0, 0, '2008-01-20 12:59:30', '1984-08-21 18:04:04'),
+(26, 1, 'EMP-240', 1, 0, 7, 11, 'Halle Ortiz', 0, 2, '1986-07-26', 'Prof. Alec Tromp', 'Miss Magali Yundt', '951 Cummerata Bridge Suite 875\nSouth Savannamouth, AR 24861', '30529 Pagac Spurs Apt. 874\nOfeliafort, MD 78559', '260.770.4589x950', '+70(9)0528893177', '17280', '28644', '99126', 'http://lorempixel.com/200/200/cats/Fake/?16765', '1985-09-11', 2, 0, 0, 0, '1995-11-27 14:45:02', '1998-02-03 14:10:36'),
+(27, 23, 'EMP-2957', 1, 0, 7, 11, 'Nicola Sanford', 0, 1, '1993-04-30', 'Isabell Kris', 'Darrion Wintheiser', '02254 Malvina Square Apt. 123\nDickinsonmouth, OK 29943-4973', '53646 Jackie Canyon Suite 642\nJessikaberg, DC 48928-4854', '278-107-1432', '643-114-6024x3850', '53118', '11884', '4353', 'http://lorempixel.com/200/200/cats/Fake/?45340', '1990-09-26', 1, 0, 0, 0, '1975-02-07 10:18:01', '1986-11-06 22:18:39'),
+(28, 59, 'EMP-216', 1, 0, 7, 11, 'Kaelyn Haag', 0, 1, '2008-01-14', 'Mr. Cornelius Monahan', 'Josephine McGlynn', '71092 Cummings Islands Suite 956\nHageneshaven, CA 88068-0418', '488 Clinton Spring Apt. 690\nWest Amirshire, UT 77803-1267', '(772)106-0796', '850-749-1312', '88507', '56656', '16507', 'http://lorempixel.com/200/200/cats/Fake/?71002', '2016-07-22', 2, 0, 0, 0, '1994-10-27 22:13:24', '1998-04-26 20:36:48'),
+(29, 16, 'EMP-2891', 1, 0, 7, 11, 'Ms. Thea Hamill PhD', 0, 2, '1971-04-27', 'Houston Herzog', 'Jana Denesik', '827 Kayli Squares\nWest Sunnyfurt, NE 55553', '142 Genevieve Bridge Apt. 545\nLake Donald, WA 61212-1054', '343.602.1303x423', '1-591-328-8036x4753', '8834', '68736', '15456', 'http://lorempixel.com/200/200/cats/Fake/?25097', '2001-06-01', 2, 0, 0, 0, '1971-12-15 20:42:32', '1999-08-23 07:54:18'),
+(30, 9, 'EMP-7759', 1, 0, 7, 11, 'Billy McDermott', 0, 1, '2008-09-10', 'Austin Bode', 'Josiah Wolf I', '5972 Olson Expressway Suite 680\nSouth Kaleb, NE 51257-9495', '33110 Schaefer Well Apt. 874\nWest Anne, ND 05728', '499-127-1642x41093', '090.125.6641x28503', '57272', '47693', '71572', 'http://lorempixel.com/200/200/cats/Fake/?80498', '1971-01-13', 2, 0, 0, 0, '2001-05-07 10:43:15', '1977-07-13 20:38:01'),
+(31, 9, 'EMP-5107', 1, 0, 7, 11, 'Lonzo Kreiger', 0, 2, '1984-04-21', 'Wyman Fritsch', 'Samson Tremblay III', '694 Mathias Forks\nEast Lenorashire, GA 89465', '741 Daisha Bypass\nPort Germaineport, TX 82358-8216', '1-682-993-6534', '+44(7)2257919260', '34436', '22994', '86688', 'http://lorempixel.com/200/200/cats/Fake/?51791', '1984-05-16', 2, 0, 0, 0, '2004-09-07 20:10:32', '1992-02-09 18:14:34'),
+(32, 33, 'EMP-8786', 1, 0, 7, 11, 'Fabian Purdy IV', 0, 2, '1996-06-05', 'Pearlie Kris', 'Skye Abbott', '0779 Joaquin Vista\nEast Emmanuel, RI 86193', '449 Leann Stream\nSouth Eltaview, KY 68540', '(563)320-5616', '(604)611-2594x3573', '28251', '59683', '7651', 'http://lorempixel.com/200/200/cats/Fake/?63190', '1993-07-14', 1, 0, 0, 0, '1997-03-27 18:09:46', '1991-05-24 20:14:15'),
+(33, 16, 'EMP-812', 1, 0, 7, 11, 'Willa Kunze', 0, 1, '2006-07-12', 'Kaden Macejkovic', 'Johnnie Ritchie', '84969 Herzog Station\nEast Bernice, VA 45349-8713', '056 Zieme Viaduct Apt. 811\nFarrellbury, CA 55733-2347', '+29(8)0653832584', '091.759.8198x264', '45045', '30613', '81460', 'http://lorempixel.com/200/200/cats/Fake/?58471', '1975-04-27', 2, 0, 0, 0, '1978-09-17 21:20:25', '1971-09-13 00:57:29'),
+(34, 19, 'EMP-6013', 1, 0, 7, 11, 'Prof. Torrance Emmerich', 0, 1, '1998-09-16', 'Adrianna Jones', 'Jackie Breitenberg', '921 Jalen Villages\nTillmanview, OR 74756', '4183 Howe Spurs Suite 189\nEast Richardmouth, DC 20551', '08687594105', '735-889-0250x139', '76293', '70025', '54065', 'http://lorempixel.com/200/200/cats/Fake/?90933', '2014-01-15', 2, 0, 0, 0, '1981-04-05 21:35:38', '1997-11-03 02:02:38'),
+(35, 36, 'EMP-3569', 1, 0, 7, 11, 'Conner Marquardt', 0, 1, '1972-04-05', 'Graham Nienow', 'Mr. Marcelino Champlin II', '3937 Padberg Plains Apt. 133\nEast Calistad, IN 31989', '3807 Connelly Harbors Apt. 125\nEast Bernitafurt, NV 45196-3263', '176.218.5814x04513', '802-254-1227x9808', '7135', '62775', '45506', 'http://lorempixel.com/200/200/cats/Fake/?89334', '1970-08-25', 1, 0, 0, 0, '1991-01-10 15:33:57', '2010-02-01 14:50:51'),
+(36, 23, 'EMP-297', 1, 0, 7, 11, 'Brandon Berge', 0, 2, '2015-06-04', 'Maybelle Beahan', 'Prof. Rex Harber', '56551 Stacey Vista\nEast Luisaton, LA 90854', '751 Ransom Turnpike\nJacobstown, FL 29757-0100', '764-529-8695', '1-959-069-3949x598', '51854', '53830', '26058', 'http://lorempixel.com/200/200/cats/Fake/?22088', '1980-03-05', 2, 0, 0, 0, '1976-03-25 09:41:58', '1994-02-20 16:54:27'),
+(37, 3, 'EMP-8772', 1, 0, 7, 11, 'Bradly Huel DVM', 0, 2, '2015-06-09', 'Dr. Marcelle Rolfson', 'Elsa Kulas', '7310 Roberts Islands\nWest Candelario, OR 09742-7369', '99528 Reba Well Apt. 405\nEast Selenaview, NJ 93831', '(119)346-7547x897', '1-622-581-8552', '35573', '48169', '27252', 'http://lorempixel.com/200/200/cats/Fake/?20762', '1977-12-06', 1, 0, 0, 0, '1980-10-19 00:14:58', '2001-10-22 08:28:48'),
+(38, 24, 'EMP-1606', 1, 0, 7, 11, 'Lauriane Gleason', 0, 2, '1992-04-28', 'Finn Rosenbaum', 'Ms. Roxane Grant Sr.', '74854 Marian Extension Apt. 440\nKadinport, WI 18932-7347', '787 Reece Radial Apt. 823\nAufderharburgh, IL 23779', '279-404-9586x100', '(640)670-5406', '87094', '37418', '54185', 'http://lorempixel.com/200/200/cats/Fake/?85667', '1974-08-21', 1, 0, 0, 0, '2010-12-07 09:02:38', '1998-11-16 15:58:16'),
+(39, 38, 'EMP-4930', 1, 0, 7, 11, 'Prof. Daisha Kutch', 0, 2, '1999-11-21', 'Lucile Bogisich', 'Mrs. Georgette Schuster III', '7626 Casper Prairie Suite 369\nJenniestad, NY 47813-3164', '4651 Rempel Freeway\nEast Jay, SC 24438-8956', '1-613-743-2745', '930-694-9228x8852', '617', '56181', '16244', 'http://lorempixel.com/200/200/cats/Fake/?55383', '2007-09-30', 2, 0, 0, 0, '2006-11-15 20:28:55', '1983-11-26 19:44:25'),
+(40, 45, 'EMP-4186', 1, 0, 7, 11, 'Kathleen Hilpert MD', 0, 1, '2000-03-20', 'Lacey Parisian', 'Braulio Tromp', '5392 Tre Lodge Apt. 508\nMorrisport, AZ 16317-8270', '7728 Kylee Road Apt. 357\nEast Lester, DE 25089-4228', '139.923.9671x2395', '413.841.4639x04955', '99358', '93118', '12026', 'http://lorempixel.com/200/200/cats/Fake/?93171', '2011-09-23', 1, 0, 0, 0, '1996-09-11 08:21:43', '1970-09-05 09:17:30'),
+(41, 8, 'EMP-4742', 1, 0, 7, 11, 'Julia Jenkins', 0, 2, '2011-06-13', 'Prof. Jake Parisian', 'Prof. Kirk Watsica Jr.', '3701 Kuhn Land Suite 850\nEichmannhaven, MD 77486', '161 Aryanna Parkways\nMagnoliafort, NE 75800-3485', '236-011-7526', '527-870-5609x26760', '856', '66692', '44927', 'http://lorempixel.com/200/200/cats/Fake/?30018', '1979-08-09', 1, 0, 0, 0, '1980-11-19 14:35:02', '2001-01-11 19:28:49'),
+(42, 39, 'EMP-4660', 1, 0, 7, 11, 'Prince Sauer', 0, 1, '2005-08-24', 'Claire Welch', 'Barbara Mitchell V', '975 Delia Parkways Apt. 190\nSouth Reillystad, ID 93230-8260', '220 Willy Mount\nMaximilliachester, AZ 55385-6597', '(530)992-6003x6187', '08564280549', '45114', '30094', '61835', 'http://lorempixel.com/200/200/cats/Fake/?57426', '1981-06-05', 1, 0, 0, 0, '1983-04-20 09:30:52', '1974-03-03 01:42:24'),
+(43, 10, 'EMP-5084', 1, 0, 7, 11, 'Granville White', 0, 1, '1996-03-22', 'Freddy O\'Keefe', 'Mr. Wilfredo Raynor', '54324 Bill Junction Apt. 502\nVirginieside, OH 42754-3919', '0405 Maeve Trail\nNorth Daphnefurt, MS 18176', '1-913-246-1546x054', '+63(3)1608120518', '74960', '74189', '77531', 'http://lorempixel.com/200/200/cats/Fake/?44828', '1997-07-14', 1, 0, 0, 0, '2003-03-01 09:52:44', '1983-03-19 10:24:52'),
+(44, 23, 'EMP-6786', 1, 0, 7, 11, 'Khalil Harber DVM', 0, 2, '2015-07-22', 'Prof. Hildegard Klocko', 'Lucile Strosin', '8631 Daron Mission\nWatsicaview, WA 41474-9889', '73299 Kira Pass Apt. 472\nKozeyhaven, PA 04729-6220', '1-648-650-8100x56548', '484-530-9410x6834', '77510', '5332', '54491', 'http://lorempixel.com/200/200/cats/Fake/?98395', '2004-01-03', 2, 0, 0, 0, '2009-10-17 07:40:51', '1997-11-23 11:27:24'),
+(45, 52, 'EMP-5936', 1, 0, 7, 11, 'Shemar Denesik', 0, 2, '1983-03-15', 'Dixie Eichmann', 'Linwood Stanton IV', '0188 Schulist Summit Apt. 090\nMargarettaland, NE 61218-8537', '67856 Prohaska Corner\nBentonview, SC 67659', '911-028-5936x93863', '04407047076', '91096', '10970', '19112', 'http://lorempixel.com/200/200/cats/Fake/?38275', '2001-07-24', 1, 0, 0, 0, '1995-07-14 19:41:31', '1990-08-20 12:44:45'),
+(46, 21, 'EMP-835', 1, 0, 7, 11, 'Mr. Daron Hartmann', 0, 2, '1984-08-15', 'Mabel Friesen V', 'Clemmie Collins Sr.', '4979 Cremin Ford Suite 838\nLake Tavares, SD 16901-5317', '81053 Pacocha Harbor Suite 441\nNorth Sid, WY 62171-5568', '346-645-9129x74975', '1-482-669-4335', '52021', '75081', '76182', 'http://lorempixel.com/200/200/cats/Fake/?55761', '1992-06-19', 1, 0, 0, 0, '1985-12-25 15:46:30', '1997-10-06 02:57:34'),
+(47, 45, 'EMP-9019', 1, 0, 7, 11, 'Mr. Ansley Cummerata', 0, 1, '1993-08-03', 'Percival Prosacco V', 'Katharina Wolf', '7760 Ricky Islands Suite 435\nIsabelside, NC 03020', '57668 Turcotte Corner\nPort Lucindahaven, KS 25046-1272', '1-988-197-2807x6100', '642.884.6390x8493', '71051', '69825', '87291', 'http://lorempixel.com/200/200/cats/Fake/?17452', '2008-11-15', 1, 0, 0, 0, '1977-04-23 02:05:09', '1983-12-15 18:20:53'),
+(48, 17, 'EMP-7420', 1, 0, 7, 11, 'Elvera Kuhlman I', 0, 1, '1983-02-21', 'Prof. Mayra Grimes PhD', 'Miss Myrtis Kuvalis Jr.', '00243 Janessa Bypass Suite 576\nGraysonborough, OK 03130', '755 Bayer Avenue\nReichelberg, ME 72515-6210', '1-270-221-1426x3390', '02805858614', '75621', '64212', '41658', 'http://lorempixel.com/200/200/cats/Fake/?77089', '1977-01-07', 2, 0, 0, 0, '2005-08-03 22:38:56', '2013-09-11 13:06:55'),
+(49, 25, 'EMP-5673', 1, 0, 7, 11, 'Zita Lockman', 0, 1, '2014-09-19', 'Alexzander Towne I', 'Vito Sporer', '253 Angelina Crest Suite 939\nAndersonburgh, OK 55987-5338', '0607 Schmitt Mountains Apt. 986\nStantonburgh, HI 72346-3880', '860-989-5864', '08166735693', '58689', '96094', '93244', 'http://lorempixel.com/200/200/cats/Fake/?30600', '1980-06-21', 2, 0, 0, 0, '1982-08-01 00:55:28', '2001-09-02 13:12:04'),
+(50, 56, 'EMP-1723', 1, 0, 7, 11, 'Tatum Feest I', 0, 2, '1972-04-18', 'Griffin Kautzer IV', 'Kathlyn Ward', '27131 Mosciski Plaza Apt. 016\nEast Stefanville, CT 72896', '3840 Tevin Dale\nJuddville, ND 55796-3931', '+11(3)7908013838', '839-867-1388', '18873', '85754', '46455', 'http://lorempixel.com/200/200/cats/Fake/?27938', '1992-08-18', 2, 0, 0, 0, '2003-11-05 21:01:18', '2004-06-01 12:38:57'),
+(51, 4, 'EMP-4061', 1, 0, 7, 11, 'Ernie Gutkowski', 0, 1, '1973-04-17', 'Zion Marvin', 'Florian Barrows V', '91611 Alda Inlet\nJenkinston, ND 16217-0877', '75804 Oceane Freeway\nWalshside, IN 44220', '(221)863-6910x6176', '(001)865-7722', '41010', '35561', '11474', 'http://lorempixel.com/200/200/cats/Fake/?45769', '2007-04-27', 2, 0, 0, 0, '1972-11-30 11:43:29', '1990-08-28 06:30:36'),
+(52, 32, 'EMP-8338', 1, 0, 7, 11, 'Gudrun Lubowitz', 0, 1, '1986-05-29', 'Timmothy Blick', 'Madalyn Cronin', '8733 O\'Kon Forge\nCorbinburgh, MD 46474-6854', '2615 Schmidt Extension Suite 563\nSouth Brianaberg, LA 19148', '870-903-9291x29451', '1-141-465-6284x728', '24729', '21377', '3380', 'http://lorempixel.com/200/200/cats/Fake/?87276', '1977-11-06', 2, 0, 0, 0, '1977-08-09 11:42:28', '2014-03-02 23:17:19'),
+(53, 8, 'EMP-4343', 1, 0, 7, 11, 'Dr. Ella Pfeffer IV', 0, 2, '1995-05-23', 'Karl Stoltenberg II', 'Mustafa Waelchi', '387 Hettinger Unions\nLemkefort, MT 18339-3632', '1132 Harber Wells\nLynchberg, CO 39349-4751', '+77(4)5704038084', '987-909-4508', '61935', '49774', '33469', 'http://lorempixel.com/200/200/cats/Fake/?50034', '2009-12-10', 2, 0, 0, 0, '2011-04-11 08:01:34', '2012-07-02 22:22:48'),
+(54, 7, 'EMP-3284', 1, 0, 7, 11, 'Mr. Loyal Crona MD', 0, 2, '1973-11-16', 'Prof. Jazmyn Kuvalis I', 'Dr. Kelvin Gorczany DVM', '0432 Jarrell Crest Apt. 887\nPasqualeton, NM 52587', '34548 Kelvin Court\nWest Salvatorefurt, NY 43342-7145', '(369)623-6290x7251', '+05(2)2044584115', '21109', '54424', '1655', 'http://lorempixel.com/200/200/cats/Fake/?77285', '2005-10-23', 1, 0, 0, 0, '1992-12-07 22:15:21', '2004-12-23 12:58:09'),
+(55, 44, 'EMP-3546', 1, 0, 7, 11, 'Jovan Cummerata', 0, 1, '2011-01-15', 'Sylvan Crist DDS', 'Mr. Deontae Weissnat', '5493 Lowe Green Suite 879\nNew Patrick, KS 41766', '86187 Toni Manor Suite 142\nWest Gregorio, WY 05020', '+69(4)3214618555', '(733)569-4604', '36748', '73685', '91978', 'http://lorempixel.com/200/200/cats/Fake/?48085', '1974-11-19', 1, 0, 0, 0, '1981-11-26 11:50:06', '1983-09-24 23:37:37'),
+(56, 47, 'EMP-1792', 1, 0, 7, 11, 'Diamond Maggio', 0, 1, '2012-06-07', 'Mr. Vidal Rowe III', 'Cristina Treutel V', '45824 Bradtke Loaf\nGoodwinbury, PA 88526-1048', '392 Ansel Mountains Apt. 637\nLake Romaineberg, CO 48050-9625', '(272)737-0807x180', '1-366-602-5874x99928', '20328', '30445', '37376', 'http://lorempixel.com/200/200/cats/Fake/?14978', '1978-02-06', 2, 0, 0, 0, '1973-06-24 13:50:08', '1992-04-12 12:20:43'),
+(57, 44, 'EMP-8310', 1, 0, 7, 11, 'Prof. Tyrique Stroman MD', 0, 1, '1990-03-23', 'Duane Runolfsson', 'Jacynthe Bashirian PhD', '215 Gilda Rapids\nNorth Erich, NM 15619-2001', '2593 Kaya Forks\nSimeonfurt, ID 51821', '025-887-4033x69067', '(723)599-6281x1507', '81598', '42351', '8576', 'http://lorempixel.com/200/200/cats/Fake/?34480', '1976-06-02', 1, 0, 0, 0, '1982-07-04 05:48:48', '2011-10-13 22:51:56'),
+(58, 42, 'EMP-614', 1, 0, 7, 11, 'Mr. Raphael Waters', 0, 1, '1985-12-24', 'Velda Frami II', 'Ms. Loren Dickens', '00649 Everett Trail\nEricburgh, NE 70558-1711', '304 Erdman Prairie Suite 092\nMelbaville, TN 81250', '(046)742-6876', '738-173-4050x489', '87513', '51029', '32881', 'http://lorempixel.com/200/200/cats/Fake/?33354', '2000-01-13', 1, 0, 0, 0, '2016-10-13 10:21:46', '2014-11-06 20:53:43'),
+(59, 1, 'EMP-4600', 1, 0, 7, 11, 'Camille Hills', 0, 2, '1989-06-16', 'Augustus Dicki DDS', 'Coty Pollich', '087 Torphy Summit\nNorth Lafayetteview, HI 88551-5172', '07735 Vanessa Well Suite 553\nVerlafort, AZ 84813', '(736)559-1904x88330', '675.940.5461', '32246', '94238', '96572', 'http://lorempixel.com/200/200/cats/Fake/?48825', '1980-02-09', 1, 0, 0, 0, '1990-09-29 03:57:31', '2012-02-08 19:12:22'),
+(60, 56, 'EMP-4042', 1, 0, 7, 11, 'Britney Beier DVM', 0, 2, '1995-05-25', 'Ms. Shanon Breitenberg Jr.', 'Marcella Larson', '5840 Denesik Inlet\nWest Angelita, AR 25727', '38760 Janelle Pass Suite 439\nCormiermouth, DC 18486-2931', '06987376584', '877-859-8881', '79902', '90501', '27678', 'http://lorempixel.com/200/200/cats/Fake/?89034', '1984-09-22', 1, 0, 0, 0, '1991-08-03 07:52:24', '2017-04-12 13:43:55'),
+(61, 39, 'EMP-204', 1, 0, 7, 11, 'Monserrat Mann', 0, 2, '2010-11-30', 'Keshawn Conroy Jr.', 'Retha Ferry', '762 Wehner Street\nMelvinmouth, WA 82751-3279', '01659 Schroeder Summit\nDeannaside, MS 53784', '191-890-4675x49420', '884-275-1912', '14224', '6098', '66864', 'http://lorempixel.com/200/200/cats/Fake/?55120', '1981-04-24', 2, 0, 0, 0, '2008-07-19 19:51:06', '2014-09-08 11:04:13'),
+(62, 59, 'EMP-2984', 1, 0, 7, 11, 'Sven Gulgowski', 0, 1, '2007-06-13', 'Kay Ullrich III', 'Bette McLaughlin', '728 Emmerich Heights Apt. 668\nHegmannville, NM 20806-8306', '9123 Kreiger Curve Apt. 223\nSmithamshire, OH 03318', '1-539-436-0513', '1-825-864-9351', '65492', '79809', '40296', 'http://lorempixel.com/200/200/cats/Fake/?81897', '1982-12-02', 2, 0, 0, 0, '1992-03-13 11:11:06', '1989-02-10 23:46:57'),
+(63, 11, 'EMP-8307', 1, 0, 7, 11, 'Keshaun Hessel', 0, 1, '1993-09-04', 'Jewell Tremblay', 'Earlene Aufderhar', '9702 Karlie Ports\nNorth Monroeside, ID 16612', '221 Stephanie Knolls\nMarymouth, UT 52644', '1-796-937-9738x2403', '054.861.0927x7293', '64708', '25518', '30431', 'http://lorempixel.com/200/200/cats/Fake/?70887', '1975-10-06', 2, 0, 0, 0, '1977-03-11 18:48:37', '2006-04-01 03:39:30'),
+(64, 1, 'EMP-3783', 1, 0, 7, 11, 'Vicky Heathcote I', 0, 1, '2010-05-12', 'Maurine Romaguera', 'Prof. Magnolia Gerlach II', '90141 Aleen Drive\nNorth Roxanne, IL 82529-5203', '26534 Brakus Drives\nOrenborough, AR 62643', '874.656.2538', '08544960550', '91662', '17135', '26404', 'http://lorempixel.com/200/200/cats/Fake/?90491', '1995-03-30', 1, 0, 0, 0, '1970-04-21 16:39:46', '1991-12-30 00:36:23'),
+(65, 10, 'EMP-5105', 1, 0, 7, 11, 'Pietro Lind', 0, 2, '2014-09-25', 'Dr. Crawford Wehner PhD', 'Miss Bethany Bogisich II', '49288 Clyde Lane Apt. 949\nVioletteberg, MO 47226-9693', '6571 Henri Track\nLeonburgh, WA 57508', '488-902-9003', '1-357-624-8767x9756', '74239', '57624', '81023', 'http://lorempixel.com/200/200/cats/Fake/?26239', '1991-07-10', 2, 0, 0, 0, '2011-01-22 12:34:51', '1974-08-01 14:41:51'),
+(66, 36, 'EMP-294', 1, 0, 7, 11, 'Walker Considine', 0, 1, '1994-06-07', 'Carmen Mosciski', 'Makayla Mante Sr.', '046 Jerel Park\nPort Dangelo, CA 91965-7943', '03634 Skiles Road\nDaniellaport, ID 84060-0278', '1-526-142-1699', '(298)306-8628x1912', '27281', '93591', '19725', 'http://lorempixel.com/200/200/cats/Fake/?99894', '1993-02-18', 1, 0, 0, 0, '1972-06-01 19:13:43', '2009-08-25 15:51:58'),
+(67, 39, 'EMP-5244', 1, 0, 7, 11, 'Prof. Zander Parker DDS', 0, 2, '2006-06-10', 'Loyal Abshire', 'Aniyah Flatley', '416 Kassulke Divide Suite 753\nNew Alexandra, WI 00659-1760', '9706 Tromp Shores Apt. 329\nBernardhaven, WA 62091', '031-650-2136', '(766)416-6591x483', '7818', '26323', '82107', 'http://lorempixel.com/200/200/cats/Fake/?41600', '2007-03-15', 2, 0, 0, 0, '1975-09-26 21:07:25', '1984-10-16 13:07:41'),
+(68, 31, 'EMP-739', 1, 0, 7, 11, 'Elisabeth Gusikowski', 0, 1, '1991-06-08', 'Elaina Cummerata IV', 'Charlie Gislason', '5386 Beatty Club\nDasiamouth, MT 99170', '31126 Rosie Cove Suite 747\nLake Malachifurt, WV 63986-6298', '(780)932-0436', '309-952-2673', '75432', '46242', '93629', 'http://lorempixel.com/200/200/cats/Fake/?85334', '1987-01-04', 2, 0, 0, 0, '2013-05-17 03:39:09', '1996-05-02 01:38:58'),
+(69, 4, 'EMP-6635', 1, 0, 7, 11, 'Miss Carissa Nitzsche', 0, 2, '1971-01-03', 'Barney Collier', 'Muriel Kunde', '7739 Krajcik Flat\nMedhursthaven, MN 25279-9981', '392 Kole Mountain\nNew Jalyn, CO 34117', '323-601-6458x707', '1-809-375-6187', '39376', '10215', '41762', 'http://lorempixel.com/200/200/cats/Fake/?99377', '2002-03-05', 2, 0, 0, 0, '2003-11-23 14:02:20', '2010-06-07 08:36:37'),
+(70, 46, 'EMP-5840', 1, 0, 7, 11, 'Samir Muller', 0, 2, '1982-11-08', 'Mr. Rigoberto Braun', 'Napoleon Quigley DVM', '531 Jena Ford\nAufderharview, WY 04566', '98743 Ephraim Mission\nOkunevahaven, KY 54880', '290-839-1458', '937-772-8081x39619', '14675', '34231', '62909', 'http://lorempixel.com/200/200/cats/Fake/?97635', '1973-09-26', 2, 0, 0, 0, '2006-06-17 13:01:51', '2012-04-04 14:17:28'),
+(71, 41, 'EMP-5571', 1, 0, 7, 11, 'Mrs. Betty Schamberger DVM', 0, 2, '2004-08-13', 'Vivienne Carter', 'Gregory Witting', '860 Treutel Passage Apt. 605\nNew Domenicton, SC 61408', '8801 Koelpin Ways\nAlexandrastad, WY 41520', '(116)307-1809x7912', '950-346-0730x24833', '87204', '72775', '52158', 'http://lorempixel.com/200/200/cats/Fake/?43557', '1991-04-26', 1, 0, 0, 0, '1979-08-29 00:35:32', '2008-07-24 04:33:44'),
+(72, 19, 'EMP-8449', 1, 0, 7, 11, 'Cicero Kerluke', 0, 1, '1993-04-12', 'Malika Ortiz', 'Ms. Icie Rosenbaum', '96688 Keegan Islands\nBreitenbergshire, OK 67996-6666', '6545 Ryann Orchard\nLake Jamel, SC 81024-1324', '+37(7)8060650917', '953-144-3117x740', '41502', '13602', '75325', 'http://lorempixel.com/200/200/cats/Fake/?81377', '2013-01-19', 2, 0, 0, 0, '2012-11-06 19:45:27', '1992-08-03 21:55:22'),
+(73, 5, 'EMP-7658', 1, 0, 7, 11, 'Jazmyn Labadie', 0, 1, '1994-11-12', 'Vito Monahan', 'Jadyn Watsica', '74721 Rosalind Way Apt. 978\nJacobsport, OR 88127', '830 Taya Shores Suite 284\nLednertown, IN 36185', '539-637-6355x529', '396.344.1596', '92514', '59292', '63095', 'http://lorempixel.com/200/200/cats/Fake/?19796', '2010-08-06', 2, 0, 0, 0, '1988-10-20 19:10:24', '1971-06-04 10:24:09'),
+(74, 59, 'EMP-4651', 1, 0, 7, 11, 'Prof. Chase Heathcote', 0, 1, '1996-10-22', 'Columbus Pollich', 'Jewel McKenzie', '055 Francisco Station Apt. 763\nPort Clifford, SC 39048', '4491 Alanis Groves Suite 718\nJulietville, NJ 82305-0283', '(257)348-5256', '+89(9)6426919454', '40159', '18399', '95129', 'http://lorempixel.com/200/200/cats/Fake/?99167', '1980-02-12', 1, 0, 0, 0, '2007-06-21 03:04:27', '1974-10-03 05:00:46'),
+(75, 30, 'EMP-867', 1, 0, 7, 11, 'Casandra Waelchi', 0, 1, '2013-01-24', 'Mr. Giovanni Funk DDS', 'Braeden Paucek', '269 Haven Squares Apt. 386\nSouth Araceli, NE 19190-2644', '073 Bernita Shore Suite 715\nWest Tabitha, TN 97845-7110', '05435926675', '(891)594-3990', '37702', '72188', '97686', 'http://lorempixel.com/200/200/cats/Fake/?24548', '1985-11-25', 2, 0, 0, 0, '2015-05-21 06:38:12', '2002-09-07 15:51:47'),
+(76, 12, 'EMP-6293', 1, 0, 7, 11, 'Prof. Jaden Murray IV', 0, 1, '1975-12-17', 'Kaleigh Powlowski', 'Nathanial Kshlerin', '9652 Brown Dam\nAlexismouth, UT 61923-9707', '2260 Kuhic Canyon\nGottliebton, OK 07923-4615', '(163)159-3451', '938.461.8073', '23949', '74588', '18251', 'http://lorempixel.com/200/200/cats/Fake/?24789', '1988-08-15', 1, 0, 0, 0, '2000-01-18 23:18:58', '2001-06-17 13:30:04'),
+(77, 26, 'EMP-3017', 1, 0, 7, 11, 'Lizzie Franecki', 0, 1, '1986-10-25', 'Ward Beer', 'Loma Wisozk Sr.', '377 Heaney Locks Apt. 754\nTheomouth, LA 13805', '27039 Sarah Station\nMissouriborough, UT 23018', '1-646-973-6022', '765.751.7023x0386', '37447', '31259', '98995', 'http://lorempixel.com/200/200/cats/Fake/?25513', '2001-02-05', 1, 0, 0, 0, '1996-06-22 10:07:56', '1974-03-24 17:19:39'),
+(78, 26, 'EMP-7942', 1, 0, 7, 11, 'Dr. Leif Boehm', 0, 1, '1980-05-27', 'Madeline Hand', 'Liliane Buckridge', '221 Strosin Mission Apt. 262\nEast Gunner, LA 80623', '848 Albina Haven Apt. 731\nWest Marlee, NH 13630', '(319)968-5325x1258', '(701)092-4252', '71849', '46563', '42280', 'http://lorempixel.com/200/200/cats/Fake/?71681', '1991-01-18', 1, 0, 0, 0, '2010-01-16 08:02:16', '2016-07-01 14:05:30'),
+(79, 4, 'EMP-733', 1, 0, 7, 11, 'Miss Carlee Bergstrom', 0, 1, '1992-02-11', 'Dr. Ronny Senger MD', 'Ramona Schmeler', '1500 Bednar Springs Apt. 786\nMonahanhaven, MA 90959', '391 Dawn Mountains Suite 837\nSydniside, ID 07617', '(458)203-2439x6208', '782-473-7688x823', '19273', '83195', '87348', 'http://lorempixel.com/200/200/cats/Fake/?91370', '2011-04-08', 1, 0, 0, 0, '2004-06-19 07:13:20', '1987-01-01 21:14:27'),
+(80, 4, 'EMP-8232', 1, 0, 7, 11, 'Gloria O\'Keefe', 0, 2, '2016-07-21', 'Zane Wiza II', 'Dr. Antone Fisher', '8800 Alex Shoals\nLake Ashtonchester, AK 70669', '19148 Nestor Overpass Suite 731\nGermaineside, WA 07020', '(053)290-7428x9145', '810.863.8605x249', '92241', '44443', '44812', 'http://lorempixel.com/200/200/cats/Fake/?37859', '1973-02-14', 1, 0, 0, 0, '2016-09-16 15:51:46', '1978-04-01 16:12:38'),
+(81, 29, 'EMP-5878', 1, 0, 7, 11, 'Mrs. Herminia Maggio', 0, 1, '1973-01-09', 'Lenore Aufderhar', 'Ila Blick', '9987 Reece Circle\nPort Vincechester, OK 95049', '90581 Beatrice Crescent\nLockmanton, OK 76517-5273', '1-305-285-6379x9357', '783-102-5217', '80032', '36136', '42505', 'http://lorempixel.com/200/200/cats/Fake/?91844', '1980-12-28', 2, 0, 0, 0, '1975-12-04 18:23:40', '2008-09-17 04:46:58'),
+(82, 60, 'EMP-6377', 1, 0, 7, 11, 'Prof. Lawson Effertz', 0, 2, '1998-08-22', 'Rico Fisher', 'Nikita Dickens', '65060 Glover Groves Suite 150\nSouth Ruby, TX 98962-8826', '05534 Charlie Burgs\nOrtizstad, DC 61990', '1-805-531-9049x2414', '(929)485-6637x6017', '86639', '22691', '97410', 'http://lorempixel.com/200/200/cats/Fake/?41390', '2010-04-20', 2, 0, 0, 0, '2010-06-11 23:08:44', '1981-05-25 11:53:27'),
+(83, 64, 'EMP-9731', 1, 0, 7, 11, 'Miss Velda Dare PhD', 0, 2, '2012-06-09', 'Kirstin Schultz', 'Griffin Ankunding PhD', '09069 Predovic Islands Suite 168\nSouth Austin, MO 39171', '867 Lehner Track Apt. 728\nSouth Betty, CA 79154', '(532)747-1833', '1-951-696-9912', '60879', '71294', '70621', 'http://lorempixel.com/200/200/cats/Fake/?71519', '2007-08-25', 2, 0, 0, 0, '2015-05-07 10:28:54', '1979-02-03 08:43:47'),
+(84, 57, 'EMP-1059', 1, 0, 7, 11, 'Isadore Boyer', 0, 1, '1992-05-21', 'Mrs. Michele Huels', 'Jerrell Mante II', '859 Goodwin Locks Suite 720\nSporerburgh, NM 57465-0316', '21595 Frami Drive Suite 891\nJaydonland, WI 56716', '469-336-7546x202', '(083)717-8384x55111', '48237', '78086', '68015', 'http://lorempixel.com/200/200/cats/Fake/?55714', '1998-04-17', 2, 0, 0, 0, '2000-10-27 02:46:23', '1971-11-17 14:31:59'),
+(85, 37, 'EMP-5100', 1, 0, 7, 11, 'Wilma Bogan', 0, 1, '1987-03-24', 'Dr. Polly Schulist V', 'Lawrence Botsford', '973 Mona Forks\nLake Sasha, NE 46837-8791', '0083 McGlynn Parkways\nRebekaberg, DE 08598-5017', '(049)513-1847x4594', '205-881-9435x273', '30353', '46081', '86179', 'http://lorempixel.com/200/200/cats/Fake/?18770', '1972-09-06', 2, 0, 0, 0, '1989-10-18 14:52:07', '1990-11-25 05:05:30'),
+(86, 61, 'EMP-1116', 1, 0, 7, 11, 'Cordia Wisoky', 0, 1, '1975-08-29', 'Prof. Joesph Schultz', 'Sigurd Green', '05454 Edwardo Field\nNorth Zoila, KS 40750', '696 Purdy Street Suite 537\nReillystad, MI 21954-1096', '275-716-7208x2047', '(202)286-5697x45720', '36583', '81962', '81694', 'http://lorempixel.com/200/200/cats/Fake/?52928', '2001-10-08', 1, 0, 0, 0, '1983-02-11 07:19:02', '1992-04-23 22:06:29'),
+(87, 1, 'EMP-911', 1, 0, 7, 11, 'Dr. Miracle Block', 0, 1, '1983-07-11', 'Elmira Tremblay', 'Dr. Diana Goldner DVM', '31260 Lavada Island Apt. 246\nEast Darrenview, AL 83195', '092 Huel Meadows Suite 791\nPort Pasquale, OR 22542-4203', '651-239-5262', '155.985.3948', '18625', '47275', '89487', 'http://lorempixel.com/200/200/cats/Fake/?78806', '2003-09-11', 2, 0, 0, 0, '2007-11-21 00:05:42', '1983-03-31 04:22:19'),
+(88, 12, 'EMP-2405', 1, 0, 7, 11, 'Darrell Bradtke DDS', 0, 1, '2014-03-10', 'Fabian Konopelski', 'Garth Anderson Sr.', '15794 Morar Route Apt. 872\nLake Leopoldoside, PA 56608', '95784 Kassandra Mountains Apt. 131\nHelgaland, FL 04299', '(386)988-6541x39388', '(136)524-0760', '77342', '36506', '1113', 'http://lorempixel.com/200/200/cats/Fake/?11351', '1994-05-04', 1, 0, 0, 0, '1997-03-26 22:50:45', '1994-03-29 14:54:44'),
+(89, 62, 'EMP-3230', 1, 0, 7, 11, 'Mrs. Rosalind Schiller IV', 0, 1, '2011-05-13', 'Santina Thompson I', 'Mrs. Estell Thiel', '11561 Sylvester Field Apt. 124\nStokesborough, HI 42413-8005', '1834 McClure Plains\nSouth Phyllisfort, AR 94991', '1-932-110-2399x82651', '(391)949-2516', '23672', '46413', '15528', 'http://lorempixel.com/200/200/cats/Fake/?29450', '1978-01-05', 1, 0, 0, 0, '1984-05-22 03:00:13', '1979-05-24 06:21:36'),
+(90, 36, 'EMP-7013', 1, 0, 7, 11, 'Savanna Fay', 0, 1, '2006-10-20', 'Mrs. Alexanne Shields', 'Giuseppe Rohan DVM', '2599 Dixie Causeway\nSchowalterfort, KS 67537-6339', '00355 Klein Manors Apt. 601\nLake Orenburgh, WV 07143', '079.227.8346', '189.812.2597x169', '13923', '61172', '63102', 'http://lorempixel.com/200/200/cats/Fake/?28704', '2015-07-06', 2, 0, 0, 0, '2001-01-16 18:03:43', '1985-11-18 00:38:42'),
+(91, 18, 'EMP-2791', 1, 0, 7, 11, 'Mr. Domenick Brown', 0, 1, '2007-05-14', 'Prof. Candelario Brakus MD', 'General McClure', '7852 Aufderhar Union\nRansomfurt, AL 49965', '35846 Jacobi Junction\nNew Jaidachester, NM 71745-0477', '+69(0)2765585612', '05271722150', '28990', '16471', '79829', 'http://lorempixel.com/200/200/cats/Fake/?34026', '2008-07-11', 2, 0, 0, 0, '1988-04-04 01:31:08', '2008-02-21 23:03:11'),
+(92, 43, 'EMP-3956', 1, 0, 7, 11, 'Miss Shanel Douglas', 0, 2, '1983-04-05', 'Elda Blanda MD', 'Veronica Rempel DVM', '0858 Jimmie Trail\nNienowfurt, VT 03693-8089', '55543 Tiana Branch Suite 701\nRunolfssonmouth, IN 76084-2611', '765.767.7818x69910', '740.311.8405x9498', '54424', '5160', '37058', 'http://lorempixel.com/200/200/cats/Fake/?84922', '2004-07-08', 2, 0, 0, 0, '1993-07-25 04:46:20', '1985-12-14 01:27:27'),
+(93, 34, 'EMP-2039', 1, 0, 7, 11, 'Caroline Ebert', 0, 1, '1994-01-24', 'Miguel Bashirian', 'Kira Quigley', '0393 Heather Cliffs Apt. 936\nArthurborough, NY 71864-8997', '5213 Hauck Route\nNorth Steve, IA 83400', '1-420-708-6264', '1-982-428-0748x4858', '71324', '96761', '64828', 'http://lorempixel.com/200/200/cats/Fake/?21681', '1979-01-20', 2, 0, 0, 0, '2010-01-28 16:15:47', '1988-10-22 03:41:02'),
+(94, 42, 'EMP-8444', 1, 0, 7, 11, 'Mr. Isac Lowe', 0, 2, '1985-06-13', 'Jennings Rogahn', 'Prof. Tomasa West Jr.', '42688 Boyle Rapids Apt. 328\nJudgefort, IA 34024-7621', '9839 Barton Unions\nPort Anthony, ND 43553', '1-436-925-0010', '318.489.5144', '85335', '72078', '8942', 'http://lorempixel.com/200/200/cats/Fake/?37482', '1996-01-15', 1, 0, 0, 0, '2015-02-01 15:31:17', '2013-04-10 19:10:39'),
+(95, 58, 'EMP-251', 1, 0, 7, 11, 'Prof. Ward Heaney IV', 0, 2, '1980-01-16', 'Ms. Deborah Ziemann', 'Glennie Treutel', '83410 Waelchi Rest\nMetzhaven, RI 94994-9328', '4403 Hane Expressway Suite 014\nNew Nicholasfurt, NE 22624', '+69(9)1554300291', '285-269-7131', '16445', '73245', '47097', 'http://lorempixel.com/200/200/cats/Fake/?42834', '1991-05-04', 2, 0, 0, 0, '1986-01-16 10:16:34', '2007-01-14 05:00:12'),
+(96, 52, 'EMP-1334', 1, 0, 7, 11, 'Roy Hettinger', 0, 2, '1979-05-31', 'Gay Beatty', 'Corrine Strosin', '0354 Reyna Crossing Suite 687\nNew Macieberg, ID 26769', '3115 Sienna Run\nSchroederhaven, OH 77029', '337-246-0093x516', '(545)648-0063x951', '1103', '95501', '53159', 'http://lorempixel.com/200/200/cats/Fake/?96095', '1991-08-24', 1, 0, 0, 0, '2006-08-20 05:22:00', '1983-02-05 12:55:02'),
+(97, 4, 'EMP-2361', 1, 0, 7, 11, 'Bernadette Sporer MD', 0, 2, '2015-12-21', 'Porter Glover MD', 'Niko Renner', '41112 Schaefer Drive Apt. 914\nLubowitzville, NE 11378', '600 Waelchi Spur Apt. 759\nSusannaborough, WI 55285', '1-769-724-3455x74340', '(047)818-4698', '22333', '89278', '7375', 'http://lorempixel.com/200/200/cats/Fake/?19109', '1974-08-14', 2, 0, 0, 0, '1997-10-31 13:56:16', '2012-10-17 04:50:50'),
+(98, 1, 'EMP-4047', 1, 0, 7, 11, 'Prof. Thalia Berge', 0, 1, '1980-04-19', 'Miss Felicity Willms', 'Prof. Harmony Kling PhD', '5053 Lockman Greens\nAbbottfort, FL 52802-9918', '824 Kunde Fort Apt. 194\nWest Delphabury, NE 23450', '(021)685-3254x36205', '178-383-6878x82464', '82760', '21887', '11150', 'http://lorempixel.com/200/200/cats/Fake/?35733', '1980-07-23', 2, 0, 0, 0, '1996-05-04 14:06:43', '2000-11-10 15:14:52'),
+(99, 35, 'EMP-562', 1, 0, 7, 11, 'Foster Parker DDS', 0, 1, '2010-09-26', 'Laurel Sauer', 'Deja Schmeler', '5296 Cormier Crescent Apt. 824\nPort Augustafort, MI 96779-9584', '60548 Lilliana Street Apt. 258\nGislasonshire, NE 56618', '1-768-609-6245', '507.261.7080', '31010', '33182', '15931', 'http://lorempixel.com/200/200/cats/Fake/?39440', '2010-08-27', 2, 0, 0, 0, '1989-03-22 08:39:44', '1977-09-05 18:24:16'),
+(100, 2, 'EMP-9440', 1, 0, 7, 11, 'Dr. Kenton Cruickshank', 0, 1, '1979-09-22', 'Elmo Turner', 'Ross Schinner', '157 Paolo Ports Apt. 646\nFritschfort, OK 43463-2666', '68229 Athena Key Suite 163\nEast Icie, OH 25996-8688', '375-648-7226x347', '096.910.0826x3856', '1710', '24760', '32364', 'http://lorempixel.com/200/200/cats/Fake/?79640', '1972-01-18', 2, 0, 0, 0, '1986-05-31 11:25:52', '1996-02-28 11:41:27'),
+(101, 0, 'EMP-9001', 1, 52, 7, 12, 'Yarn Chtutisbulkenhaus', 1, 1, '2017-05-16', 'Yorn', NULL, 'yaan', 'yoon', '12132318', '12132318', '12132318', '12132318', '12132318', '', '2017-05-23', 1, 0, 0, 0, '2017-05-02 04:04:32', '2017-05-02 04:04:32'),
+(102, 4, 'EMP-6541', 1, 12, 3, 11, 'qsdqsdqsdqs', 1, 1, '2017-05-23', 'sqdqsdqs', NULL, 'dqsdqsdqs', 'dqsdqsdqsd', '4654645654', '54645645645', '654645645645', '54645654645645', '4564565464', 'avatar.png', '2017-05-16', 1, 0, 0, 0, '2017-05-02 05:25:59', '2017-05-02 05:25:59'),
+(103, 1, '5365454', 1, 52, 7, 12, 'sqdqsdsqd', 2, 1, '2017-05-02', 'sqdqsdqs', NULL, 'qsdqsdqsdqs', 'dqsdqsd', '5465464564', '54645645654', '6546456456', '546456456', '45645645', 'avatar.png', '2017-05-31', 2, 0, 0, 0, '2017-05-02 05:29:39', '2017-05-02 05:29:39'),
+(104, 61, '456456', 1, 13, 7, 1, '45sdfdsf', 1, 1, '2017-05-17', 'dsfsdfsdf', NULL, 'sdfsdfsdfsdf', 'sdfsdfdsfsd', '45645645645', '5445645654', '645645654', 'sdsdqsqsd', 'qsdqsdqsdqs', 'avatar21.png', '2017-05-17', 1, 0, 0, 0, '2017-05-02 05:47:05', '2017-05-02 05:47:05'),
+(105, 18, '524345345', 1, 64, 3, 13, 'dfsdfsdfsddsf', 1, 1, '2017-05-01', 'sdfsdfsdfsd', NULL, 'fsdfsdfs', 'dfsdfsdfsd', '5446456', '645645645', '6456456', '45645645', '45645645', 'avatar2.png', '2017-05-01', 1, 0, 0, 0, '2017-05-02 05:49:51', '2017-05-02 05:49:51'),
+(106, 55, 'zdsfsd', 1, 30, 1, 14, 'fdsfsdfsdf', 1, 1, '2017-05-24', 'dsfsdfsdfs', NULL, 'fdsfsdfds', 'fdsfdsfd', 'ssdfsdfsdf', 'fdsfsfdf', 'dsfsdfsd', 'fdsfsd', 'fsdfsdf', 'avatar3.png', '2017-05-03', 2, 0, 0, 0, '2017-05-02 06:15:29', '2017-05-02 06:15:29'),
+(107, 15, 'dsqdqsds', 1, 10, 1, 14, 'sqdqsdsdqs', 2, 1, '0000-00-00', 'sqdqsdsqdq', NULL, 'sdqsqdqsdqsdqs', 'dsqdqsdqsqs', '112354694984', '', '', '', '', '107.png', '0000-00-00', 2, 0, 0, 0, '2017-05-03 18:11:48', '2017-05-03 18:11:48'),
+(109, 15, 'EMP-9999', 1, 10, 1, 14, 'sqdqsdsdqs', 2, 1, '0000-00-00', 'sqdqsdsqdq', NULL, 'sdqsqdqsdqsdqs', 'dsqdqsdqsqs', '112354694984', '', '', '', '', '108.png', '0000-00-00', 2, 0, 0, 0, '2017-05-03 18:14:26', '2017-05-03 18:14:26'),
+(110, 15, 'EMP-8000', 1, 10, 1, 14, 'sqdqsdsdqs', 2, 1, '0000-00-00', 'sqdqsdsqdq', NULL, 'sdqsqdqsdqsdqs', 'dsqdqsdqsqs', '112354694984', '', '', '', '', '110.png', '0000-00-00', 2, 0, 0, 0, '2017-05-03 18:14:52', '2017-05-03 18:14:52'),
+(111, 13, 'EMP-989', 1, 0, 3, 11, 'jack jack', 1, 1, '0000-00-00', 'qsdqsdqs', NULL, 'sqdqsdsqdq', 'dsqdqsdqs', '6546545456', '', '', '', '', '111.png', '0000-00-00', 1, 0, 0, 0, '2017-05-03 18:27:37', '2017-05-03 18:27:37'),
+(114, 13, 'EMP-1586', 1, 0, 3, 11, 'jack jack', 1, 1, '2017-04-30', 'qsdqsdqs', NULL, 'sqdqsdsqdq', 'dsqdqsdqs', '6546545456', '', '', '', '', '112.png', '2017-04-30', 1, 0, 0, 0, '2017-05-03 18:44:34', '2017-05-03 18:44:34'),
+(115, 20, 'EMP-5417', 2, 7, 6, 3, 'qdsdqsdqsdqs', 1, 1, '2017-04-30', 'sqdqsdsqdq', NULL, 'qsqsdqsdqsdqs', 'sqdqsdqsdqsdqs', '1561651661', '', '', '', '', '115.png', '2017-04-30', 1, 0, 0, 0, '2017-05-03 19:12:19', '2017-05-03 19:12:19'),
+(116, 56, 'EMP-4589', 1, 31, 5, 4, 'ggggggggggggggggggggg', 2, 1, '0000-00-00', 'sdfsdfsd', NULL, 'dfsfsdfdsfsd', 'fdsfsdfsdfsd', '654654654', '', '', '', '', '116.png', '0000-00-00', 2, 0, 0, 0, '2017-05-03 23:07:52', '2017-05-04 01:04:32'),
+(118, 10, 'EMP-9000', 1, 39, 3, 11, 'Hon', 2, 2, '2017-04-30', 'Noh', NULL, 'Ohn', 'Ohn', '4568654', '', '', '', '', '', '2017-04-30', 1, 0, 0, 0, '2017-05-07 13:11:59', '2017-05-07 13:11:59'),
+(119, 16, 'EMP-4568', 1, 31, 5, 4, 'K', 3, 1, '2017-04-30', 'K', NULL, 'K', 'K', '800-126-646-64', '', '', '', '', '', '2017-04-30', 7, 0, 0, 0, '2017-05-07 13:18:34', '2017-05-07 13:18:34'),
+(120, 0, 'EMP-888', 1, 64, 3, 13, 'Re', 2, 1, '2017-04-30', 'Er', NULL, 'Err', 'Err', '57-6786-78-65478', '', '', '', '', '', '2017-04-30', 10, 0, 0, 0, '2017-05-07 13:21:13', '2017-05-07 13:21:13'),
+(121, 52, 'EMP-789', 2, 14, 8, 16, 'g', 2, 1, '2017-04-30', 'g', NULL, 'g', 'g', '486-86-86', '', '', '', '', '121.png', '2017-04-30', 3, 0, 0, 0, '2017-05-07 13:23:11', '2017-05-07 13:23:11'),
+(122, 46, 'EMP-987', 2, 59, 4, 6, 'g', 9, 1, '2017-04-30', 'popo', NULL, 'p', 'p', '458', '', '', '', '', 'dummyPortrait.png', '2017-04-30', 8, 0, 0, 0, '2017-05-07 13:27:23', '2017-05-07 13:27:23');
 
 -- --------------------------------------------------------
 
@@ -451,7 +456,41 @@ INSERT INTO `employee_designation` (`id`, `designation_id`, `employee_id`, `stat
 (111, 26, 113, 1, 0, 0, '2017-05-03 18:42:07', '2017-05-03 18:42:07', NULL),
 (112, 26, 114, 1, 0, 0, '2017-05-03 18:44:34', '2017-05-03 18:44:34', NULL),
 (113, 8, 115, 1, 0, 0, '2017-05-03 19:12:20', '2017-05-03 19:12:20', NULL),
-(114, 21, 116, 1, 0, 0, '2017-05-03 23:07:52', '2017-05-03 23:07:52', NULL);
+(114, 21, 116, 1, 0, 0, '2017-05-03 23:07:52', '2017-05-03 23:07:52', NULL),
+(115, 17, 117, 1, 0, 0, '2017-05-07 12:52:11', '2017-05-07 12:52:11', NULL),
+(116, 15, 118, 1, 0, 0, '2017-05-07 13:11:59', '2017-05-07 13:11:59', NULL),
+(117, 12, 119, 1, 0, 0, '2017-05-07 13:18:34', '2017-05-07 13:18:34', NULL),
+(118, 4, 120, 1, 0, 0, '2017-05-07 13:21:13', '2017-05-07 13:21:13', NULL),
+(119, 32, 121, 1, 0, 0, '2017-05-07 13:23:11', '2017-05-07 13:23:11', NULL),
+(120, 11, 122, 1, 0, 0, '2017-05-07 13:27:23', '2017-05-07 13:27:23', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee_statuses`
+--
+
+CREATE TABLE `employee_statuses` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee_types`
+--
+
+CREATE TABLE `employee_types` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_by` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -566,8 +605,7 @@ CREATE TABLE `holidays` (
 --
 
 INSERT INTO `holidays` (`id`, `name`, `start`, `end`, `type`, `created_by`, `deleted_by`, `created_at`, `updated_at`) VALUES
-(1, 'Aid', '2017-11-11', '2017-12-11', 1, NULL, NULL, '2017-11-11 00:00:00', '2017-11-11 00:00:00'),
-(3, 'Yolo', '2017-04-30', '2017-07-20', 1, NULL, NULL, '2017-05-07 03:57:36', '2017-05-07 03:57:36');
+(1, 'Aid', '2017-11-11', '2017-12-11', 1, NULL, NULL, '2017-11-11 00:00:00', '2017-11-11 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -578,8 +616,8 @@ INSERT INTO `holidays` (`id`, `name`, `start`, `end`, `type`, `created_by`, `del
 CREATE TABLE `holiday_types` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -587,7 +625,16 @@ CREATE TABLE `holiday_types` (
 --
 
 INSERT INTO `holiday_types` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Rligious', '2000-11-10 23:00:00', '2000-11-10 23:00:00');
+(1, 'Prof. Angelina Kub', '1971-06-14 23:00:00', '0000-00-00 00:00:00'),
+(2, 'Mohamed Rath', '2012-05-15 23:00:00', '0000-00-00 00:00:00'),
+(3, 'Dr. Henri Rippin MD', '2004-12-29 23:00:00', '0000-00-00 00:00:00'),
+(4, 'Prof. Maximillian Stamm DDS', '1993-12-14 23:00:00', '0000-00-00 00:00:00'),
+(5, 'Rhoda Fadel PhD', '1972-10-02 23:00:00', '0000-00-00 00:00:00'),
+(6, 'Dakota Muller', '2009-12-29 23:00:00', '0000-00-00 00:00:00'),
+(7, 'Kristopher Denesik V', '2010-08-03 23:00:00', '0000-00-00 00:00:00'),
+(8, 'Cole Hermann', '1994-05-09 23:00:00', '0000-00-00 00:00:00'),
+(9, 'Maureen Pfannerstill', '2006-08-27 22:00:00', '0000-00-00 00:00:00'),
+(10, 'Jesse Kunze', '1989-12-31 23:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -598,17 +645,59 @@ INSERT INTO `holiday_types` (`id`, `name`, `created_at`, `updated_at`) VALUES
 CREATE TABLE `leaves` (
   `id` int(10) UNSIGNED NOT NULL,
   `employee_id` int(10) UNSIGNED NOT NULL,
-  `total_days` double(8,2) NOT NULL,
+  `leave_app_id` int(10) UNSIGNED NOT NULL,
   `start_day` date NOT NULL,
   `end_day` date NOT NULL,
-  `year` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
+  `leave_type_id` int(10) UNSIGNED NOT NULL,
   `remark` text COLLATE utf8_unicode_ci NOT NULL,
   `created_by` int(10) UNSIGNED NOT NULL,
   `updated_by` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NOT NULL DEFAULT '2000-02-01 23:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '2000-02-01 23:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `leaves`
+--
+
+INSERT INTO `leaves` (`id`, `employee_id`, `leave_app_id`, `start_day`, `end_day`, `leave_type_id`, `remark`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(1, 86, 3, '2018-07-19', '2016-03-01', 1, 'Aut doloribus dolores reiciendis sint quod adipisci rem. Doloremque repellat consectetur porro animi facilis possimus quaerat vero. Modi tenetur dignissimos est qui.', 0, 0, '1993-03-03 23:00:00', '1995-03-23 23:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `leave_applications`
+--
+
+CREATE TABLE `leave_applications` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `employee_id` int(10) UNSIGNED NOT NULL,
+  `start_day` date NOT NULL,
+  `end_day` date NOT NULL,
+  `leave_type_id` int(10) UNSIGNED NOT NULL,
+  `reasons` text COLLATE utf8_unicode_ci NOT NULL,
+  `state` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
+  `created_by` int(10) UNSIGNED NOT NULL,
+  `updated_by` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `leave_applications`
+--
+
+INSERT INTO `leave_applications` (`id`, `employee_id`, `start_day`, `end_day`, `leave_type_id`, `reasons`, `state`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(1, 73, '2018-07-19', '1975-12-28', 10, 'Enim corporis vitae qui cumque magnam. Rerum aut cumque occaecati. Similique eius voluptate a sint corrupti voluptatum eius. Atque dolor est vel esse.', 3, 0, 0, '1975-07-15 23:00:00', '2017-05-07 17:30:00'),
+(2, 36, '2018-07-19', '2009-02-20', 9, 'Deleniti est quis eos pariatur voluptatum aspernatur. Et atque neque ea reprehenderit quis. Tempore in reiciendis neque ut iusto ratione dolores. Eum recusandae maiores facere quia.', 3, 0, 0, '2003-05-13 23:00:00', '2017-05-07 17:30:03'),
+(3, 86, '2018-07-19', '2016-03-01', 1, 'Aut doloribus dolores reiciendis sint quod adipisci rem. Doloremque repellat consectetur porro animi facilis possimus quaerat vero. Modi tenetur dignissimos est qui.', 2, 0, 0, '1993-03-03 23:00:00', '2017-05-07 17:33:07'),
+(4, 57, '2018-07-19', '2001-03-29', 9, 'Doloribus deserunt omnis deserunt ut qui dolor. Et sint at dolor distinctio perspiciatis. Vero itaque vero voluptate dignissimos.', 1, 0, 0, '1981-01-18 23:00:00', '2012-12-07 23:00:00'),
+(5, 99, '2018-07-19', '2006-09-10', 1, 'Aut est officia sint assumenda quaerat quibusdam similique. Et ea aperiam nisi nisi ratione libero. Facere et architecto est dolor eaque.', 1, 0, 0, '1997-07-17 23:00:00', '2007-01-19 23:00:00'),
+(6, 101, '2018-07-19', '1983-11-15', 8, 'Animi beatae libero ducimus culpa praesentium quo. Blanditiis ut et ut odio odit accusamus omnis. Occaecati repellat reprehenderit rerum. Explicabo esse consequatur exercitationem doloremque ea sed.', 1, 0, 0, '2001-02-04 23:00:00', '2003-05-01 23:00:00'),
+(7, 10, '2018-07-19', '1981-08-08', 1, 'Sit aut ea dolorem culpa. Molestiae earum ad esse aut ipsam illo enim. Nemo animi repellat alias autem distinctio ipsam nam.', 1, 0, 0, '2014-01-10 23:00:00', '1993-08-06 23:00:00'),
+(8, 14, '2018-07-19', '2003-05-22', 9, 'Ipsa tenetur nulla enim quia saepe ut eveniet. Asperiores sit sit voluptatum atque deleniti eius recusandae. Fugit quis quaerat ut aut autem. Omnis est esse aut explicabo ratione hic.', 1, 0, 0, '1980-01-25 23:00:00', '1986-10-14 23:00:00'),
+(9, 45, '2018-07-19', '2007-10-04', 9, 'Porro repellat quibusdam eveniet labore quo et. Possimus voluptates veritatis nisi aut. Alias totam dolores et atque culpa dicta.', 1, 0, 0, '2004-09-03 23:00:00', '1983-12-07 23:00:00'),
+(10, 23, '2018-07-19', '1995-01-20', 8, 'Voluptatem debitis expedita consectetur quos consectetur. Occaecati blanditiis voluptas omnis doloremque iusto.', 1, 0, 0, '1977-08-18 22:00:00', '1979-09-25 23:00:00');
 
 -- --------------------------------------------------------
 
@@ -661,26 +750,25 @@ CREATE TABLE `leave_types` (
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `created_by` int(10) UNSIGNED NOT NULL,
   `updated_by` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `deleted_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NOT NULL DEFAULT '2000-02-01 23:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '2000-02-01 23:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `leave_types`
 --
 
-INSERT INTO `leave_types` (`id`, `name`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Dr. Ryley Fadel DDS', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(2, 'Prof. Kaylah McCullough', 5, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(3, 'Sean Gerhold', 10, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(4, 'Anika Sauer', 9, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(5, 'Marjory Renner DVM', 8, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(6, 'Mrs. Lucy Schinner', 9, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(7, 'Zelda Satterfield III', 4, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(8, 'Lowell Hammes', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(9, 'Mr. Lula Hamill V', 8, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(10, 'Dr. Muriel Johns III', 10, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL);
+INSERT INTO `leave_types` (`id`, `name`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
+(1, 'Dr. Ryley Fadel DDS', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Prof. Kaylah McCullough', 5, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'Sean Gerhold', 10, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 'Anika Sauer', 9, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, 'Marjory Renner DVM', 8, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(6, 'Mrs. Lucy Schinner', 9, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(7, 'Zelda Satterfield III', 4, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(8, 'Lowell Hammes', 1, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(9, 'Mr. Lula Hamill V', 8, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(10, 'Dr. Muriel Johns III', 10, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -850,7 +938,10 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2016_04_02_011352_add_ot_rate_in_salary_structure_table', 1),
 ('2016_04_13_000254_AdddaysFieldInSalaryRegister', 2),
 ('2016_04_18_060553_add_extra_ot_hour_and_amount_in_salary_register', 2),
-('2017_05_04_094939_create_holiday_types_table', 2);
+('2017_05_04_094939_create_holiday_types_table', 2),
+('2017_05_07_061802_create_employee_types_table', 2),
+('2017_05_07_072728_create_employee_statuses_table', 2),
+('2017_05_07_151217_create_leave_applications_table', 2);
 
 -- --------------------------------------------------------
 
@@ -1155,6 +1246,20 @@ ALTER TABLE `employee_designation`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `employee_statuses`
+--
+ALTER TABLE `employee_statuses`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `employee_statuses_name_unique` (`name`);
+
+--
+-- Indexes for table `employee_types`
+--
+ALTER TABLE `employee_types`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `employee_types_name_unique` (`name`);
+
+--
 -- Indexes for table `grades`
 --
 ALTER TABLE `grades`
@@ -1166,21 +1271,27 @@ ALTER TABLE `grades`
 ALTER TABLE `holidays`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`),
-  ADD KEY `type` (`type`);
+  ADD KEY `type` (`type`) USING BTREE;
 
 --
 -- Indexes for table `holiday_types`
 --
 ALTER TABLE `holiday_types`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
+  ADD UNIQUE KEY `holiday_types_name_unique` (`name`);
 
 --
 -- Indexes for table `leaves`
 --
 ALTER TABLE `leaves`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `leave_applications`
+--
+ALTER TABLE `leave_applications`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `leaves_employee_id_year_index` (`employee_id`,`year`);
+  ADD KEY `leave_applications_employee_id_start_day_index` (`employee_id`,`start_day`);
 
 --
 -- Indexes for table `leave_details`
@@ -1310,12 +1421,22 @@ ALTER TABLE `designations`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 --
 -- AUTO_INCREMENT for table `employee_designation`
 --
 ALTER TABLE `employee_designation`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+--
+-- AUTO_INCREMENT for table `employee_statuses`
+--
+ALTER TABLE `employee_statuses`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `employee_types`
+--
+ALTER TABLE `employee_types`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `grades`
 --
@@ -1325,17 +1446,22 @@ ALTER TABLE `grades`
 -- AUTO_INCREMENT for table `holidays`
 --
 ALTER TABLE `holidays`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `holiday_types`
 --
 ALTER TABLE `holiday_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `leaves`
 --
 ALTER TABLE `leaves`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `leave_applications`
+--
+ALTER TABLE `leave_applications`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `leave_details`
 --
@@ -1404,12 +1530,6 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `holidays`
---
-ALTER TABLE `holidays`
-  ADD CONSTRAINT `holiday_type_relation` FOREIGN KEY (`type`) REFERENCES `holiday_types` (`id`);
 
 --
 -- Constraints for table `permission_role`
