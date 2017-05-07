@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+use App\Model;
 
 function checkPermission($resource)
 {
@@ -38,14 +40,7 @@ function getDaysInaYear($year,$day ='Friday', $format, $timezone='Asia/Dhaka')
 
 function employeeStatus($status)
 {
-	if ($status == 1) {
-		return "Active";
-	} else if ($status == 2) {
-		return 'New';
-	} else {
-		return 'Resign';
-	}
-
+    return Model\EmployeeStatus::find($status)->first()->name;
 }
 function leavePayable($flag)
 {

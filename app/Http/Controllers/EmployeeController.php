@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+
 use App\Model\Branch;
 use App\Model\Department;
 use App\Model\Designation;
@@ -12,6 +13,7 @@ use App\Model\Employee_Designation;
 use App\Model\Grade;
 use App\Model\Line;
 use App\Model\Section;
+
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -22,10 +24,13 @@ class EmployeeController extends Controller
     {
     	// return Employee::with('line.section.department.branch','designations')->get();
         
-        $filter = \DataFilter::source(Employee::with('line','section','department','branch','designations'));
+        $filter = \DataFilter::source(Employee::with('line','section','department','branch','designations',
+            'employee_type','employee_status'));
         
         $filter->add('employee_id','Employee ID','text');
-        $filter->add('branch','Branch', 'select')->options([''=>'Select Branch'])->options(Branch::lists("name", "id")->all())
+        $filter->add('branch','Branch', 'select')
+            ->options([''=>'Select Branch'])
+            ->options(Branch::lists("name", "id")->all())
                     // ->scope(function($query){
                     //     if (!empty(\Input::get('line_section_department_branch'))) {
                     //         $branches = Branch::where(['id'=>\Input::get('line_section_department_branch')])->with('departments.sections.lines')->get();

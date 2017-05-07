@@ -21,12 +21,13 @@ class DatabaseSeeder extends Seeder
         \DB::table('sections')->truncate();;
         \DB::table('lines')->truncate();;
         \DB::table('designations')->truncate();;
+        \DB::table('employee_types')->truncate();;
+        \DB::table('employee_statuses')->truncate();;
         \DB::table('employees')->truncate();;
         \DB::table('employee_designation')->truncate();;
         \DB::table('leave_types')->truncate();;
         \DB::table('holiday_types')->truncate();;
         \DB::table('holidays')->truncate();;
-        \DB::table('employee_types')->truncate();;
         // \DB::truncate('users');
         // \DB::truncate('users');
 
@@ -34,6 +35,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DepartmentTableSeeder::class);
         $this->call(DesignationTableSeeder::class);
         $this->call(EmployeeTypeTableSeeder::class);
+        $this->call(EmployeeStatusTableSeeder::class);
         $this->call(EmployeeTableSeeder::class);
         $this->call(LineTableSeeder::class);
         $this->call(OrganizationTableSeeder::class);

@@ -43,6 +43,9 @@ Route::group(['middleware' => 'acl'], function () {
 
     Route::get('/employee_type','EmployeeTypeController@index');
     Route::any('/employee_type/edit','EmployeeTypeController@edit');
+
+    Route::get('/employee_status','EmployeeStatusController@index');
+    Route::any('/employee_status/edit','EmployeeStatusController@edit');
     
     Route::get('/line', 'LineController@index');
     Route::any('/line/edit', 'LineController@edit');

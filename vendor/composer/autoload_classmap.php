@@ -80,7 +80,7 @@ return array(
     'DepartmentsDescriptionSetNull' => $baseDir . '/database/migrations/2016_01_08_104750_departments_description_set_null.php',
     'DesignationTableSeeder' => $baseDir . '/database/seeds/DesignationTableSeeder.php',
     'DesignationsDescriptionSetNull' => $baseDir . '/database/migrations/2016_01_08_110957_designations_description_set_null.php',
-    'EmployeeStatusTableController' => $baseDir . '/database/seeds/EmployeeStatusTableController.php',
+    'EmployeeStatusTableSeeder' => $baseDir . '/database/seeds/EmployeeStatusTableSeeder.php',
     'EmployeeTableSeeder' => $baseDir . '/database/seeds/EmployeeTableSeeder.php',
     'EmployeeTypeTableSeeder' => $baseDir . '/database/seeds/EmployeeTypeTableSeeder.php',
     'Employee_DesignationTableSeeder' => $baseDir . '/database/seeds/Employee_DesignationTableSeeder.php',

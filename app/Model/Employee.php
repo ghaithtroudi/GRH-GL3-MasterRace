@@ -69,4 +69,9 @@ class Employee extends Model
         return $this->belongsTo('App\Model\EmployeeType');
     }
 
+    public function employee_status()
+    {
+        return $this->belongsTo('App\Model\EmployeeStatus');
+    }
+
 }

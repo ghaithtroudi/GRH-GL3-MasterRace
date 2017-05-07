@@ -48,6 +48,9 @@
           <li class=" @if($active == 'employee.type') active @endif ">
             <a href="{{ url('employee_type') }}"><i class="fa fa-circle-o"></i>Type</a>
           </li>
+          <li class=" @if($active == 'employee.status') active @endif ">
+            <a href="{{ url('employee_status') }}"><i class="fa fa-circle-o"></i>Status</a>
+          </li>
         </ul>
 
       </li>
