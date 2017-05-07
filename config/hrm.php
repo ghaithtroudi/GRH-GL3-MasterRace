@@ -7,6 +7,7 @@ return [
     'report_row_per_page' => 4,
     'pagination_alternative' => 10,
     'img_dir' => public_path('uploads/images/employees/'),
-    'timezone' => 'Africa/Tunisia'
+    'timezone' => 'Africa/Tunisia',
+    'default_image' => 'dummyPortrait.png'
 
 ];

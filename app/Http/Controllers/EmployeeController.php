@@ -13,6 +13,8 @@ use App\Model\Employee_Designation;
 use App\Model\Grade;
 use App\Model\Line;
 use App\Model\Section;
+use App\Model\EmployeeType;
+use App\Model\EmployeeStatus;
 
 use Illuminate\Http\Request;
 
@@ -224,9 +226,13 @@ class EmployeeController extends Controller
         $edit->add('passport','Passport','text');
         $edit->add('birth_certificate','Birth Certificate','text');
         $edit->add('joining_date','Joining Date <span class="text-danger">*</span>','date')->format('d/m/Y', 'en')->rule('required');
-        $edit->add('status','Status <span class="text-danger">*</span>','select')->options(['1'=>'Active','2'=>'New','3'=>'Resigned'])->rule('required');
+        $edit->add('status','Status <span class="text-danger">*</span>','select')->options(['' => 'Select Status'])
+            ->options(EmployeeStatus::lists('name','id')->all())->rule('required');
 
-        $edit->add('type','Type <span class="text-danger">*</span>','select')->options(['1'=>'Worker','2'=>'Staff'])->rule('required');
+        $edit->add('type','Type <span class="text-danger">*</span>','select')->options(['' => 'Select Type'])
+            ->options(EmployeeType::lists('name','id')->all())->rule('required');
+
+        $edit->add('resigned','Resigned','checkbox');
 
         $edit->add('image','Photo', 'image')->move(public_path('/uploads/images/employees'))
             ->image(function($image) {
@@ -251,8 +257,7 @@ class EmployeeController extends Controller
             'joining_date' => 'required|filled|date_format:"d/m/Y"',
             'present_address' => 'required|filled',
             'permanent_address' => 'required|filled',
-            'primary_phone' => 'required|filled|numeric',
-            'secondary_phone' => 'numeric',
+            'primary_phone' => 'required|filled',
         ]);
 
         $referer = $request->headers->get('referer');
@@ -290,6 +295,11 @@ class EmployeeController extends Controller
         {
             $image = $fields['image'];
             unset($fields['image']);
+        }
+
+        else
+        {
+            $fields['image'] = config('hrm.default_image');
         }
 
         $date = \DateTime::createFromFormat('d/m/Y',$fields['joining_date']);
@@ -364,6 +374,13 @@ class EmployeeController extends Controller
             $image = $fields['image'];
             unset($fields['image']);
         }
+
+        else
+        {
+            $fields['image'] = config('hrm.default_image');
+        }
+
+        dd($image);
 
         $employee_designation = new Employee_Designation();
 

@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 
 use \App\Model\EmployeeType;
+use \App\Model\EmployeeStatus;
 class EmployeeTableSeeder extends Seeder
 {
     /**
@@ -16,6 +17,7 @@ class EmployeeTableSeeder extends Seeder
         $faker = Faker::create();
 
         $type_max = EmployeeType::orderBy('id','desc')->first()->id;
+        $status_max = EmployeeStatus::orderBy('id','desc')->first()->id;
     	
         foreach (range(1,100) as $value) {
         	DB::table('employees')->insert([
@@ -33,7 +35,7 @@ class EmployeeTableSeeder extends Seeder
 	            'birth_certificate' => $faker->randomNumber(5),
 	            'passport' => $faker->randomNumber(5),
 	            'image' => $faker->imageUrl(200, 200, 'cats', true, 'Fake'),
-	            'status' => $faker->numberBetween(1,2),
+	            'status' => $faker->numberBetween(1,$status_max),
 	            'department_id' => $faker->numberBetween(1,8),
 	            'joining_date' => $faker->date('Y-m-d'),
 	            'created_at' => $faker->dateTime('now'),

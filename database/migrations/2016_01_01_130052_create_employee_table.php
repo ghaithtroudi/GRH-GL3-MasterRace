@@ -29,11 +29,11 @@ class CreateEmployeeTable extends Migration
             $table->string('birth_certificate',20);
             $table->string('image',256);
             $table->date('joining_date');
-            $table->tinyInteger('status')->unsigned();
+            $table->integer('status')->unsigned();
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned();
+            $table->boolean('resigned')->default(false);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
