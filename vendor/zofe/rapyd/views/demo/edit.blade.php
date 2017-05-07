@@ -9,6 +9,6 @@
 
         {!! $edit !!}
         {!! Documenter::showMethod("Zofe\\Rapyd\\Demo\\DemoController", "anyEdit") !!}
-        {!! Documenter::showCode("zofe/rapyd/views/demo/edit.blade.php") !!}
+        {!! Documenter::showCode("edit2.blade.php") !!}
     </p>
 @stop

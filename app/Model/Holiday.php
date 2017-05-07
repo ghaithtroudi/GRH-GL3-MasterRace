@@ -8,10 +8,12 @@ use Carbon\Carbon;
 
 class Holiday extends Model
 {
-    //use SoftDeletes;
-
-    public $table = 'holidays';
     public $guarded = ['id'];
+
+    public function holiday_type()
+    {
+        return $this->belongsTo('App\Model\HolidayType');
+    }
 
     /*public function getDateAttribute($value)
     {
@@ -22,17 +24,4 @@ class Holiday extends Model
     {
         $this->attributes['date'] = Carbon::createFromFormat('d/m/Y', $value)->toDateString();
     }*/
-
-    public function holiday_type()
-    {
-        return $this->belongsTo('App\Model\HolidayType');
-    }
-
-    /*public static function leaveType()
-{
-    return [
-        '1' =>'Weekly',
-        '2' => 'Government'
-    ];
-}*/
 }

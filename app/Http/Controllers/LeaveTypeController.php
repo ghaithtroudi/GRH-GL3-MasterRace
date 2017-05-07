@@ -9,11 +9,6 @@ use Illuminate\Http\Request;
 
 class LeaveTypeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         
@@ -21,11 +16,11 @@ class LeaveTypeController extends Controller
         $grid = \DataGrid::source('leave_types');
 
         $grid->add('id','S_No', true)->cell(function($value, $row){
-            $pageNumber = (\Input::get('page')) ? \Input::get('page') : 1;
+            $pageNumber =( \Input::get('page') ?  \Input::get('page') : 1 );
 
-            static $serialStart =0;
-            ++$serialStart; 
-            return ($pageNumber-1)*10 +$serialStart;
+            static $serialstart = 0;
+            ++$serialstart;
+            return ($pageNumber - 1) * intval(config('hrm.alternative_pagination')) + $serialstart;
 
 
         });

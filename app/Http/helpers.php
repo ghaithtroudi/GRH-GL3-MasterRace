@@ -11,7 +11,7 @@ function checkPermission($resource)
 function gmtToBDTime($gmt)
 {
 	$date = new DateTime($gmt);
-	$date->setTimezone(new DateTimeZone('Asia/Dhaka')); // +04
+	$date->setTimezone(new DateTimeZone(config('hrm.timezone'))); // +04
 
 	return $date->format('d-m-Y h:i:s A'); 
 }
@@ -23,8 +23,9 @@ function getCountryName(\GuzzleHttp\Client $client, $countryCode)
 	return $country->full_name_english;
 }
 
-function getDaysInaYear($year,$day ='Friday', $format, $timezone='Asia/Dhaka')
+function getDaysInaYear($year,$day ='Friday', $format, $timezone='none')
 {
+    $timezone = 'none' ? config('hrm.timezone') : $timezone;
 	$fridays = array();
     $startDate = new DateTime("{$year}-01-01 $day", new DateTimezone($timezone));
     $year++;
@@ -147,5 +148,46 @@ function createDateRangeArray($strDateFrom,$strDateTo)
 	}
 	return $aryRange;
 }
+
+function setTheStateColumn($state)
+{
+    //return '<button class="btn btn-primary gogo">Accept</button><button class="btn btn-danger gogo">Decline</button>';
+
+    if( $state == 1)
+    {
+        return '<text class="text text-info">Pending</text>';
+    }
+
+    else if( $state == 2)
+    {
+        return '<text class="text text-success">Accepted</text>';
+    }
+
+    else if( $state == 3)
+    {
+        return '<text class="text text-danger">Declined</text>';
+    }
+
+    else if( $state == 4)
+    {
+        return '<text class="text text-yellow">Timed Out</text>';
+    }
+}
+
+function setTheDoColumn($row)
+{
+    if( $row->state == 1 )
+    {
+        return '<span><a class="text-success" href="'.url('leave_application/deal?yes=1&app='.$row->id).
+            '">A</a>&nbsp/&nbsp<a class="text-danger"href="'.url('leave_application/deal?yes=0&app='.$row->id).
+            '">D</a></span>';
+    }
+
+    else
+    {
+        return '<span class="text text-info">Done</span>';
+    }
+}
+
 
 

@@ -7,10 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Leave extends Model
 {
-    //
+    public $guarded = ['id'];
+
 	public function employee()
     {
     	return $this->belongsTo("App\\Model\\Employee");
+    }
+
+    public function leave_application()
+    {
+        return $this->belongsTo('App\Model\LeaveApplication');
+    }
+
+    public function leave_type()
+    {
+        return $this->belongsTo('App\Model\LeaveType');
     }
 
     public function leaveDetails()

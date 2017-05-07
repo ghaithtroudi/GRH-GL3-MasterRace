@@ -2,37 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests;
-use App\Model\Employee;
-use App\Model\Leave;
-use App\Model\LeaveDetail;
-use App\Model\LeaveEmployee;
-use App\Model\LeaveType;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
-use Zofe\Rapyd\DataFilter\DataFilter;
-use Zofe\Rapyd\Facades\DataGrid;
+
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+use App\Model\Leave;
+use App\Model\LeaveApplication;
+use App\Model\LeaveType;
+use App\Model\Employee;
+
 use Carbon\Carbon;
 
 class LeaveController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $filter = DataFilter::source(Leave::with('employee'));
-        $filter->add('employee.employee_id','Employee ID','text');
-        $filter->add('year','Year','date')->format('Y')->scope( function ($query, $value) {
-            if(!empty(\Input::get('year'))){
-                return $query->where('year', \Input::get('year'));
-            } else {
-                return $query;
-            }
-        });
+        $filter = \DataFilter::source(Leave::with('leave_type','leave_application'));
+
+        $filter->add('start_day','Start Day','date');
+        $filter->add('end_day','Last Day','date');
+        $filter->add('leave_type','Leave Type','select')//->option(['' => 'Select Leave Type'])
+        ->options(LeaveType::lists('name','id')->all());
+        $filter->add('employee','Employee Id','select')->options(['' => 'Select Employee'])
+            ->options(Employee::lists('employee_id','id')->all());
 
         $filter->submit('search');
         $filter->reset('reset');
@@ -40,227 +33,48 @@ class LeaveController extends Controller
 
         $grid = \DataGrid::source($filter);
 
-        $grid->add('id','S_No')->cell(function($value, $row){
-            $pageNumber = (\Input::get('page')) ? \Input::get('page') : 1;
+        $grid->add('id','S_No',true)->cell(function($value,$row){
 
-            static $serialStart =0;
-            ++$serialStart;
-            return ($pageNumber-1)*10 +$serialStart;
+            $pageNumber =( \Input::get('page') ?  \Input::get('page') : 1 );
 
-
+            static $serialstart = 0;
+            ++$serialstart;
+            return ($pageNumber - 1) * intval(config('hrm.alternative_pagination')) + $serialstart;
         });
 
-        $grid->add('employee.employee_id','Employee ID','employee_id', true);
-        $grid->add('employee.name','Name');
-        $grid->add('total_days','Number Of Days',true);
-        $grid->add('start_day','Start Date',true);
-        $grid->add('end_day','End Date',true);
-        $grid->add('year','Year',true);
+        $grid->add('employee','Employee_ID',true)->cell(function($value,$row){
+            return Employee::where('id',$row->employee_id)->first()->employee_id;
+        });
 
-        $grid->edit('leaveapplication/edit', 'Action','show|modify');
-        $grid->link('leaveapplication/create',"New Leave Application", "TR",['class' =>'btn btn-success']);
-        $grid->orderBy('year','DESC');
+        $grid->add('start_day','Start_Day',true);
+        $grid->add('end_day','Last_Day',true);
+        $grid->add('duration','Duration',true)->cell(function($value,$row){
+            /*$start = \DateTime::createFromFormat('Y-m-d',$row->start_day);
+            $end = \DateTime::createFromFormat('Y-m-d',$row->end_day);
 
-        $grid->paginate(10);
+            return date_diff($start,$end)->format('%a');*/
 
+            $start = Carbon::createFromFormat('d/m/Y',$row->start_day);
+            $end = Carbon::createFromFormat('d/m/Y',$row->end_day);
 
-        return view('leave.application.index',compact('grid','filter'));
-//        $leaves = Leave::with(['employee'=>function($query){
-//                if (!empty(\Input::get('employee'))) {
-//
-//                    return $query->where('employee_id', \Input::get('employee'));
-//                }
-//                return $query;
-//            }])
-//            ->where(function($query){
-//                if (!empty(\Input::get('year'))) {
-//                    return $query->where('year', \Input::get('year'));
-//                }
-//                return $query;
-//            })
-//            ->paginate(10);
-//
-//        //return $leaves;
-//
-//        return view('leave.application.index',compact('leaves'));
+            return $start->diffInDays();
+
+        });
+        $grid->add('leave_type','Leave Type',true)->cell(function($value,$row){
+            return LeaveType::where('id',$row->leave_type_id)->first()->name;
+        });
+        //$grid->add('reasons','Reasons',true);
+
+        //$grid->link('leave_application/edit','New Leave','TR',['class' => 'btn btn-success']);
+        $grid->edit('leave_leave/edit','Action','show');
+
+        $grid->build();
+
+        return view('leave.leave.index',compact('filter','grid'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function edit()
     {
-        $leaveType = LeaveType::lists('name','id');
-        return view('leave.application.create', compact('leaveType'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-
-        $this->validate($request, [
-            'employee_id' => 'required|exists:employees,employee_id',
-            'start_date' => 'required|date_format:d/m/Y',
-            'end_date' => 'required|date_format:d/m/Y',
-            'total_day' =>'required|numeric',
-            'leave_type'=>'required|array',
-            'sub_start_date'=>'required|array',
-            'sub_end_date'=>'required|array',
-            'sub_total_days'=>'required|array',
-            'payable'=>'required|array',
-        ]);
-
-       Carbon::createFromFormat('d/m/Y', $request->start_date)->toDateString('Y-m-d');
-
-        $leaveapplication = new Leave();
-
-        $employee = Employee::where('employee_id', $request->employee_id)->select(['id','name','employee_id'])->get();
-
-        $leaveapplication->employee_id = $employee[0]->id;
-        $leaveapplication->start_day =  Carbon::createFromFormat('d/m/Y', $request->start_date)->toDateString('Y-m-d');
-        $leaveapplication->end_day = Carbon::createFromFormat('d/m/Y', $request->end_date)->toDateString('Y-m-d');
-
-        $start_day = Carbon::createFromFormat('d/m/Y', $request->start_date);
-        $end_day = Carbon::createFromFormat('d/m/Y', $request->end_date);
-        $total_days = $end_day->diffInDays($start_day);
-
-
-        $leaveapplication->total_days = $total_days+1; //As diffInDays return 0 for same days
-
-        $leaveapplication->year = Carbon::createFromFormat('d/m/Y', $request->start_date)->toDateString('Y');
-
-        $leaveapplication->save();
-
-        foreach($request->leave_type as $index => $type){
-            $leaveDetails = new LeaveDetail();
-            $leaveDetails->leave_id = $leaveapplication->id;
-            $leaveDetails->leave_type_id = $type;
-            $leaveDetails->days = $request->sub_total_days[$index];
-            $leaveDetails->start_day = Carbon::createFromFormat('d/m/Y', $request->sub_start_date[$index])->toDateString('Y-m-d');
-            $leaveDetails->end_day = Carbon::createFromFormat('d/m/Y', $request->sub_end_date[$index])->toDateString('Y-m-d');
-            $leaveDetails->payable = $request->payable[$index];
-            $leaveDetails->save();
-        }
-
-        return redirect('/leaveapplication');
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $leaveapplication = Leave::findOrFail($id);
-        return view('leave.application.show',compact('leaveapplication'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $leave = Leave::findOrFail($id);
-        $leaveType = LeaveType::lists('name','id');
-        return view('leave.application.edit',compact('leave','leaveType'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $this->validate($request, [
-            'employee_id' => 'required|exists:employees,employee_id',
-            'start_date' => 'required|date_format:d/m/Y',
-            'end_date' => 'required|date_format:d/m/Y',
-            'total_day' =>'required|numeric',
-            'leave_type'=>'required|array',
-            'sub_start_date'=>'required|array',
-            'sub_end_date'=>'required|array',
-            'sub_total_days'=>'required|array',
-            'payable'=>'required|array',
-        ]);
-
-        Carbon::createFromFormat('d/m/Y', $request->start_date)->toDateString('Y-m-d');
-
-        $leaveapplication = Leave::findOrFail($id);
-
-        $employee = Employee::where('employee_id', $request->employee_id)->select(['id','name','employee_id'])->get();
-
-        $leaveapplication->employee_id = $employee[0]->id;
-        $leaveapplication->start_day =  Carbon::createFromFormat('d/m/Y', $request->start_date)->toDateString('Y-m-d');
-        $leaveapplication->end_day = Carbon::createFromFormat('d/m/Y', $request->end_date)->toDateString('Y-m-d');
-
-        $start_day = Carbon::createFromFormat('d/m/Y', $request->start_date);
-        $end_day = Carbon::createFromFormat('d/m/Y', $request->end_date);
-        $total_days = $end_day->diffInDays($start_day);
-
-
-        $leaveapplication->total_days = $total_days+1; //As diffInDays return 0 for same days
-
-        $leaveapplication->year = Carbon::createFromFormat('d/m/Y', $request->start_date)->toDateString('Y');
-
-        $leaveapplicationCheck = $leaveapplication->save();
-        //Delete existing Leave Details
-        LeaveDetail::where('leave_id',$id)->delete();
-
-        foreach($request->leave_type as $index => $type){
-            $leaveDetails = new LeaveDetail();
-            $leaveDetails->leave_id = $leaveapplication->id;
-            $leaveDetails->leave_type_id = $type;
-            $leaveDetails->days = $request->sub_total_days[$index];
-            $leaveDetails->start_day = Carbon::createFromFormat('d/m/Y', $request->sub_start_date[$index])->toDateString('Y-m-d');
-            $leaveDetails->end_day = Carbon::createFromFormat('d/m/Y', $request->sub_end_date[$index])->toDateString('Y-m-d');
-            $leaveDetails->payable = $request->payable[$index];
-            $leaveDetails->save();
-        }
-        if ($leaveapplicationCheck)
-        {
-            Session::flash('system_message', "Leave Application Updated Successfully!");
-        }else{
-            Session::flash('system_message', "Fail! to updateLeave Application!");
-        }
-
-        return redirect('/leaveapplication/'.$id.'/edit');
-    }
-    
-    public function summary($employee_id){
-        $employee = Employee::where('employee_id',$employee_id)->with(['leaveEmployees'=>function($query){
-            $query->where(['year'=>date('Y')])->with('leaveType');
-        }])->get();
-
-        foreach($employee[0]->leaveEmployees as $alocatedLeave){
-            
-            $spentLeaves = Leave::where([ 'year' => date('Y'),'employee_id'=>$employee[0]->id])->with(['leaveDetails'=>function($query) use($alocatedLeave){
-                return $query->where('leave_type_id',$alocatedLeave->leaveType->id);
-            }])->get();
-            $total = 0;
-            foreach($spentLeaves as $spentLeave){
-                $total = $total + $spentLeave->leaveDetails->sum('days');
-            }
-            
-            $summary[$alocatedLeave->leaveType->id] =['leaveType'=>$alocatedLeave->leaveType->name,'alocated'=>$alocatedLeave->leave_day,'spent'=>$total];
-        }
-        
-        return response()->json(['status'=>1,'employee'=>$employee[0]->name, 'summary'=>$summary]);
 
     }
 }

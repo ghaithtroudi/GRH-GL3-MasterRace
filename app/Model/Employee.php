@@ -61,7 +61,7 @@ class Employee extends Model
 
         public function attendance()
     {
-        return $this->hasMany('App\Model\Attendance','');
+        return $this->hasMany('App\Model\Attendance');
     }
 
     public function employee_type()

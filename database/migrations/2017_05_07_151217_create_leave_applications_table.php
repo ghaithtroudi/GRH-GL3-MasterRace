@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLeavesTable extends Migration
+class CreateLeaveApplicationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,14 @@ class CreateLeavesTable extends Migration
      */
     public function up()
     {
-        Schema::create('leaves', function (Blueprint $table) {
+        Schema::create('leave_applications', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('employee_id')->unsigned();
-            $table->integer('leave_app_id')->unsigned()->unique();
             $table->date('start_day');
             $table->date('end_day');
             $table->integer('leave_type_id')->unsigned();
-            $table->text('remark');
+            $table->text('reasons');
+            $table->tinyInteger('state')->unsigned()->default(1);
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned();
             $table->timestamps();
@@ -35,6 +35,6 @@ class CreateLeavesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('leaves');
+        Schema::drop('leave_applications');
     }
 }

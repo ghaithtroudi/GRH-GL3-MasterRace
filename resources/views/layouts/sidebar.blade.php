@@ -78,8 +78,13 @@
           <li class="@if($active == 'leaveemployee') active @endif">
             <a href="{{ url('leaveemployee') }}"><i class="fa fa-circle-o"></i>Employee Leave</a>
           </li>
-          <li class="@if($active == 'leaveapplication') active @endif">
-            <a href="{{ url('leaveapplication') }}"><i class="fa fa-circle-o"></i>Leave Application</a>
+
+          <li class="@if($active == 'leave_application') active @endif">
+            <a href="{{ url('leave_application') }}"><i class="fa fa-circle-o"></i>Leave Application</a>
+          </li>
+
+          <li class="@if($active == 'leave_leave') active @endif">
+            <a href="{{ url('leave_leave') }}"><i class="fa fa-circle-o"></i>Leave</a>
           </li>
         </ul>
       </li>

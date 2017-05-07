@@ -64,26 +64,33 @@ Route::group(['middleware' => 'acl'], function () {
     Route::any('/leaveemployee/edit', 'EmployeeLeaveController@edit');
     Route::get('/leaveemployee/json/{leavetype_id}','EmployeeLeaveController@getLists')->where('id', '[0-9]+');
 
-    Route::get('/leaveapplication','LeaveController@index');
-    Route::get('/leaveapplication/create','LeaveController@create');
-    Route::post('/leaveapplication','LeaveController@store');
+    Route::get('/leave_application','LeaveApplicationController@index');
+    Route::any('/leave_application/edit','LeaveApplicationController@edit');
+    Route::any('/leave_application/deal','LeaveApplicationController@deal');
+
+    Route::get('/leave_leave','LeaveController@index');
+    Route::any('/leave_leave/edit','LeaveController@edit');
+
+    /*Route::get('/leaveapplication','LeavesController@index');
+    Route::get('/leaveapplication/create','LeavesController@create');
+    Route::post('/leaveapplication','LeavesController@store');
     Route::any('/leaveapplication/edit',function(){
 
         $show = \Input::get('show');
         if (!empty($show)) {
-           return \Redirect::action('LeaveController@show', array($show));
+           return \Redirect::action('LeavesController@show', array($show));
         }
 
         $modify = \Input::get('modify');
         if (!empty($modify)) {
-           return \Redirect::action('LeaveController@edit', array($modify));
+           return \Redirect::action('LeavesController@edit', array($modify));
         }
         return redirect('/leaveapplication');
     });
-    Route::get('/leaveapplication/{id}','LeaveController@show');
-    Route::get('/leaveapplication/{id}/edit','LeaveController@edit');
-    Route::PUT('/leaveapplication/{id}','LeaveController@update');
-    Route::get('/leave/summary/json/{employee_id}','LeaveController@summary')->where('id', '^EMP-[0-9]*');
+    Route::get('/leaveapplication/{id}','LeavesController@show');
+    Route::get('/leaveapplication/{id}/edit','LeavesController@edit');
+    Route::PUT('/leaveapplication/{id}','LeavesController@update');
+    Route::get('/leave/summary/json/{employee_id}','LeavesController@summary')->where('id', '^EMP-[0-9]*');*/
 
     //  Holiday Routes
     Route::get('/holiday', 'HolidayController@index');

@@ -18,7 +18,6 @@ class CreateLeaveTypesTable extends Migration
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
