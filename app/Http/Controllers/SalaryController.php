@@ -101,7 +101,7 @@ class SalaryController extends Controller
         $endDay = new Carbon('last day of '.months()[$request->month].' '.$request->year );
 
         //Get all Holidays for the requested month
-        $holidays = Holiday::whereBetween('date',[$startDay,$endDay])->count();
+        $holidays = Holiday::whereBetween('start',[$startDay,$endDay])->count();
 
         $noOfDaysInMonth = Carbon::create($request->year,$request->month)->daysInMonth;
 

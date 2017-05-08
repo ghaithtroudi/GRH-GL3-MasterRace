@@ -75,9 +75,9 @@
             <a href="{{ url('holiday_type') }}"><i class="fa fa-circle-o"></i>Holiday Types</a>
           </li>
 
-          <li class="@if($active == 'leaveemployee') active @endif">
+          <!--<li class="@if($active == 'leaveemployee') active @endif">
             <a href="{{ url('leaveemployee') }}"><i class="fa fa-circle-o"></i>Employee Leave</a>
-          </li>
+          </li>-->
 
           <li class="@if($active == 'leave_application') active @endif">
             <a href="{{ url('leave_application') }}"><i class="fa fa-circle-o"></i>Leave Application</a>
@@ -116,9 +116,10 @@
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="  treeview-menu">
-        
+
           <li class="@if($active == 'attendance') active @endif">
             <a href="{{ url('attendance') }}"><i class="fa fa-circle-o"></i>Manual Attendance</a>
+
           </li>
           <li class="@if($active == 'upload') active @endif">
             <a href="{{ url('attendance/upload') }}"><i class="fa fa-circle-o"></i>Upload Attendance</a>

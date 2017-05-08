@@ -14,10 +14,15 @@ class LineTableSeeder extends Seeder
         $faker = Faker::create();
     	
         foreach (range(1,64) as $value) {
+
+            $section = DB::table('sections')->where('id',$faker->numberBetween(1,16))->first();
+
         	DB::table('lines')->insert([
 	            'name' => $faker->name(),
 	            'description' => $faker->text(),
-	            'section_id' => $faker->numberBetween(1,16),
+	            'section_id' => $section->id,
+	            'department_id' => $section->department_id,
+                'branch_id' => $section->branch_id,
 	            'created_at' => $faker->dateTime('now'),
 	            'updated_at' => $faker->dateTime('now'),
 	        ]);

@@ -14,10 +14,14 @@ class SectionTableSeeder extends Seeder
         $faker = Faker::create();
     	
         foreach (range(1,16) as $value) {
+
+            $depart = DB::table('departments')->where('id',$faker->numberBetween(1,8));
+
         	DB::table('sections')->insert([
 	            'name' => $faker->name(),
 	            'description' => $faker->text(),
-	            'department_id' => $faker->numberBetween(1,8),
+	            'department_id' => $depart->id,
+	            'branch_id' => $depart->branch_id,
 	            'created_at' => $faker->dateTime('now'),
 	            'updated_at' => $faker->dateTime('now'),
 	        ]);

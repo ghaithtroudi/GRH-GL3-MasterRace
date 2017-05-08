@@ -26,5 +26,16 @@ class userSeeder extends Seeder
 	            'updated_at' => $faker->dateTime('now'),
 	        ]);
         }
+        DB::table('users')->insert([
+            'name' => "User",
+            'password' => password_hash('0123456789',CRYPT_SHA256),
+            'email' => "User@User.com",
+            'role_id' => 1,//$faker->randomElement([1,2]),
+            'status' =>$faker->randomElement([1,2,3]),
+            'branch_id' =>$faker->randomElement([1,2]),
+            'all_access' =>$faker->randomElement([0,1]),
+            'created_at' => $faker->dateTime('now'),
+            'updated_at' => $faker->dateTime('now'),
+        ]);
     }
 }
